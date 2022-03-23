@@ -3,6 +3,9 @@
 
 #include "raylib.h"
 
+
+
+
 #include "spheroid.h"
 #include "cuboid.h"
 
@@ -32,6 +35,9 @@ class video
 
   Vector3 m_cam_up
   { 0.0f, 0.0f, 1.0f };
+
+  Vector3 m_light_pos
+  { m_cam_pos };
 
   spheroid m_player;
 

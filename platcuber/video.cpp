@@ -1,12 +1,13 @@
 #include "video.h"
 
+#include "rlights.h"
+#define RLIGHTS_IMPLEMENT
+
 #if defined(PLATFORM_DESKTOP)
     #define GLSL_VERSION            330
 #else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
     #define GLSL_VERSION            100
 #endif
-
-#define RLIGHTS_IMPLEMENTATION
 
 video::video()
 {
@@ -39,6 +40,8 @@ void video::initialize()
 
 void video::run()
 {
+  Light bulb;
+
   initialize();
 
   // SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
