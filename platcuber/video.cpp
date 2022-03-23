@@ -17,7 +17,7 @@ video::video()
 void video::initialize()
 {
   SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
-  InitWindow(m_screen_side, m_screen_side, "beatalizer");
+  InitWindow(m_screen_side, m_screen_side, "platcuber");
 
   SetTargetFPS(m_fps);
   m_camera.position = m_cam_pos;    // Camera position
