@@ -21,10 +21,14 @@ private:
   Color m_color
   { WHITE };
 
+  Model m_model;
+
 public:
   spheroid();
 
   void display();
+
+  void set_sphere();
 
   void set_shading(const Shader &shade);
 };

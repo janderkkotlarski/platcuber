@@ -3,9 +3,6 @@
 
 #include "raylib.h"
 
-
-
-
 #include "spheroid.h"
 #include "cuboid.h"
 
@@ -24,8 +21,8 @@ class video
 
   Shader m_lighting_shader;
 
-  const float m_fps
-  { 60.0f };
+  const int m_fps
+  { 60 };
 
   Vector3 m_cam_pos
   { -4.0f, 0.0f, 0.0f };
