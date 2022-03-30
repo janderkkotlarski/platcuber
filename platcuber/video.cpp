@@ -36,11 +36,13 @@ void video::initialize()
       GetShaderLocation(m_lighting_shader, "matModel");
   m_lighting_shader.locs[LOC_VECTOR_VIEW] =
       GetShaderLocation(m_lighting_shader, "viewPos");
+
+  Light bulb;
 }
 
 void video::run()
 {
-  Light bulb;
+
 
   initialize();
 
