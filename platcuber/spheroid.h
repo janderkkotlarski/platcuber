@@ -25,6 +25,8 @@ public:
   spheroid();
 
   void display();
+
+  void set_shading(const Shader &shade);
 };
 
 #endif // SPHEROID_H

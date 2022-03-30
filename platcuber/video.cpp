@@ -38,6 +38,8 @@ void video::initialize()
       GetShaderLocation(m_lighting_shader, "viewPos");
 
   Light bulb;
+
+  m_player.set_shading(m_lighting_shader);
 }
 
 void video::run()
