@@ -55,4 +55,8 @@ LIBS += -LC:\raylib\raylib
 LIBS += -LC:\raylib\
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        video.cpp
+
+HEADERS += \
+  video.h
