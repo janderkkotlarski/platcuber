@@ -2,7 +2,7 @@
 
 #include "raymath.h"
 
-#define RLIGHTS_IMPLEMENT
+#define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
 
 #if defined(PLATFORM_DESKTOP)
@@ -38,9 +38,8 @@ video::video()
   // int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
   //    SetShaderValue(m_lighting_shader, ambientLoc, (float[4]){ 0.1f, 0.1f, 0.1f, 1.0f }, 0);
 
-  Light bulb;
-  bulb = CreateLight(LIGHT_POINT, m_cam_pos, m_cam_target, WHITE, m_lighting_shader);
-  // { CreateLight(LIGHT_POINT, m_cam_pos, m_cam_target, WHITE, m_lighting_shader) };
+  Light bulb
+  { CreateLight(LIGHT_POINT, m_cam_pos, m_cam_target, WHITE, m_lighting_shader) };
 
   m_player.set_sphere();
 

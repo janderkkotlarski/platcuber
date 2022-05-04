@@ -56,7 +56,9 @@ LIBS += -LC:\raylib\
 
 SOURCES += \
         main.cpp \
+        player.cpp \
         video.cpp
 
 HEADERS += \
+  player.h \
   video.h

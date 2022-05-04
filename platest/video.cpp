@@ -13,6 +13,8 @@
     #define GLSL_VERSION            100
 #endif
 
+#include "player.h"
+
 video::video()
 {
 
@@ -24,6 +26,8 @@ void video::run()
   //--------------------------------------------------------------------------------------
   const int screenWidth = 800;
   const int screenHeight = 450;
+
+  player first;
 
   SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
   InitWindow(screenWidth, screenHeight, "raylib [shaders] example - basic lighting");
