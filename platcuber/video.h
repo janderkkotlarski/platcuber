@@ -3,6 +3,10 @@
 
 #include "raylib.h"
 
+
+
+
+
 #include "spheroid.h"
 #include "cuboid.h"
 
@@ -25,7 +29,7 @@ class video
   { 60 };
 
   Vector3 m_cam_pos
-  { -4.0f, 0.0f, 0.0f };
+  { -8.0f, 0.0f, 0.0f };
 
   Vector3 m_cam_target
   { 0.0f, 0.0f, 0.0f };
@@ -42,6 +46,10 @@ public:
   video();
 
   void initialize();
+
+  void init_screen();
+
+  void init_camera();
 
   void run();
 };
