@@ -35,7 +35,7 @@ video::video()
   m_lighting_shader.locs[LOC_VECTOR_VIEW] =
       GetShaderLocation(m_lighting_shader, "viewPos");
 
-  // int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
+  int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
   //    SetShaderValue(m_lighting_shader, ambientLoc, (float[4]){ 0.1f, 0.1f, 0.1f, 1.0f }, 0);
 
   Light bulb
