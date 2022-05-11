@@ -21,6 +21,12 @@ private:
   Color m_color
   { WHITE };
 
+  Image m_image;
+
+  Texture2D m_tex2d;
+
+  Mesh m_mesh;
+
   Model m_model;
 
 public:

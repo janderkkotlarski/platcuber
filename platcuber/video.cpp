@@ -22,6 +22,8 @@ void video::initialize()
 
   init_camera();
 
+
+
   m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
   // LoadShader("base_lighting.vs", "lighting.fs");
 
@@ -30,14 +32,21 @@ void video::initialize()
   m_lighting_shader.locs[LOC_VECTOR_VIEW] =
       GetShaderLocation(m_lighting_shader, "viewPos");
 
-  int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
-  //    SetShaderValue(m_lighting_shader, ambientLoc, (float[4]){ 0.1f, 0.1f, 0.1f, 1.0f }, 0);
+  const float lighting_color[4]
+  { 0.1f, 0.1f, 0.1f, 1.0f };
 
+  int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
+  // SetShaderValue(m_lighting_shader, ambientLoc, lighting_color, 0);
+
+  Light bulb
+  { CreateLight(LIGHT_POINT, m_cam_target, m_cam_target, WHITE, m_lighting_shader) };
 
 
   m_player.set_sphere();
 
-  m_player.set_shading(m_lighting_shader);
+
+
+  // m_player.set_shading(m_lighting_shader);
 
 }
 
@@ -87,7 +96,9 @@ void video::run()
       {
         // DrawSphereEx(bulb.position, 0.2f, 8, 8, YELLOW);
 
-        DrawSphereEx(m_cam_target, 1.0f, 10, 10, GREEN);
+        // DrawSphereEx(m_cam_target, 1.0f, 10, 10, GREEN);
+
+        m_player.display();
 
         DrawCubeV(Vector3{ 0.0f, 2.0f, 0.0f }, Vector3{ 0.5f, 0.5f, 0.5f }, RED);
 

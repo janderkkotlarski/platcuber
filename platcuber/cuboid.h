@@ -21,8 +21,7 @@ private:
   Color m_color
   { WHITE };
 
-  Model m_model
-  { LoadModelFromMesh(GenMeshCube(m_side, m_side, m_side)) };
+  Model m_model;
 
 public:
   cuboid();
