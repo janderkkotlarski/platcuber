@@ -42,6 +42,8 @@ class video
 
   spheroid m_player;
 
+  cuboid  m_block;
+
 public:
   video();
 

@@ -89,6 +89,8 @@ void video::run()
 
         DrawSphereEx(m_cam_target, 1.0f, 10, 10, GREEN);
 
+        DrawCubeV(Vector3{ 0.0f, 2.0f, 0.0f }, Vector3{ 0.5f, 0.5f, 0.5f }, RED);
+
         // m_player.display();
       }
       EndMode3D();
