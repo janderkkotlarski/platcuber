@@ -30,11 +30,15 @@
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
 
+/*
 #if defined(PLATFORM_DESKTOP)
     #define GLSL_VERSION            330
 #else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
     #define GLSL_VERSION            100
 #endif
+*/
+
+// #define GLSL_VERSION            330
 
 void light_it()
 {
@@ -57,9 +61,10 @@ void light_it()
     // Load plane model from a generated mesh
     Model model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
     Model cube = LoadModelFromMesh(GenMeshCube(2.0f, 4.0f, 2.0f));
-    // Shader shader = LoadShader("base_lighting.vs", "lighting.fs");
-    Shader shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION),
-                               TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
+    Shader shader = LoadShader("/base_lighting.vs", "/lighting.fs");
+    // shader = LoadShader("/d:/Cpp/build-platcuber-libray_MinGW-Debug/base_lighting.vs",
+    //                     "/d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
+    // shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION), TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
 
     // Get some required shader loactions
     shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
