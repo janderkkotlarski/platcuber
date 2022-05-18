@@ -1,5 +1,6 @@
-#include "cuboid.h"
-#include "video.h"
+// #include "cuboid.h"
+// #include "video.h"
+#include "basic_lighting.h"
 
 int main()
 {
@@ -9,7 +10,7 @@ int main()
 
   // vid.run();
 
-
+  light_it();
 
   return 0;
 }

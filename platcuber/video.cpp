@@ -1,6 +1,6 @@
 #include "video.h"
 
-
+/*
 
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
@@ -139,3 +139,4 @@ void video::run()
     EndDrawing();
   }
 }
+*/

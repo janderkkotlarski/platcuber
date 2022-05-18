@@ -1,5 +1,7 @@
 #include "basic_lighting.h"
 
+#include "video.h"
+
 /*******************************************************************************************
 *
 *   raylib [shaders] example - basic lighting
@@ -19,9 +21,11 @@
 *
 ********************************************************************************************/
 
+
 #include "raylib.h"
 
 #include "raymath.h"
+
 
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
@@ -53,7 +57,7 @@ void light_it()
     // Load plane model from a generated mesh
     Model model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
     Model cube = LoadModelFromMesh(GenMeshCube(2.0f, 4.0f, 2.0f));
-
+    // Shader shader = LoadShader("base_lighting.vs", "lighting.fs");
     Shader shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION),
                                TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
 
@@ -65,7 +69,9 @@ void light_it()
 
     // Ambient light level (some basic lighting)
     int ambientLoc = GetShaderLocation(shader, "ambient");
-    SetShaderValue(shader, ambientLoc, (float[4]){ 0.1f, 0.1f, 0.1f, 1.0f }, SHADER_UNIFORM_VEC4);
+    const float lighting_color[4]
+    { 0.1f, 0.1f, 0.1f, 1.0f };
+    SetShaderValue(shader, ambientLoc, lighting_color, UNIFORM_VEC4);
 
     // Assign out lighting shader to model
     model.materials[0].shader = shader;
@@ -104,7 +110,7 @@ void light_it()
 
         // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
         float cameraPos[3] = { camera.position.x, camera.position.y, camera.position.z };
-        SetShaderValue(shader, shader.locs[SHADER_LOC_VECTOR_VIEW], cameraPos, SHADER_UNIFORM_VEC3);
+        SetShaderValue(shader, shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
         //----------------------------------------------------------------------------------
 
         // Draw
