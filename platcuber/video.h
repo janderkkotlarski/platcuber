@@ -3,7 +3,7 @@
 
 #include "raylib.h"
 
-
+#include "raymath.h"
 
 
 
@@ -32,13 +32,13 @@ class video
   { -8.0f, 0.0f, 0.0f };
 
   Vector3 m_cam_target
-  { 0.0f, 0.0f, 0.0f };
+  { -0.0f, 0.0f, 0.0f };
 
   Vector3 m_cam_up
   { 0.0f, 0.0f, 1.0f };
 
   Vector3 m_light_pos
-  { m_cam_pos };
+  { Vector3Negate(m_cam_pos) };
 
   spheroid m_player;
 
@@ -52,6 +52,10 @@ public:
   void init_screen();
 
   void init_camera();
+
+  void init_shaders();
+
+  void init_player();
 
   void run();
 };

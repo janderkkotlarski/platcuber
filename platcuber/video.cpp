@@ -1,6 +1,6 @@
 #include "video.h"
 
-#include "raymath.h"
+
 
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
@@ -21,33 +21,6 @@ void video::initialize()
   init_screen();
 
   init_camera();
-
-
-
-  m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
-  // LoadShader("base_lighting.vs", "lighting.fs");
-
-  m_lighting_shader.locs[LOC_MATRIX_MODEL] =
-      GetShaderLocation(m_lighting_shader, "matModel");
-  m_lighting_shader.locs[LOC_VECTOR_VIEW] =
-      GetShaderLocation(m_lighting_shader, "viewPos");
-
-  const float lighting_color[4]
-  { 0.1f, 0.1f, 0.1f, 1.0f };
-
-  int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
-  // SetShaderValue(m_lighting_shader, ambientLoc, lighting_color, 0);
-
-  Light bulb
-  { CreateLight(LIGHT_POINT, m_cam_target, m_cam_target, WHITE, m_lighting_shader) };
-
-
-  m_player.set_sphere();
-
-
-
-  // m_player.set_shading(m_lighting_shader);
-
 }
 
 void video::init_screen()
@@ -71,12 +44,40 @@ void video::init_camera()
   UpdateCamera(&m_camera);
 }
 
+void video::init_shaders()
+{
+  m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
+  // LoadShader("base_lighting.vs", "lighting.fs");
+
+  m_lighting_shader.locs[LOC_MATRIX_MODEL] =
+      GetShaderLocation(m_lighting_shader, "matModel");
+  m_lighting_shader.locs[LOC_VECTOR_VIEW] =
+      GetShaderLocation(m_lighting_shader, "viewPos");
+
+  const float lighting_color[4]
+  { 0.1f, 0.1f, 0.1f, 1.0f };
+
+  const int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
+  SetShaderValue(m_lighting_shader, ambientLoc, lighting_color, 0);
+
+}
+
+void video::init_player()
+{
+  m_player.set_sphere();
+  // m_player.set_shading(m_lighting_shader);
+}
+
 void video::run()
 {
+  Model erehps = LoadModelFromMesh(GenMeshSphere(2.0f, 10, 10));
+
+  init_shaders();
+
   Light bulb
   { CreateLight(LIGHT_POINT, m_cam_target, m_cam_target, WHITE, m_lighting_shader) };
 
-
+  init_player();
 
   // SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
   // InitWindow(m_screen_side, m_screen_side, "beatalizer");
