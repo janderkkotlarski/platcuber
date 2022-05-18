@@ -3,11 +3,13 @@
 
 int main()
 {
-  cuboid cube;
+  // cuboid cube;
 
-  video vid;
+  // video vid;
 
-  vid.run();
+  // vid.run();
+
+
 
   return 0;
 }

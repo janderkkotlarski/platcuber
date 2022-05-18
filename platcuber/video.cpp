@@ -72,12 +72,35 @@ void video::run()
 {
   Model erehps = LoadModelFromMesh(GenMeshSphere(2.0f, 10, 10));
 
-  init_shaders();
+  Shader shader = LoadShader("base_lighting.vs", "lighting.fs");
+
+  shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
+
+  const int ambientLoc = GetShaderLocation(shader, "ambient");
+
+  const float lighting_color[4]
+  { 0.1f, 0.1f, 0.1f, 1.0f };
+  SetShaderValue(shader, ambientLoc, lighting_color, UNIFORM_VEC4);
+
+  erehps.materials[0].shader = shader;
+
+
+  // init_shaders();
+
+  const Vector3 light_target
+  { 0.0f, 0.0f, 0.0f };
+
+  const Vector3 light_source
+  { 0.0f, 8.0f, 0.0f };
 
   Light bulb
-  { CreateLight(LIGHT_POINT, m_cam_target, m_cam_target, WHITE, m_lighting_shader) };
+  { CreateLight(LIGHT_POINT, light_source, light_target, RED, shader) };
 
-  init_player();
+  erehps.materials[0].shader = shader;
+
+  // { CreateLight(LIGHT_POINT, m_cam_target, m_cam_target, RED, shader) };
+
+  // init_player();
 
   // SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
   // InitWindow(m_screen_side, m_screen_side, "beatalizer");
@@ -89,8 +112,12 @@ void video::run()
     if (IsKeyPressed(KEY_DELETE))
     { m_windeath = true; }
 
+    UpdateLightValues(shader, bulb);
+
     BeginDrawing();
     {
+
+
       ClearBackground(BLACK);
 
       BeginMode3D(m_camera);
@@ -99,11 +126,13 @@ void video::run()
 
         // DrawSphereEx(m_cam_target, 1.0f, 10, 10, GREEN);
 
-        m_player.display();
+        // m_player.display();
 
-        DrawCubeV(Vector3{ 0.0f, 2.0f, 0.0f }, Vector3{ 0.5f, 0.5f, 0.5f }, RED);
+        // DrawCubeV(Vector3{ 0.0f, 2.0f, 0.0f }, Vector3{ 0.5f, 0.5f, 0.5f }, RED);
 
         // m_player.display();
+
+        DrawModel(erehps, light_target, 1.0f, WHITE);
       }
       EndMode3D();
     }
