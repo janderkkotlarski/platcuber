@@ -30,15 +30,13 @@
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
 
-/*
+
 #if defined(PLATFORM_DESKTOP)
     #define GLSL_VERSION            330
 #else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
     #define GLSL_VERSION            100
 #endif
-*/
 
-// #define GLSL_VERSION            330
 
 void light_it()
 {
@@ -52,9 +50,9 @@ void light_it()
 
     // Define the camera to look into our 3d world
     Camera camera = { 0 };
-    camera.position = (Vector3){ 2.0f, 4.0f, 6.0f };    // Camera position
-    camera.target = (Vector3){ 0.0f, 0.5f, 0.0f };      // Camera looking at point
-    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
+    camera.position = Vector3{ 2.0f, 4.0f, 6.0f };    // Camera position
+    camera.target = Vector3{ 0.0f, 0.5f, 0.0f };      // Camera looking at point
+    camera.up = Vector3{ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
     camera.fovy = 45.0f;                                // Camera field-of-view Y
     camera.type = CAMERA_PERSPECTIVE;             // Camera mode type
 
@@ -66,8 +64,8 @@ void light_it()
     //                     "/d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
     // shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION), TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
 
-    // Get some required shader loactions
-    shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
+    // Get some required shader locations
+    // shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
     // NOTE: "matModel" location name is automatically assigned on shader loading,
     // no need to get the location again if using that uniform name
     //shader.locs[SHADER_LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
@@ -75,19 +73,23 @@ void light_it()
     // Ambient light level (some basic lighting)
     int ambientLoc = GetShaderLocation(shader, "ambient");
     const float lighting_color[4]
-    { 0.1f, 0.1f, 0.1f, 1.0f };
+    { 0.1f, 0.1f, 0.1f, 0.1f };
     SetShaderValue(shader, ambientLoc, lighting_color, UNIFORM_VEC4);
 
     // Assign out lighting shader to model
     model.materials[0].shader = shader;
-    cube.materials[0].shader = shader;
+    // cube.materials[0].shader = shader;
+
+    Light bulb = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), YELLOW, shader);
 
     // Using 4 point lights: gold, red, green and blue
+    /*
     Light lights[MAX_LIGHTS] = { 0 };
-    lights[0] = CreateLight(LIGHT_POINT, (Vector3){ -2, 1, -2 }, Vector3Zero(), YELLOW, shader);
-    lights[1] = CreateLight(LIGHT_POINT, (Vector3){ 2, 1, 2 }, Vector3Zero(), RED, shader);
-    lights[2] = CreateLight(LIGHT_POINT, (Vector3){ -2, 1, 2 }, Vector3Zero(), GREEN, shader);
-    lights[3] = CreateLight(LIGHT_POINT, (Vector3){ 2, 1, -2 }, Vector3Zero(), BLUE, shader);
+    lights[0] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), YELLOW, shader);
+    lights[1] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, 2 }, Vector3Zero(), RED, shader);
+    lights[2] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, 2 }, Vector3Zero(), GREEN, shader);
+    lights[3] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, -2 }, Vector3Zero(), BLUE, shader);
+    */
 
     SetCameraMode(camera, CAMERA_ORBITAL);  // Set an orbital camera mode
 
@@ -101,6 +103,11 @@ void light_it()
         //----------------------------------------------------------------------------------
         UpdateCamera(&camera);              // Update camera
 
+
+        if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
+        UpdateLightValues(shader, bulb);
+        /*
+
         // Check key inputs to enable/disable lights
         if (IsKeyPressed(KEY_Y)) { lights[0].enabled = !lights[0].enabled; }
         if (IsKeyPressed(KEY_R)) { lights[1].enabled = !lights[1].enabled; }
@@ -112,6 +119,7 @@ void light_it()
         UpdateLightValues(shader, lights[1]);
         UpdateLightValues(shader, lights[2]);
         UpdateLightValues(shader, lights[3]);
+        */
 
         // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
         float cameraPos[3] = { camera.position.x, camera.position.y, camera.position.z };
@@ -122,12 +130,17 @@ void light_it()
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-            ClearBackground(RAYWHITE);
+            ClearBackground(BLACK);
 
             BeginMode3D(camera);
 
                 DrawModel(model, Vector3Zero(), 1.0f, WHITE);
                 DrawModel(cube, Vector3Zero(), 1.0f, WHITE);
+
+                if (bulb.enabled) DrawSphereEx(bulb.position, 0.2f, 8, 8, YELLOW);
+                else DrawSphereWires(bulb.position, 0.2f, 8, 8, ColorAlpha(YELLOW, 0.3f));
+
+                /*
 
                 // Draw markers to show where the lights are
                 if (lights[0].enabled) DrawSphereEx(lights[0].position, 0.2f, 8, 8, YELLOW);
@@ -140,6 +153,8 @@ void light_it()
                 else DrawSphereWires(lights[3].position, 0.2f, 8, 8, ColorAlpha(BLUE, 0.3f));
 
                 DrawGrid(10, 1.0f);
+
+                */
 
             EndMode3D();
 
