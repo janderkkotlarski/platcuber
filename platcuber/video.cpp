@@ -5,15 +5,12 @@
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
 
-/*
 
 #if defined(PLATFORM_DESKTOP)
     #define GLSL_VERSION            330
 #else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
     #define GLSL_VERSION            100
 #endif
-
-*/
 
 video::video()
 {
@@ -59,7 +56,7 @@ void video::init_shaders()
       GetShaderLocation(m_lighting_shader, "viewPos");
 
   const float lighting_color[4]
-  { 0.1f, 0.1f, 0.1f, 1.0f };
+  { 0.8f, 0.8f, 0.8f, 1.0f };
 
   const int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
   SetShaderValue(m_lighting_shader, ambientLoc, lighting_color, 0);
@@ -74,7 +71,7 @@ void video::init_player()
 
 void video::run()
 {
-  Model erehps = LoadModelFromMesh(GenMeshSphere(2.0f, 10, 10));
+  Model erehps = LoadModelFromMesh(GenMeshSphere(2.0f, 20, 20));
 
   Shader shader = LoadShader("base_lighting.vs", "lighting.fs");
 
@@ -83,7 +80,7 @@ void video::run()
   const int ambientLoc = GetShaderLocation(shader, "ambient");
 
   const float lighting_color[4]
-  { 0.1f, 0.1f, 0.1f, 1.0f };
+  { 0.8f, 0.8f, 0.8f, 1.0f };
   SetShaderValue(shader, ambientLoc, lighting_color, UNIFORM_VEC4);
 
   erehps.materials[0].shader = shader;
@@ -97,10 +94,12 @@ void video::run()
   const Vector3 light_source
   { 0.0f, 8.0f, 0.0f };
 
+  erehps.materials[0].shader = shader;
+
+
   Light bulb
   { CreateLight(LIGHT_POINT, light_source, light_target, RED, shader) };
 
-  erehps.materials[0].shader = shader;
 
   // { CreateLight(LIGHT_POINT, m_cam_target, m_cam_target, RED, shader) };
 
