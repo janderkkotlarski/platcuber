@@ -1,15 +1,19 @@
 #include "video.h"
 
-/*
+
 
 #define RLIGHTS_IMPLEMENTATION
 #include "rlights.h"
+
+/*
 
 #if defined(PLATFORM_DESKTOP)
     #define GLSL_VERSION            330
 #else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
     #define GLSL_VERSION            100
 #endif
+
+*/
 
 video::video()
 {
@@ -139,4 +143,3 @@ void video::run()
     EndDrawing();
   }
 }
-*/

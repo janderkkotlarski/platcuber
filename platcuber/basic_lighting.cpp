@@ -20,7 +20,7 @@
 *   Copyright (c) 2019-2021 Chris Camacho (@codifies) and Ramon Santamaria (@raysan5)
 *
 ********************************************************************************************/
-
+/*
 
 #include "raylib.h"
 
@@ -59,9 +59,9 @@ void light_it()
     // Load plane model from a generated mesh
     Model model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
     Model cube = LoadModelFromMesh(GenMeshCube(2.0f, 4.0f, 2.0f));
-    // Shader shader = LoadShader("base_lighting.vs", "lighting.fs");
-    Shader shader = LoadShader("d:/Cpp/build-platcuber-libray_MinGW-Debug/base_lighting.vs",
-                        "d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
+    Shader shader = LoadShader("base_lighting.vs", "lighting.fs");
+    // Shader shader = LoadShader("d:/Cpp/build-platcuber-libray_MinGW-Debug/base_lighting.vs",
+    //                     "d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
     // shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION), TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
 
     // Get some required shader locations
@@ -73,12 +73,12 @@ void light_it()
     // Ambient light level (some basic lighting)
     int ambientLoc = GetShaderLocation(shader, "ambient");
     const float lighting_color[4]
-    { 0.1f, 0.1f, 0.1f, 0.1f };
+    { 0.1f, 0.1f, 0.1f, 1.0f };
     SetShaderValue(shader, ambientLoc, lighting_color, UNIFORM_VEC4);
 
     // Assign out lighting shader to model
     model.materials[0].shader = shader;
-    // cube.materials[0].shader = shader;
+    cube.materials[0].shader = shader;
 
     Light bulb = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), YELLOW, shader);
 
@@ -89,7 +89,7 @@ void light_it()
     lights[1] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, 2 }, Vector3Zero(), RED, shader);
     lights[2] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, 2 }, Vector3Zero(), GREEN, shader);
     lights[3] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, -2 }, Vector3Zero(), BLUE, shader);
-    */
+
 
     SetCameraMode(camera, CAMERA_ORBITAL);  // Set an orbital camera mode
 
@@ -119,7 +119,7 @@ void light_it()
         UpdateLightValues(shader, lights[1]);
         UpdateLightValues(shader, lights[2]);
         UpdateLightValues(shader, lights[3]);
-        */
+
 
         // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
         float cameraPos[3] = { camera.position.x, camera.position.y, camera.position.z };
@@ -134,10 +134,12 @@ void light_it()
 
             BeginMode3D(camera);
 
-                DrawModel(model, Vector3Zero(), 1.0f, WHITE);
                 DrawModel(cube, Vector3Zero(), 1.0f, WHITE);
 
-                if (bulb.enabled) DrawSphereEx(bulb.position, 0.2f, 8, 8, YELLOW);
+                DrawModel(model, Vector3Zero(), 1.0f, RED);
+
+
+                if (bulb.enabled) DrawSphereEx(bulb.position, 0.2f, 8, 8, GRAY);
                 else DrawSphereWires(bulb.position, 0.2f, 8, 8, ColorAlpha(YELLOW, 0.3f));
 
                 /*
@@ -154,7 +156,6 @@ void light_it()
 
                 DrawGrid(10, 1.0f);
 
-                */
 
             EndMode3D();
 
@@ -175,3 +176,4 @@ void light_it()
     CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 }
+*/
