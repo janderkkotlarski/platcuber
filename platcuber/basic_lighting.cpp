@@ -59,16 +59,16 @@ void light_it()
     // Load plane model from a generated mesh
     Model model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
     Model cube = LoadModelFromMesh(GenMeshCube(2.0f, 4.0f, 2.0f));
-    Shader shader = LoadShader("/base_lighting.vs", "/lighting.fs");
-    // shader = LoadShader("/d:/Cpp/build-platcuber-libray_MinGW-Debug/base_lighting.vs",
-    //                     "/d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
+    // Shader shader = LoadShader("base_lighting.vs", "lighting.fs");
+    Shader shader = LoadShader("d:/Cpp/build-platcuber-libray_MinGW-Debug/base_lighting.vs",
+                        "d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
     // shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION), TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
 
     // Get some required shader locations
-    // shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
+    shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
     // NOTE: "matModel" location name is automatically assigned on shader loading,
     // no need to get the location again if using that uniform name
-    //shader.locs[SHADER_LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
+    shader.locs[LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
 
     // Ambient light level (some basic lighting)
     int ambientLoc = GetShaderLocation(shader, "ambient");
