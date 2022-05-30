@@ -80,7 +80,7 @@ void video::run()
   const int ambientLoc = GetShaderLocation(shader, "ambient");
 
   const float lighting_color[4]
-  { 0.8f, 0.8f, 0.8f, 1.0f };
+  { 10.0f, 1.0f, 1.0f, 1.0f };
   SetShaderValue(shader, ambientLoc, lighting_color, UNIFORM_VEC4);
 
   erehps.materials[0].shader = shader;
@@ -92,7 +92,7 @@ void video::run()
   { 0.0f, 0.0f, 0.0f };
 
   const Vector3 light_source
-  { 0.0f, 8.0f, 0.0f };
+  { 0.0f, 2.0f, 0.0f };
 
   erehps.materials[0].shader = shader;
 
@@ -125,6 +125,20 @@ void video::run()
 
       BeginMode3D(m_camera);
       {
+        // DrawSphereEx(Vector3{0.0f, 0.0f, 0.0f}, 0.2f, 8, 8, WHITE);
+
+        DrawSphereEx(Vector3{1.0f, 0.0f, 0.0f}, 0.1f, 8, 8, RED);
+
+        DrawSphereEx(Vector3{-1.0f, 0.0f, 0.0f}, 0.1f, 8, 8, GREEN);
+
+        DrawSphereEx(Vector3{0.0f, 1.0f, 0.0f}, 0.1f, 8, 8, YELLOW);
+
+        DrawSphereEx(Vector3{0.0f, -1.0f, 0.0f}, 0.1f, 8, 8, BLUE);
+
+        DrawSphereEx(Vector3{0.0f, 0.0f, 1.0f}, 0.1f, 8, 8, ORANGE);
+
+        DrawSphereEx(Vector3{0.0f, 0.0f, -1.0f}, 0.1f, 8, 8, PURPLE);
+
         // DrawSphereEx(bulb.position, 0.2f, 8, 8, YELLOW);
 
         // DrawSphereEx(m_cam_target, 1.0f, 10, 10, GREEN);
@@ -135,10 +149,11 @@ void video::run()
 
         // m_player.display();
 
-        DrawModel(erehps, light_target, 1.0f, WHITE);
+        DrawModel(erehps, light_target, 0.2f, WHITE);
       }
       EndMode3D();
     }
     EndDrawing();
   }
 }
+

@@ -80,10 +80,10 @@ void light_it()
     model.materials[0].shader = shader;
     cube.materials[0].shader = shader;
 
-    Light bulb = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), YELLOW, shader);
+    // Light bulb = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), YELLOW, shader);
 
     // Using 4 point lights: gold, red, green and blue
-    /*
+
     Light lights[MAX_LIGHTS] = { 0 };
     lights[0] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), YELLOW, shader);
     lights[1] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, 2 }, Vector3Zero(), RED, shader);
@@ -104,9 +104,9 @@ void light_it()
         UpdateCamera(&camera);              // Update camera
 
 
-        if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
-        UpdateLightValues(shader, bulb);
-        /*
+        // if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
+        // UpdateLightValues(shader, bulb);
+
 
         // Check key inputs to enable/disable lights
         if (IsKeyPressed(KEY_Y)) { lights[0].enabled = !lights[0].enabled; }
@@ -136,13 +136,13 @@ void light_it()
 
                 DrawModel(cube, Vector3Zero(), 1.0f, WHITE);
 
-                DrawModel(model, Vector3Zero(), 1.0f, RED);
+                DrawModel(model, Vector3Zero(), 1.0f, BLACK);
 
 
-                if (bulb.enabled) DrawSphereEx(bulb.position, 0.2f, 8, 8, GRAY);
-                else DrawSphereWires(bulb.position, 0.2f, 8, 8, ColorAlpha(YELLOW, 0.3f));
+                // if (bulb.enabled) DrawSphereEx(bulb.position, 0.2f, 8, 8, GRAY);
+                // else DrawSphereWires(bulb.position, 0.2f, 8, 8, ColorAlpha(YELLOW, 0.3f));
 
-                /*
+
 
                 // Draw markers to show where the lights are
                 if (lights[0].enabled) DrawSphereEx(lights[0].position, 0.2f, 8, 8, YELLOW);
@@ -176,4 +176,5 @@ void light_it()
     CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 }
+
 */
