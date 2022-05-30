@@ -57,6 +57,8 @@ public:
 
   void init_player();
 
+  void light_it();
+
   void run();
 };
 

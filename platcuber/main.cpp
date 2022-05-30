@@ -8,7 +8,7 @@ int main()
 
   video vid;
 
-  vid.run();
+  vid.light_it();
 
   // light_it();
 
