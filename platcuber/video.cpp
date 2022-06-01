@@ -113,38 +113,40 @@ void video::light_it()
     */
 
     // Load plane model from a generated mesh
-    Model model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
-    Model cube = LoadModelFromMesh(GenMeshCube(2.0f, 4.0f, 2.0f));
+    m_model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
+    m_cube = LoadModelFromMesh(GenMeshCube(2.0f, 4.0f, 2.0f));
     Shader shader = LoadShader("base_lighting.vs", "lighting.fs");
+
+    m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
     // Shader shader = LoadShader("d:/Cpp/build-platcuber-libray_MinGW-Debug/base_lighting.vs",
     //                     "d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
     // shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION), TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
 
     // Get some required shader locations
-    shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
+    m_lighting_shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
     // NOTE: "matModel" location name is automatically assigned on shader loading,
     // no need to get the location again if using that uniform name
-    shader.locs[LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
+    m_lighting_shader.locs[LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
 
     // Ambient light level (some basic lighting)
-    int ambientLoc = GetShaderLocation(shader, "ambient");
+    int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
     const float lighting_color[4]
     { 0.1f, 0.1f, 0.1f, 1.0f };
-    SetShaderValue(shader, ambientLoc, lighting_color, UNIFORM_VEC4);
+    SetShaderValue(m_lighting_shader, ambientLoc, lighting_color, UNIFORM_VEC4);
 
     // Assign out lighting shader to model
-    model.materials[0].shader = shader;
-    cube.materials[0].shader = shader;
+    m_model.materials[0].shader = m_lighting_shader;
+    m_cube.materials[0].shader = m_lighting_shader;
 
     // Light bulb = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), YELLOW, shader);
 
     // Using 4 point lights: gold, red, green and blue
 
     Light lights[MAX_LIGHTS] = { 0 };
-    lights[0] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), YELLOW, shader);
-    lights[1] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, 2 }, Vector3Zero(), RED, shader);
-    lights[2] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, 2 }, Vector3Zero(), GREEN, shader);
-    lights[3] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, -2 }, Vector3Zero(), BLUE, shader);
+    lights[0] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), YELLOW, m_lighting_shader);
+    lights[1] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, 2 }, Vector3Zero(), RED, m_lighting_shader);
+    lights[2] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, 2 }, Vector3Zero(), GREEN, m_lighting_shader);
+    lights[3] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, -2 }, Vector3Zero(), BLUE, m_lighting_shader);
 
 
     SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
@@ -171,15 +173,15 @@ void video::light_it()
         if (IsKeyPressed(KEY_B)) { lights[3].enabled = !lights[3].enabled; }
 
         // Update light values (actually, only enable/disable them)
-        UpdateLightValues(shader, lights[0]);
-        UpdateLightValues(shader, lights[1]);
-        UpdateLightValues(shader, lights[2]);
-        UpdateLightValues(shader, lights[3]);
+        UpdateLightValues(m_lighting_shader, lights[0]);
+        UpdateLightValues(m_lighting_shader, lights[1]);
+        UpdateLightValues(m_lighting_shader, lights[2]);
+        UpdateLightValues(m_lighting_shader, lights[3]);
 
 
         // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
         float cameraPos[3] = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
-        SetShaderValue(shader, shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
+        SetShaderValue(m_lighting_shader, m_lighting_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -190,9 +192,9 @@ void video::light_it()
 
             BeginMode3D(m_camera);
 
-                // DrawModel(cube, Vector3Zero(), 1.0f, WHITE);
+                // DrawModel(m_cube, Vector3Zero(), 1.0f, WHITE);
 
-                DrawModel(model, Vector3Zero(), 1.0f, BLACK);
+                DrawModel(m_model, Vector3Zero(), 1.0f, BLACK);
 
 
                 // if (bulb.enabled) DrawSphereEx(bulb.position, 0.2f, 8, 8, GRAY);
@@ -225,9 +227,9 @@ void video::light_it()
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    UnloadModel(model);     // Unload the model
-    UnloadModel(cube);      // Unload the model
-    UnloadShader(shader);   // Unload shader
+    UnloadModel(m_model);     // Unload the model
+    UnloadModel(m_cube);      // Unload the model
+    UnloadShader(m_lighting_shader);   // Unload shader
 
     CloseWindow();          // Close window and OpenGL context
     //--------------------------------------------------------------------------------------

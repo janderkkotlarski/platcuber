@@ -44,6 +44,9 @@ class video
 
   cuboid  m_block;
 
+  Model m_model;
+  Model m_cube;
+
 public:
   video();
 
