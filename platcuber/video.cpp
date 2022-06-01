@@ -19,9 +19,13 @@ video::video()
 
 void video::initialize()
 {
-  init_screen();
+  // for (int count{ 0 }; count < 100; ++count)
+  // init_screen();
 
-  init_camera();
+  // init_camera();
+
+  light_screen();
+  light_camera();
 }
 
 void video::init_screen()
@@ -69,23 +73,44 @@ void video::init_player()
   // m_player.set_shading(m_lighting_shader);
 }
 
+void video::light_screen()
+{
+  const int screenWidth = 800;
+  const int screenHeight = 450;
+
+  SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
+  InitWindow(screenWidth, screenHeight, "raylib [shaders] example - basic lighting");
+}
+
+void video::light_camera()
+{
+  m_camera.position = Vector3{ 2.0f, 4.0f, 6.0f };      // Camera position
+  m_camera.target = Vector3{ 0.0f, 0.5f, 0.0f };      // Camera looking at point
+  m_camera.up = Vector3{ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
+
+
+  m_camera.fovy = 45.0f;                                // Camera field-of-view Y
+  m_camera.type = CAMERA_PERSPECTIVE;                  // Camera mode type
+
+  UpdateCamera(&m_camera);
+}
+
 void video::light_it()
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
 
-    SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
-    InitWindow(screenWidth, screenHeight, "raylib [shaders] example - basic lighting");
 
     // Define the camera to look into our 3d world
+  /*
     Camera camera = { 0 };
     camera.position = Vector3{ 2.0f, 4.0f, 6.0f };    // Camera position
     camera.target = Vector3{ 0.0f, 0.5f, 0.0f };      // Camera looking at point
     camera.up = Vector3{ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
     camera.fovy = 45.0f;                                // Camera field-of-view Y
     camera.type = CAMERA_PERSPECTIVE;             // Camera mode type
+
+    */
 
     // Load plane model from a generated mesh
     Model model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
@@ -122,7 +147,7 @@ void video::light_it()
     lights[3] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, -2 }, Vector3Zero(), BLUE, shader);
 
 
-    SetCameraMode(camera, CAMERA_ORBITAL);  // Set an orbital camera mode
+    SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
 
     SetTargetFPS(60);                       // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -132,7 +157,7 @@ void video::light_it()
     {
         // Update
         //----------------------------------------------------------------------------------
-        UpdateCamera(&camera);              // Update camera
+        UpdateCamera(&m_camera);              // Update camera
 
 
         // if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
@@ -153,7 +178,7 @@ void video::light_it()
 
 
         // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
-        float cameraPos[3] = { camera.position.x, camera.position.y, camera.position.z };
+        float cameraPos[3] = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
         SetShaderValue(shader, shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
         //----------------------------------------------------------------------------------
 
@@ -163,7 +188,7 @@ void video::light_it()
 
             ClearBackground(BLACK);
 
-            BeginMode3D(camera);
+            BeginMode3D(m_camera);
 
                 // DrawModel(cube, Vector3Zero(), 1.0f, WHITE);
 

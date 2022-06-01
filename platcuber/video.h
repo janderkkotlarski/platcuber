@@ -57,6 +57,10 @@ public:
 
   void init_player();
 
+  void light_screen();
+
+  void light_camera();
+
   void light_it();
 
   void run();
