@@ -47,6 +47,11 @@ class video
   Model m_model;
   Model m_cube;
 
+  int m_ambientLoc;
+
+  const float m_lighting_color[4]
+  { 0.1f, 0.1f, 0.1f, 1.0f };
+
 public:
   video();
 
@@ -63,6 +68,10 @@ public:
   void light_screen();
 
   void light_camera();
+
+  void light_models();
+
+  void light_shader();
 
   void light_it();
 

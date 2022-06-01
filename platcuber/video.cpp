@@ -26,6 +26,8 @@ void video::initialize()
 
   light_screen();
   light_camera();
+  light_models();
+  light_shader();
 }
 
 void video::init_screen()
@@ -95,6 +97,30 @@ void video::light_camera()
   UpdateCamera(&m_camera);
 }
 
+void video::light_models()
+{
+  m_model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
+  m_cube = LoadModelFromMesh(GenMeshCube(2.0f, 4.0f, 2.0f));
+}
+
+void video::light_shader()
+{
+  m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
+  // Shader shader = LoadShader("d:/Cpp/build-platcuber-libray_MinGW-Debug/base_lighting.vs",
+  //                     "d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
+  // shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION), TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
+
+  // Get some required shader locations
+  m_lighting_shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(m_lighting_shader, "viewPos");
+  // NOTE: "matModel" location name is automatically assigned on shader loading,
+  // no need to get the location again if using that uniform name
+  m_lighting_shader.locs[LOC_MATRIX_MODEL] = GetShaderLocation(m_lighting_shader, "matModel");
+
+  // Ambient light level (some basic lighting)
+  m_ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
+  SetShaderValue(m_lighting_shader, m_ambientLoc, m_lighting_color, UNIFORM_VEC4);
+}
+
 void video::light_it()
 {
     // Initialization
@@ -113,27 +139,24 @@ void video::light_it()
     */
 
     // Load plane model from a generated mesh
-    m_model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
-    m_cube = LoadModelFromMesh(GenMeshCube(2.0f, 4.0f, 2.0f));
-    Shader shader = LoadShader("base_lighting.vs", "lighting.fs");
 
+    /*
     m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
     // Shader shader = LoadShader("d:/Cpp/build-platcuber-libray_MinGW-Debug/base_lighting.vs",
     //                     "d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
     // shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION), TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
 
     // Get some required shader locations
-    m_lighting_shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
+    m_lighting_shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(m_lighting_shader, "viewPos");
     // NOTE: "matModel" location name is automatically assigned on shader loading,
     // no need to get the location again if using that uniform name
-    m_lighting_shader.locs[LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
+    m_lighting_shader.locs[LOC_MATRIX_MODEL] = GetShaderLocation(m_lighting_shader, "matModel");
 
     // Ambient light level (some basic lighting)
-    int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
-    const float lighting_color[4]
-    { 0.1f, 0.1f, 0.1f, 1.0f };
-    SetShaderValue(m_lighting_shader, ambientLoc, lighting_color, UNIFORM_VEC4);
+    m_ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
+    SetShaderValue(m_lighting_shader, m_ambientLoc, m_lighting_color, UNIFORM_VEC4);
 
+    */
     // Assign out lighting shader to model
     m_model.materials[0].shader = m_lighting_shader;
     m_cube.materials[0].shader = m_lighting_shader;
