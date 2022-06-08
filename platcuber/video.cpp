@@ -88,8 +88,8 @@ void video::light_screen()
 
 void video::light_camera()
 {
-  m_camera.position = Vector3{ 2.0f, 4.0f, 6.0f };      // Camera position
-  m_camera.target = Vector3{ 0.0f, 0.5f, 0.0f };      // Camera looking at point
+  m_camera.position = Vector3{ 0.0f, 10.0f, 0.0f };      // Camera position
+  m_camera.target = Vector3{ 0.0f, 0.0f, 0.0f };      // Camera looking at point
   m_camera.up = Vector3{ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
 
 
@@ -103,6 +103,7 @@ void video::light_models()
 {
   m_model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
   m_cube = LoadModelFromMesh(GenMeshCube(2.0f, 4.0f, 2.0f));
+  m_sphere = LoadModelFromMesh(GenMeshSphere(0.2f, 20, 20));
 }
 
 void video::light_shader()
@@ -127,6 +128,7 @@ void video::light_shadels()
 {
   m_model.materials[0].shader = m_lighting_shader;
   m_cube.materials[0].shader = m_lighting_shader;
+  m_sphere.materials[0].shader = m_lighting_shader;
 }
 
 void video::light_it()
@@ -173,12 +175,16 @@ void video::light_it()
     // Using 4 point lights: gold, red, green and blue
 
     Light lights[1] = { 0 };
-    lights[0] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), m_chroma.get_color(), m_lighting_shader);
+    lights[0] = CreateLight(LIGHT_POINT, Vector3{ 0, 100000, 0 }, Vector3Zero(), m_chroma.get_color(), m_lighting_shader);
     /*
     lights[1] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, 2 }, Vector3Zero(), BLACK, m_lighting_shader);
     lights[2] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, 2 }, Vector3Zero(), BLACK, m_lighting_shader);
     lights[3] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, -2 }, Vector3Zero(), BLACK, m_lighting_shader);
+
     */
+
+    const Vector3 sphere_pos
+    { 2.0f, 1.0f, -2.0f };
 
 
     SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
@@ -244,8 +250,10 @@ void video::light_it()
 
 
                 // Draw markers to show where the lights are
-                if (lights[0].enabled) DrawSphereEx(lights[0].position, 0.2f, 8, 8, m_chroma.get_color());
-                else DrawSphereWires(lights[0].position, 0.2f, 8, 8, ColorAlpha(m_chroma.get_color(), 0.3f));
+                // if (lights[0].enabled) DrawSphereEx(lights[0].position, 0.2f, 8, 8, m_chroma.get_color());
+                // else DrawSphereWires(lights[0].position, 0.2f, 8, 8, ColorAlpha(m_chroma.get_color(), 0.3f));
+
+                DrawModel(m_sphere, sphere_pos, 1.0f, WHITE);
                 /*
                 if (lights[1].enabled) DrawSphereEx(lights[1].position, 0.2f, 8, 8, RED);
                 else DrawSphereWires(lights[1].position, 0.2f, 8, 8, ColorAlpha(RED, 0.3f));
