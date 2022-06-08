@@ -42,6 +42,15 @@ class video
 
   spheroid m_player;
 
+  Color m_light_color
+  { 255, 255, 127, 255 };
+
+  bool m_light_up
+  { true };
+
+  int m_light_choice
+  { -1 };
+
   cuboid  m_block;
 
   Model m_model;
@@ -65,6 +74,8 @@ public:
 
   void init_player();
 
+  void light_spectralize();
+
   void light_screen();
 
   void light_camera();
@@ -72,6 +83,8 @@ public:
   void light_models();
 
   void light_shader();
+
+  void light_shadels();
 
   void light_it();
 

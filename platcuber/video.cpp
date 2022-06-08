@@ -28,6 +28,7 @@ void video::initialize()
   light_camera();
   light_models();
   light_shader();
+  light_shadels();
 }
 
 void video::init_screen()
@@ -73,6 +74,21 @@ void video::init_player()
 {
   m_player.set_sphere();
   // m_player.set_shading(m_lighting_shader);
+}
+
+void video::light_spectralize()
+{
+  if (m_light_up)
+  {
+    if (m_light_choice < 0)
+    {
+      ++m_light_color.a;
+    }
+  }
+  else
+  {
+
+  }
 }
 
 void video::light_screen()
@@ -121,6 +137,12 @@ void video::light_shader()
   SetShaderValue(m_lighting_shader, m_ambientLoc, m_lighting_color, UNIFORM_VEC4);
 }
 
+void video::light_shadels()
+{
+  m_model.materials[0].shader = m_lighting_shader;
+  m_cube.materials[0].shader = m_lighting_shader;
+}
+
 void video::light_it()
 {
     // Initialization
@@ -158,15 +180,14 @@ void video::light_it()
 
     */
     // Assign out lighting shader to model
-    m_model.materials[0].shader = m_lighting_shader;
-    m_cube.materials[0].shader = m_lighting_shader;
+
 
     // Light bulb = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), YELLOW, shader);
 
     // Using 4 point lights: gold, red, green and blue
 
     Light lights[MAX_LIGHTS] = { 0 };
-    lights[0] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), YELLOW, m_lighting_shader);
+    lights[0] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, -2 }, Vector3Zero(), WHITE, m_lighting_shader);
     lights[1] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, 2 }, Vector3Zero(), RED, m_lighting_shader);
     lights[2] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, 2 }, Vector3Zero(), GREEN, m_lighting_shader);
     lights[3] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, -2 }, Vector3Zero(), BLUE, m_lighting_shader);
@@ -190,7 +211,7 @@ void video::light_it()
 
 
         // Check key inputs to enable/disable lights
-        if (IsKeyPressed(KEY_Y)) { lights[0].enabled = !lights[0].enabled; }
+        if (IsKeyPressed(KEY_W)) { lights[0].enabled = !lights[0].enabled; }
         if (IsKeyPressed(KEY_R)) { lights[1].enabled = !lights[1].enabled; }
         if (IsKeyPressed(KEY_G)) { lights[2].enabled = !lights[2].enabled; }
         if (IsKeyPressed(KEY_B)) { lights[3].enabled = !lights[3].enabled; }
@@ -226,8 +247,8 @@ void video::light_it()
 
 
                 // Draw markers to show where the lights are
-                if (lights[0].enabled) DrawSphereEx(lights[0].position, 0.2f, 8, 8, YELLOW);
-                else DrawSphereWires(lights[0].position, 0.2f, 8, 8, ColorAlpha(YELLOW, 0.3f));
+                if (lights[0].enabled) DrawSphereEx(lights[0].position, 0.2f, 8, 8, WHITE);
+                else DrawSphereWires(lights[0].position, 0.2f, 8, 8, ColorAlpha(WHITE, 0.3f));
                 if (lights[1].enabled) DrawSphereEx(lights[1].position, 0.2f, 8, 8, RED);
                 else DrawSphereWires(lights[1].position, 0.2f, 8, 8, ColorAlpha(RED, 0.3f));
                 if (lights[2].enabled) DrawSphereEx(lights[2].position, 0.2f, 8, 8, GREEN);
