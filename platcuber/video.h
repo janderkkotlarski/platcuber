@@ -9,6 +9,7 @@
 
 #include "spheroid.h"
 #include "cuboid.h"
+#include "chromatic.h"
 
 class video
 {
@@ -42,19 +43,13 @@ class video
 
   spheroid m_player;
 
-  Color m_light_color
-  { 255, 255, 127, 255 };
-
-  bool m_light_up
-  { true };
-
-  int m_light_choice
-  { -1 };
+  chromatic m_chroma;
 
   cuboid  m_block;
 
   Model m_model;
   Model m_cube;
+  Model m_sphere;
 
   int m_ambientLoc;
 
@@ -74,7 +69,9 @@ public:
 
   void init_player();
 
-  void light_spectralize();
+  void spectral_pogo();
+
+  void spectral_choice();
 
   void light_screen();
 
