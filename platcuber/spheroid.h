@@ -32,6 +32,8 @@ private:
 public:
   spheroid();
 
+  void set_pos(const Vector3 &pos);
+
   void display();
 
   void set_sphere();

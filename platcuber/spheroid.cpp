@@ -5,6 +5,9 @@ spheroid::spheroid()
 
 }
 
+void spheroid::set_pos(const Vector3 &pos)
+{ m_posit = pos; }
+
 void spheroid::display()
 {
   // DrawSphere(m_posit, 0.5f*m_side, m_color);
@@ -18,7 +21,7 @@ void spheroid::set_sphere()
 
   m_tex2d = LoadTextureFromImage(m_image);
 
-  m_model = LoadModelFromMesh(GenMeshSphere(m_side, 30, 30));
+  m_model = LoadModelFromMesh(GenMeshSphere(m_side, 20, 20));
 
   m_model.materials[0].maps[MAP_DIFFUSE].texture = m_tex2d;
 
