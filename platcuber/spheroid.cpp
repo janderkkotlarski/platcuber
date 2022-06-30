@@ -24,7 +24,7 @@ void spheroid::set_sphere()
 
   m_tex2d = LoadTextureFromImage(m_image);
 
-  m_model = LoadModelFromMesh(GenMeshSphere(m_side, 20, 20));
+  m_model = LoadModelFromMesh(GenMeshSphere(m_side, 25, 50));
 
   m_model.materials[0].maps[MAP_DIFFUSE].texture = m_tex2d;
 

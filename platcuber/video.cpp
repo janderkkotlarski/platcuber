@@ -66,7 +66,7 @@ void video::init_shaders()
       GetShaderLocation(m_lighting_shader, "viewPos");
 
   const float lighting_color[4]
-  { 0.8f, 0.8f, 0.8f, 1.0f };
+  { 10.0f, 10.0f, 10.0f, 100.0f };
 
   const int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
   SetShaderValue(m_lighting_shader, ambientLoc, lighting_color, 0);
@@ -87,8 +87,8 @@ void video::init_player()
 
 void video::light_screen()
 {
-  const int screenWidth = 800;
-  const int screenHeight = 450;
+  const int screenWidth = 1400;
+  const int screenHeight = 800;
 
   SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
   InitWindow(screenWidth, screenHeight, "raylib [shaders] example - basic lighting");
@@ -96,7 +96,7 @@ void video::light_screen()
 
 void video::light_camera()
 {
-  m_camera.position = Vector3{ 0.0f, 2.0f, 10.0f };      // Camera position
+  m_camera.position = Vector3{ 7.0f, 2.0f, -7.0f };      // Camera position
   m_camera.target = Vector3{ 0.0f, 2.0f, 0.0f };      // Camera looking at point
   m_camera.up = Vector3{ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
 
@@ -149,123 +149,123 @@ void video::light_it()
 
   m_light_pos = m_player.get_pos();
 
-    Light lights[1] = { 0 };
-    lights[0] = CreateLight(LIGHT_POINT, Vector3{ 0, 1000, 0 }, Vector3Zero(), m_chroma.get_color(), m_lighting_shader);
-    /*
-    lights[1] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, 2 }, Vector3Zero(), BLACK, m_lighting_shader);
-    lights[2] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, 2 }, Vector3Zero(), BLACK, m_lighting_shader);
-    lights[3] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, -2 }, Vector3Zero(), BLACK, m_lighting_shader);
+  Light lights[1] = { 0 };
+  lights[0] = CreateLight(LIGHT_POINT, Vector3{ 0, 1000, 0 }, Vector3Zero(), m_chroma.get_color(), m_lighting_shader);
+  /*
+  lights[1] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, 2 }, Vector3Zero(), BLACK, m_lighting_shader);
+  lights[2] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, 2 }, Vector3Zero(), BLACK, m_lighting_shader);
+  lights[3] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, -2 }, Vector3Zero(), BLACK, m_lighting_shader);
 
+  */
+
+  const Vector3 sphere_pos
+  { 2.0f, 1.0f, -2.0f };
+
+  // SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
+
+  SetTargetFPS(60);                       // Set our game to run at 60 frames-per-second
+  //--------------------------------------------------------------------------------------
+
+  // Main game loop
+  while (!WindowShouldClose())            // Detect window close button or ESC key
+  {
+    // Update
+    //----------------------------------------------------------------------------------
+    UpdateCamera(&m_camera);              // Update camera
+
+    m_chroma.pogo();
+    m_chroma.choose();
+
+
+    lights[0].color = m_chroma.get_color();
+
+    // if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
+    // UpdateLightValues(shader, bulb);
+
+
+    // Check key inputs to enable/disable lights
+    if (IsKeyPressed(KEY_W)) { lights[0].enabled = !lights[0].enabled; }
+    /*
+    if (IsKeyPressed(KEY_R)) { lights[1].enabled = !lights[1].enabled; }
+    if (IsKeyPressed(KEY_G)) { lights[2].enabled = !lights[2].enabled; }
+    if (IsKeyPressed(KEY_B)) { lights[3].enabled = !lights[3].enabled; }
     */
 
-    const Vector3 sphere_pos
-    { 2.0f, 1.0f, -2.0f };
-
-    SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
-
-    SetTargetFPS(60);                       // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
-
-    // Main game loop
-    while (!WindowShouldClose())            // Detect window close button or ESC key
-    {
-        // Update
-        //----------------------------------------------------------------------------------
-        UpdateCamera(&m_camera);              // Update camera
-
-        m_chroma.pogo();
-        m_chroma.choose();
+    // Update light values (actually, only enable/disable them)
+    UpdateLightValues(m_lighting_shader, lights[0]);
+    /*
+    UpdateLightValues(m_lighting_shader, lights[1]);
+    UpdateLightValues(m_lighting_shader, lights[2]);
+    UpdateLightValues(m_lighting_shader, lights[3]);
+    */
 
 
-        lights[0].color = m_chroma.get_color();
+    // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
+    float cameraPos[3] = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
+    SetShaderValue(m_lighting_shader, m_lighting_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
+    //----------------------------------------------------------------------------------
 
-        // if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
-        // UpdateLightValues(shader, bulb);
+    // Draw
+    //----------------------------------------------------------------------------------
+    BeginDrawing();
 
+      ClearBackground(BLACK);
 
-        // Check key inputs to enable/disable lights
-        if (IsKeyPressed(KEY_W)) { lights[0].enabled = !lights[0].enabled; }
-        /*
-        if (IsKeyPressed(KEY_R)) { lights[1].enabled = !lights[1].enabled; }
-        if (IsKeyPressed(KEY_G)) { lights[2].enabled = !lights[2].enabled; }
-        if (IsKeyPressed(KEY_B)) { lights[3].enabled = !lights[3].enabled; }
-        */
+      BeginMode3D(m_camera);
 
-        // Update light values (actually, only enable/disable them)
-        UpdateLightValues(m_lighting_shader, lights[0]);
-        /*
-        UpdateLightValues(m_lighting_shader, lights[1]);
-        UpdateLightValues(m_lighting_shader, lights[2]);
-        UpdateLightValues(m_lighting_shader, lights[3]);
-        */
-
-
-        // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
-        float cameraPos[3] = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
-        SetShaderValue(m_lighting_shader, m_lighting_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
-        //----------------------------------------------------------------------------------
-
-        // Draw
-        //----------------------------------------------------------------------------------
-        BeginDrawing();
-
-            ClearBackground(BLACK);
-
-            BeginMode3D(m_camera);
-
-                // DrawModel(m_cube, Vector3Zero(), 1.0f, WHITE);
+          // DrawModel(m_cube, Vector3Zero(), 1.0f, WHITE);
 
 
 
 
-                // if (bulb.enabled) DrawSphereEx(bulb.position, 0.2f, 8, 8, GRAY);
-                // else DrawSphereWires(bulb.position, 0.2f, 8, 8, ColorAlpha(YELLOW, 0.3f));
+          // if (bulb.enabled) DrawSphereEx(bulb.position, 0.2f, 8, 8, GRAY);
+          // else DrawSphereWires(bulb.position, 0.2f, 8, 8, ColorAlpha(YELLOW, 0.3f));
 
 
 
-                // Draw markers to show where the lights are
-                // if (lights[0].enabled) DrawSphereEx(lights[0].position, 0.2f, 8, 8, m_chroma.get_color());
-                // else DrawSphereWires(lights[0].position, 0.2f, 8, 8, ColorAlpha(m_chroma.get_color(), 0.3f));
+          // Draw markers to show where the lights are
+          // if (lights[0].enabled) DrawSphereEx(lights[0].position, 0.2f, 8, 8, m_chroma.get_color());
+          // else DrawSphereWires(lights[0].position, 0.2f, 8, 8, ColorAlpha(m_chroma.get_color(), 0.3f));
 
 
 
 
 
-                m_player.display();
+          m_player.display();
 
-                DrawModel(m_sphere, sphere_pos, 1.0f, WHITE);
+          DrawModel(m_sphere, sphere_pos, 1.0f, BLACK);
 
-                DrawModel(m_model, Vector3Zero(), 1.0f, GREEN);
-                /*
-                if (lights[1].enabled) DrawSphereEx(lights[1].position, 0.2f, 8, 8, RED);
-                else DrawSphereWires(lights[1].position, 0.2f, 8, 8, ColorAlpha(RED, 0.3f));
-                if (lights[2].enabled) DrawSphereEx(lights[2].position, 0.2f, 8, 8, GREEN);
-                else DrawSphereWires(lights[2].position, 0.2f, 8, 8, ColorAlpha(GREEN, 0.3f));
-                if (lights[3].enabled) DrawSphereEx(lights[3].position, 0.2f, 8, 8, BLUE);
-                else DrawSphereWires(lights[3].position, 0.2f, 8, 8, ColorAlpha(BLUE, 0.3f));
-                */
+          DrawModel(m_model, Vector3Zero(), 1.0f, BLACK);
+          /*
+          if (lights[1].enabled) DrawSphereEx(lights[1].position, 0.2f, 8, 8, RED);
+          else DrawSphereWires(lights[1].position, 0.2f, 8, 8, ColorAlpha(RED, 0.3f));
+          if (lights[2].enabled) DrawSphereEx(lights[2].position, 0.2f, 8, 8, GREEN);
+          else DrawSphereWires(lights[2].position, 0.2f, 8, 8, ColorAlpha(GREEN, 0.3f));
+          if (lights[3].enabled) DrawSphereEx(lights[3].position, 0.2f, 8, 8, BLUE);
+          else DrawSphereWires(lights[3].position, 0.2f, 8, 8, ColorAlpha(BLUE, 0.3f));
+          */
 
-                // DrawGrid(10, 1.0f);
+          // DrawGrid(10, 1.0f);
 
 
-            EndMode3D();
+      EndMode3D();
 
-            DrawFPS(10, 10);
+      DrawFPS(10, 10);
 
-            DrawText("Use keys [Y][R][G][B] to toggle lights", 10, 40, 20, DARKGRAY);
+      DrawText("Use keys [Y] to toggle light", 10, 40, 20, DARKGRAY);
 
-        EndDrawing();
-        //----------------------------------------------------------------------------------
-    }
+    EndDrawing();
+    //----------------------------------------------------------------------------------
+  }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    UnloadModel(m_model);     // Unload the model
-    UnloadModel(m_cube);      // Unload the model
-    UnloadShader(m_lighting_shader);   // Unload shader
+  // De-Initialization
+  //--------------------------------------------------------------------------------------
+  UnloadModel(m_model);     // Unload the model
+  UnloadModel(m_cube);      // Unload the model
+  UnloadShader(m_lighting_shader);   // Unload shader
 
-    CloseWindow();          // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
+  CloseWindow();          // Close window and OpenGL context
+  //--------------------------------------------------------------------------------------
 }
 
 void video::run()
