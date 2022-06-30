@@ -5,6 +5,9 @@ spheroid::spheroid()
 
 }
 
+Vector3 spheroid::get_pos() noexcept
+{ return m_posit; }
+
 void spheroid::set_pos(const Vector3 &pos)
 { m_posit = pos; }
 

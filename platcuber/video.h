@@ -39,7 +39,7 @@ class video
   { 0.0f, 0.0f, 1.0f };
 
   Vector3 m_light_pos
-  { Vector3Negate(m_cam_pos) };
+  { 0.0f, 0.0f, 0.0f };
 
   spheroid m_player;
 

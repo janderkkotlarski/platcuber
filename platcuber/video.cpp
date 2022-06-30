@@ -76,7 +76,7 @@ void video::init_shaders()
 void video::init_player()
 {
   const Vector3 player_pos
-  { -2.0f, 2.0f, 2.0f };
+  { 2.0f, 4.0f, -2.0f };
 
   m_player.set_pos(player_pos);
 
@@ -117,6 +117,7 @@ void video::light_models()
 void video::light_shader()
 {
   m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
+  /// This is the local place for the shaders.
   // Shader shader = LoadShader("d:/Cpp/build-platcuber-libray_MinGW-Debug/base_lighting.vs",
   //                     "d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
   // shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION), TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
@@ -146,6 +147,7 @@ void video::light_it()
     // Initialization
     //--------------------------------------------------------------------------------------
 
+  m_light_pos = m_player.get_pos();
 
     Light lights[1] = { 0 };
     lights[0] = CreateLight(LIGHT_POINT, Vector3{ 0, 1000, 0 }, Vector3Zero(), m_chroma.get_color(), m_lighting_shader);
@@ -213,7 +215,7 @@ void video::light_it()
 
                 // DrawModel(m_cube, Vector3Zero(), 1.0f, WHITE);
 
-                DrawModel(m_model, Vector3Zero(), 1.0f, BLACK);
+
 
 
                 // if (bulb.enabled) DrawSphereEx(bulb.position, 0.2f, 8, 8, GRAY);
@@ -225,9 +227,15 @@ void video::light_it()
                 // if (lights[0].enabled) DrawSphereEx(lights[0].position, 0.2f, 8, 8, m_chroma.get_color());
                 // else DrawSphereWires(lights[0].position, 0.2f, 8, 8, ColorAlpha(m_chroma.get_color(), 0.3f));
 
-                DrawModel(m_sphere, sphere_pos, 1.0f, WHITE);
+
+
+
 
                 m_player.display();
+
+                DrawModel(m_sphere, sphere_pos, 1.0f, WHITE);
+
+                DrawModel(m_model, Vector3Zero(), 1.0f, GREEN);
                 /*
                 if (lights[1].enabled) DrawSphereEx(lights[1].position, 0.2f, 8, 8, RED);
                 else DrawSphereWires(lights[1].position, 0.2f, 8, 8, ColorAlpha(RED, 0.3f));
