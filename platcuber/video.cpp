@@ -76,7 +76,7 @@ void video::init_shaders()
 void video::init_player()
 {
   const Vector3 player_pos
-  { 2.0f, 4.0f, -2.0f };
+  { 0.0f, 4.0f, 0.0f };
 
   m_player.set_pos(player_pos);
 
@@ -96,7 +96,7 @@ void video::light_screen()
 
 void video::light_camera()
 {
-  m_camera.position = Vector3{ 7.0f, 2.0f, -7.0f };      // Camera position
+  m_camera.position = Vector3{ -10.0f, 2.0f, 10.0f };      // Camera position
   m_camera.target = Vector3{ 0.0f, 2.0f, 0.0f };      // Camera looking at point
   m_camera.up = Vector3{ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
 
@@ -147,10 +147,13 @@ void video::light_it()
     // Initialization
     //--------------------------------------------------------------------------------------
 
-  m_light_pos = m_player.get_pos();
+  m_light_pos = Vector3{ 0.0f, 2.5f, 0.0f };
+
+  const float middle
+  { 2.5f };
 
   Light lights[1] = { 0 };
-  lights[0] = CreateLight(LIGHT_POINT, Vector3{ 0, 1000, 0 }, Vector3Zero(), m_chroma.get_color(), m_lighting_shader);
+  lights[0] = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), m_chroma.get_color(), m_lighting_shader);
   /*
   lights[1] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, 2 }, Vector3Zero(), BLACK, m_lighting_shader);
   lights[2] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, 2 }, Vector3Zero(), BLACK, m_lighting_shader);
@@ -159,7 +162,7 @@ void video::light_it()
   */
 
   const Vector3 sphere_pos
-  { 2.0f, 1.0f, -2.0f };
+  { 0.0f, 1.0f, 0.0f };
 
   // SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
 
@@ -253,6 +256,15 @@ void video::light_it()
       DrawFPS(10, 10);
 
       DrawText("Use keys [Y] to toggle light", 10, 40, 20, DARKGRAY);
+
+      m_time += float(m_fps);
+
+      while (m_time >= m_period)
+      { m_time -= m_period; }
+
+      lights[0].position.y = middle;
+
+      UpdateLightValues(m_lighting_shader, lights[0]);;
 
     EndDrawing();
     //----------------------------------------------------------------------------------

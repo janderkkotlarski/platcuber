@@ -55,16 +55,16 @@ LIBS += -LC:\raylib\raylib
 LIBS += -LC:\raylib\
 
 SOURCES += \
-        basic_lighting.cpp \
         chromatic.cpp \
         cuboid.cpp \
+        functions.cpp \
         main.cpp \
         spheroid.cpp \
         video.cpp
 
 HEADERS += \
-  basic_lighting.h \
   chromatic.h \
   cuboid.h \
+  functions.h \
   spheroid.h \
   video.h

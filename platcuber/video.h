@@ -53,6 +53,12 @@ class video
 
   int m_ambientLoc;
 
+  float m_time
+  { 0.0f };
+
+  const float m_period
+  { 8.0f };
+
   const float m_lighting_color[4]
   { 0.1f, 0.1f, 0.1f, 1.0f };
 
