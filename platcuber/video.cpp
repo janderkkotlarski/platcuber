@@ -147,10 +147,13 @@ void video::light_it()
     // Initialization
     //--------------------------------------------------------------------------------------
 
-  m_light_pos = Vector3{ 0.0f, 2.5f, 0.0f };
+  const Vector3 anchor
+  { 0.0f, 2.5f, 0.0f };
 
-  const float middle
-  { 2.5f };
+  m_light_pos = anchor;
+
+  const float wiggle
+  { 1.0f };
 
   Light lights[1] = { 0 };
   lights[0] = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), m_chroma.get_color(), m_lighting_shader);
@@ -257,12 +260,14 @@ void video::light_it()
 
       DrawText("Use keys [Y] to toggle light", 10, 40, 20, DARKGRAY);
 
-      m_time += float(m_fps);
+      m_time += 1.0f/float(m_fps);
 
       while (m_time >= m_period)
       { m_time -= m_period; }
 
-      lights[0].position.y = middle;
+
+
+      lights[0].position.z = anchor.z + wiggle*sin(0.5f*PI*m_time);
 
       UpdateLightValues(m_lighting_shader, lights[0]);;
 
