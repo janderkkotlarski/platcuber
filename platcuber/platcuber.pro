@@ -59,6 +59,7 @@ SOURCES += \
         cuboid.cpp \
         functions.cpp \
         main.cpp \
+        platform.cpp \
         spheroid.cpp \
         video.cpp
 
@@ -66,5 +67,6 @@ HEADERS += \
   chromatic.h \
   cuboid.h \
   functions.h \
+  platform.h \
   spheroid.h \
   video.h

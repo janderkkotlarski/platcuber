@@ -28,8 +28,10 @@ void video::initialize()
   light_camera();
 
   init_player();
+  init_platform();
 
   light_models();
+  light_textures();
   light_shader();
   light_shadels();
 }
@@ -84,6 +86,10 @@ void video::init_player()
   // m_player.set_shading(m_lighting_shader);
 }
 
+void video::init_platform()
+{
+  m_platform.set_plane();
+}
 
 void video::light_screen()
 {
@@ -96,7 +102,7 @@ void video::light_screen()
 
 void video::light_camera()
 {
-  m_camera.position = Vector3{ -10.0f, 2.0f, 10.0f };      // Camera position
+  m_camera.position = Vector3{ 0.0f, 2.0f, 20.0f };      // Camera position
   m_camera.target = Vector3{ 0.0f, 2.0f, 0.0f };      // Camera looking at point
   m_camera.up = Vector3{ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
 
@@ -109,9 +115,18 @@ void video::light_camera()
 
 void video::light_models()
 {
-  m_model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 3, 3));
+  m_model = LoadModelFromMesh(GenMeshPlane(10.0f, 10.0f, 100, 100));
   m_cube = LoadModelFromMesh(GenMeshCube(2.0f, 4.0f, 2.0f));
   m_sphere = LoadModelFromMesh(GenMeshSphere(0.2f, 20, 20));
+}
+
+void video::light_textures()
+{
+  m_image = LoadImage("cube_face_spectrum_.png");
+
+  m_tex2d = LoadTextureFromImage(m_image);
+
+  m_model.materials[0].maps[MAP_DIFFUSE].texture = m_tex2d;
 }
 
 void video::light_shader()
@@ -135,11 +150,11 @@ void video::light_shader()
 
 void video::light_shadels()
 {
-  m_model.materials[0].shader = m_lighting_shader;
+  // m_model.materials[0].shader = m_lighting_shader;
   m_cube.materials[0].shader = m_lighting_shader;
-  m_sphere.materials[0].shader = m_lighting_shader;
+  // m_sphere.materials[0].shader = m_lighting_shader;
 
-  m_player.set_shading(m_lighting_shader);
+  // m_player.set_shading(m_lighting_shader);
 }
 
 void video::light_it()
@@ -235,13 +250,15 @@ void video::light_it()
 
 
 
-
+          m_platform.display();
 
           m_player.display();
 
-          DrawModel(m_sphere, sphere_pos, 1.0f, BLACK);
 
-          DrawModel(m_model, Vector3Zero(), 1.0f, BLACK);
+
+          // DrawModel(m_sphere, lights[0].position, 1.0f, m_chroma.get_color());
+
+          // DrawModel(m_model, Vector3Zero(), 1.0f, WHITE);
           /*
           if (lights[1].enabled) DrawSphereEx(lights[1].position, 0.2f, 8, 8, RED);
           else DrawSphereWires(lights[1].position, 0.2f, 8, 8, ColorAlpha(RED, 0.3f));
@@ -260,16 +277,22 @@ void video::light_it()
 
       DrawText("Use keys [Y] to toggle light", 10, 40, 20, DARKGRAY);
 
-      m_time += 1.0f/float(m_fps);
+      const float delta
+      { 1.0f/float(m_fps) };
+
+      m_time += delta;
 
       while (m_time >= m_period)
       { m_time -= m_period; }
 
 
-
+      lights[0].position.x = anchor.x + wiggle*cos(0.5f*PI*m_time);
+      lights[0].position.y = anchor.y + wiggle*cos(0.5f*PI*m_time);
       lights[0].position.z = anchor.z + wiggle*sin(0.5f*PI*m_time);
 
-      UpdateLightValues(m_lighting_shader, lights[0]);;
+      UpdateLightValues(m_lighting_shader, lights[0]);
+
+      m_player.move(m_platform.get_pos(), delta);
 
     EndDrawing();
     //----------------------------------------------------------------------------------

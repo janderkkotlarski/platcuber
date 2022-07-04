@@ -1,5 +1,7 @@
 #include "spheroid.h"
 
+#include "raymath.h"
+
 spheroid::spheroid()
 {
 
@@ -32,3 +34,26 @@ void spheroid::set_sphere()
 
 void spheroid::set_shading(const Shader &shade)
 { m_model.materials[0].shader = shade; }
+
+void spheroid::move(const Vector3 &posit, const float time)
+{
+  m_posit = Vector3Add(m_posit, Vector3Scale(m_veloc, 0.5f*time));
+
+  if (m_posit.y <= posit.y + m_side)
+  {
+    m_posit.y = 2.0f*(posit.y + m_side) - m_posit.y;
+
+    m_veloc.y *= -1.0f;
+  }
+
+  m_veloc = Vector3Add(m_veloc, Vector3Scale(m_accel, time));
+
+  m_posit = Vector3Add(m_posit, Vector3Scale(m_veloc, 0.5f*time));
+
+  if (m_posit.y <= posit.y + m_side)
+  {
+    m_posit.y = 2.0f*(posit.y + m_side) - m_posit.y;
+
+    m_veloc.y *= -1.0f;
+  }
+}

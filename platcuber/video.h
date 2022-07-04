@@ -6,7 +6,7 @@
 #include "raymath.h"
 
 
-
+#include "platform.h"
 #include "spheroid.h"
 #include "cuboid.h"
 #include "chromatic.h"
@@ -43,6 +43,8 @@ class video
 
   spheroid m_player;
 
+  platform m_platform;
+
   chromatic m_chroma;
 
   cuboid  m_block;
@@ -50,6 +52,10 @@ class video
   Model m_model;
   Model m_cube;
   Model m_sphere;
+
+  Image m_image;
+
+  Texture m_tex2d;
 
   int m_ambientLoc;
 
@@ -73,6 +79,8 @@ public:
 
   void init_shaders();
 
+  void init_platform();
+
   void init_player();
 
   void spectral_pogo();
@@ -84,6 +92,8 @@ public:
   void light_camera();
 
   void light_models();
+
+  void light_textures();
 
   void light_shader();
 

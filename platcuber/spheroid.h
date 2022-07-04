@@ -16,7 +16,7 @@ private:
   { 0.0f, 0.0f, 0.0f };
 
   Vector3 m_accel
-  { 0.0f, 0.0f, 0.0f };
+  { 0.0f, -1.0f, 0.0f };
 
   Color m_color
   { WHITE };
@@ -41,6 +41,8 @@ public:
   void set_sphere();
 
   void set_shading(const Shader &shade);
+
+  void move(const Vector3 &posit, const float time);
 };
 
 #endif // SPHEROID_H
