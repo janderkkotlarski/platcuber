@@ -13,7 +13,7 @@ private:
   { 0.0f, 0.0f, 0.0f };
 
   Color m_color
-  { WHITE };
+  { 63, 63, 63, 255 };
 
   Model m_model;
 

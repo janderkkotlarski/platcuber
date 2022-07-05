@@ -19,7 +19,7 @@ private:
   { 0.0f, 0.0f, 0.0f };
 
   Color m_color
-  { WHITE };
+  { BLACK };
 
   Model m_model;
 
