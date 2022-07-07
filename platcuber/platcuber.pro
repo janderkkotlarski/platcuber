@@ -61,7 +61,8 @@ SOURCES += \
         main.cpp \
         platform.cpp \
         spheroid.cpp \
-        video.cpp
+        video.cpp \
+        viewctor.cpp
 
 HEADERS += \
   chromatic.h \
@@ -69,4 +70,5 @@ HEADERS += \
   functions.h \
   platform.h \
   spheroid.h \
-  video.h
+  video.h \
+  viewctor.h

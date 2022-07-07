@@ -22,6 +22,8 @@ Vector3 dim_vector(const float scalar, const int dim)
   { return Vector3{ 0.0f, 0.0f, scalar }; }
   else
   { return Vector3{ 0.0f, scalar, 0.0f }; }
+
+
 }
 
 void reflect(const Vector3 &reflect_posit, const float reflect_dist, const int reflect_dim,

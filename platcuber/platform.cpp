@@ -13,12 +13,12 @@ void platform::set_pos(const Vector3 &pos)
 
 void platform::display()
 {
-  // DrawSphere(m_posit, 0.5f*m_side, m_color);
-
   DrawModel(m_model, m_posit, 1.0f, m_color);
 }
 
 void platform::set_plane()
 {
   m_model = LoadModelFromMesh(GenMeshPlane(m_side, m_side, 100, 100));
+
+
 }

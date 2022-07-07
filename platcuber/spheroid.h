@@ -36,6 +36,8 @@ public:
 
   void set_pos(const Vector3 &pos);
 
+  void set_color(const Color &color);
+
   void display();
 
   void set_sphere();

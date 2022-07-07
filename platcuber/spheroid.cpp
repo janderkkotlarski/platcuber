@@ -15,6 +15,9 @@ Vector3 spheroid::get_pos() noexcept
 void spheroid::set_pos(const Vector3 &pos)
 { m_posit = pos; }
 
+void spheroid::set_color(const Color &color)
+{ m_color = color; }
+
 void spheroid::display()
 {
   // DrawSphere(m_posit, 0.5f*m_side, m_color);
@@ -30,7 +33,7 @@ void spheroid::set_sphere()
 
   m_model = LoadModelFromMesh(GenMeshSphere(m_side, 25, 50));
 
-  // m_model.materials[0].maps[MAP_DIFFUSE].texture = m_tex2d;
+  m_model.materials[0].maps[MAP_DIFFUSE].texture = m_tex2d;
 
 }
 

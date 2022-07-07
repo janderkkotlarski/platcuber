@@ -200,6 +200,8 @@ void video::light_it()
 
     lights[0].color = m_chroma.get_color();
 
+    m_player.set_color(m_chroma.get_color());
+
     // if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
     // UpdateLightValues(shader, bulb);
 
