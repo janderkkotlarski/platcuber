@@ -29,6 +29,7 @@ void video::initialize()
 
   init_player();
   init_platform();
+  init_viewctor();
 
   light_models();
   light_textures();
@@ -89,6 +90,11 @@ void video::init_player()
 void video::init_platform()
 {
   m_platform.set_plane();
+}
+
+void video::init_viewctor()
+{
+  m_viewctor.set_stick();
 }
 
 void video::light_screen()
@@ -198,6 +204,8 @@ void video::light_it()
     m_chroma.choose();
 
 
+
+
     lights[0].color = m_chroma.get_color();
 
     m_player.set_color(m_chroma.get_color());
@@ -256,7 +264,7 @@ void video::light_it()
 
           m_player.display();
 
-
+          m_viewctor.display();
 
           // DrawModel(m_sphere, lights[0].position, 1.0f, m_chroma.get_color());
 
@@ -295,6 +303,8 @@ void video::light_it()
       UpdateLightValues(m_lighting_shader, lights[0]);
 
       m_player.move(m_platform.get_pos(), delta);
+
+      m_viewctor.set_on_sphere(m_player);
 
     EndDrawing();
     //----------------------------------------------------------------------------------

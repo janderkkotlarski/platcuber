@@ -46,6 +46,8 @@ class video
 
   platform m_platform;
 
+  viewctor m_viewctor;
+
   chromatic m_chroma;
 
   cuboid  m_block;
@@ -83,6 +85,8 @@ public:
   void init_platform();
 
   void init_player();
+
+  void init_viewctor();
 
   void spectral_pogo();
 

@@ -6,7 +6,7 @@
 class spheroid
 {
 private:
-  const float m_side
+  const float m_radius
   { 1.0f };
 
   Vector3 m_posit
@@ -32,7 +32,11 @@ private:
 public:
   spheroid();
 
-  Vector3 get_pos() noexcept;
+  Vector3 get_posit() const noexcept;
+
+  Vector3 get_veloc() const noexcept;
+
+  float get_radius() const noexcept;
 
   void set_pos(const Vector3 &pos);
 
