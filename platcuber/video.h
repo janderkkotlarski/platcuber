@@ -10,6 +10,7 @@
 #include "spheroid.h"
 #include "cuboid.h"
 #include "chromatic.h"
+#include "viewctor.h"
 
 class video
 {
