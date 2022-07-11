@@ -59,7 +59,7 @@ void viewctor::display()
   const Vector3 mid_pos
   { Vector3Add(m_posit, Vector3Scale(m_direct, 0.5f)) };
 
-  DrawModel(m_stick, mid_pos, 1.0f, GREEN);
+  DrawModel(m_stick, m_posit, 1.0f, GREEN);
 
   DrawModel(m_sphere, m_posit, 1.0f, RED);
 }
