@@ -306,6 +306,8 @@ void video::light_it()
 
       m_player.move(m_platform.get_pos(), delta);
 
+
+
       m_viewctor.set_on_sphere(m_player);
 
     EndDrawing();

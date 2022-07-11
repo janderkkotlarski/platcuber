@@ -52,9 +52,13 @@ void spheroid::move(const Vector3 &posit, const float time)
 
   reflect(posit, 0.0f, 1, m_posit, m_radius, m_veloc);
 
+  m_accel.x = m_spring*(m_spring_center.x - m_posit.x);
+  m_accel.z = m_spring*(m_spring_center.z - m_posit.z);
+
   m_veloc = Vector3Add(m_veloc, Vector3Scale(m_accel, time));
 
   m_posit = Vector3Add(m_posit, Vector3Scale(m_veloc, 0.5f*time));
 
   reflect(posit, 0.0f, 1, m_posit, m_radius, m_veloc);
+
 }

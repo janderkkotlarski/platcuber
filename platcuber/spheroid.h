@@ -13,10 +13,16 @@ private:
   { 0.0f, 0.0f, 0.0f };
 
   Vector3 m_veloc
-  { 1.0f, 0.0f, 0.0f };
+  { 2.0f, 0.0f, 0.0f };
 
   Vector3 m_accel
   { 0.0f, -10.0f, 0.0f };
+
+  const float m_spring
+  { 0.1f };
+
+  const Vector3 m_spring_center
+  { 0.0f, 0.0f, 0.0f };
 
   Color m_color
   { WHITE };
