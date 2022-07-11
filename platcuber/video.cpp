@@ -110,7 +110,7 @@ void video::light_screen()
 
 void video::light_camera()
 {
-  m_camera.position = Vector3{ 0.0f, 14.0f, 14.0f };      // Camera position
+  m_camera.position = Vector3{ 20.0f, 2.0f, 0.0f };      // Camera position
   m_camera.target = Vector3{ 0.0f, 2.0f, 0.0f };      // Camera looking at point
   m_camera.up = Vector3{ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
 
@@ -264,7 +264,7 @@ void video::light_it()
 
           m_platform.display();
 
-          m_player.display();
+          // m_player.display();
 
           m_viewctor.display();
 
@@ -306,9 +306,9 @@ void video::light_it()
 
       m_player.move(m_platform.get_pos(), delta);
 
+      m_viewctor.set_in_space();
 
-
-      m_viewctor.set_on_sphere(m_player);
+      // m_viewctor.set_on_sphere(m_player);
 
     EndDrawing();
     //----------------------------------------------------------------------------------

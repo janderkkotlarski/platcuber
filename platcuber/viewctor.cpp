@@ -54,13 +54,19 @@ void viewctor::set_on_sphere(const spheroid &sphoid)
   set_posit(Vector3Add(base_posit, radius_direct));
 }
 
+void viewctor::set_in_space()
+{
+  m_angle += m_delta;
+}
+
 void viewctor::display()
 {
   const Vector3 mid_pos
   { Vector3Add(m_posit, Vector3Scale(m_direct, 0.5f)) };
 
   DrawModel(m_stick, m_posit, 1.0f, GREEN);
-  DrawModelEx(m_stick, m_posit, m_direct, 40.0f, Vector3One(), BLUE);
+  // DrawModelEx(m_stick, m_posit, m_direct, 40.0f, Vector3One(), BLUE);
+  DrawModelEx(m_stick, m_posit, m_direct, m_angle, Vector3One(), BLUE);
 
   DrawModel(m_sphere, m_posit, 1.0f, RED);
 }

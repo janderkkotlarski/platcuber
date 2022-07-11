@@ -9,10 +9,10 @@ class viewctor
 {
 private:
   Vector3 m_posit
-  { 3.0f, 0.0f, 0.0f };
+  { 0.0f, 2.0f, 0.0f };
 
   Vector3 m_direct
-  { 0.0f, 2.0f, 0.0f };
+  { 0.0f, 0.0f, 2.0f };
 
   float m_mult;
 
@@ -32,6 +32,12 @@ private:
   float m_sphere_radius
   { 0.1f };
 
+  float m_angle
+  { 180.0f };
+
+  const float m_delta
+  { 0.0f };
+
 public:
   viewctor();
 
@@ -40,6 +46,8 @@ public:
   void set_direct(const Vector3 &direct);
 
   void set_on_sphere(const spheroid &sphoid);
+
+  void set_in_space();
 
   void remeasure();
 
