@@ -14,29 +14,33 @@ private:
   Vector3 m_direct
   { 2.0f, 0.0f, 2.0f };
 
-  float m_mult;
-
   Color m_color
   { WHITE };
 
   Model m_stick;
 
-  float m_stick_radius
-  { 0.05f };
+  const float m_ratio
+  { 0.02f };
 
   float m_stick_length
   { 1.0f };
 
+  float m_stick_radius
+  { m_ratio*m_stick_length };
+
   Model m_sphere;
 
+  const float m_mult
+  { 2.0f };
+
   float m_sphere_radius
-  { 0.1f };
+  { m_mult*m_stick_radius };
 
   float m_angle
-  { 0.0f };
+  { 90.0f };
 
   const float m_delta
-  { 0.1f };
+  { 0.5f };
 
 public:
   viewctor();

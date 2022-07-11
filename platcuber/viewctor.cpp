@@ -23,9 +23,9 @@ void viewctor::remeasure()
 {
   m_stick_length = Vector3Length(m_direct);
 
-  m_stick_radius = 0.05f*m_stick_length;
+  m_stick_radius = m_ratio*m_stick_length;
 
-  m_sphere_radius = 0.1f*m_stick_length;
+  m_sphere_radius = m_mult*m_stick_radius;
 }
 
 void viewctor::set_stick()
@@ -64,7 +64,7 @@ void viewctor::display()
   const Vector3 mid_pos
   { Vector3Add(m_posit, Vector3Scale(m_direct, 0.5f)) };
 
-  DrawModel(m_stick, m_posit, 1.0f, GREEN);
+  // DrawModel(m_stick, m_posit, 1.0f, GREEN);
   // DrawModelEx(m_stick, m_posit, m_direct, 40.0f, Vector3One(), BLUE);
   DrawModelEx(m_stick, m_posit, m_direct, m_angle, Vector3One(), BLUE);
 
