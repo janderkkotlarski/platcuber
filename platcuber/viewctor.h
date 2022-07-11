@@ -12,7 +12,7 @@ private:
   { 0.0f, 2.0f, 0.0f };
 
   Vector3 m_direct
-  { 0.0f, 0.0f, 2.0f };
+  { 2.0f, 0.0f, 2.0f };
 
   float m_mult;
 
@@ -33,10 +33,10 @@ private:
   { 0.1f };
 
   float m_angle
-  { 180.0f };
+  { 0.0f };
 
   const float m_delta
-  { 0.0f };
+  { 0.1f };
 
 public:
   viewctor();

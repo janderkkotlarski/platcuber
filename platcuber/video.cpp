@@ -264,6 +264,9 @@ void video::light_it()
 
           m_platform.display();
 
+          DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{2.0f, 0.0f, 0.0f}, PURPLE);
+          DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{0.0f, 0.0f, 2.0f}, ORANGE);
+
           // m_player.display();
 
           m_viewctor.display();
