@@ -4,7 +4,7 @@
 
 viewctor::viewctor()
 {
-  restick();
+  remeasure();
 }
 
 void viewctor::set_posit(const Vector3 &posit)
@@ -16,14 +16,16 @@ void viewctor::set_direct(const Vector3 &direct)
 {
   m_direct = direct;
 
-  restick();
+  remeasure();
 }
 
-void viewctor::restick()
+void viewctor::remeasure()
 {
   m_stick_length = Vector3Length(m_direct);
 
   m_stick_radius = 0.05f*m_stick_length;
+
+  m_sphere_radius = 0.1f*m_stick_length;
 }
 
 void viewctor::set_stick()
@@ -58,4 +60,6 @@ void viewctor::display()
   { Vector3Add(m_posit, Vector3Scale(m_direct, 0.5f)) };
 
   DrawModel(m_stick, mid_pos, 1.0f, GREEN);
+
+  DrawModel(m_sphere, m_posit, 1.0f, RED);
 }

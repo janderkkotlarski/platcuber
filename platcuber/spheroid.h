@@ -13,7 +13,7 @@ private:
   { 0.0f, 0.0f, 0.0f };
 
   Vector3 m_veloc
-  { 0.0f, 0.0f, 0.0f };
+  { 1.0f, 0.0f, 0.0f };
 
   Vector3 m_accel
   { 0.0f, -10.0f, 0.0f };

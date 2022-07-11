@@ -95,6 +95,8 @@ void video::init_platform()
 void video::init_viewctor()
 {
   m_viewctor.set_stick();
+
+  m_viewctor.set_sphere();
 }
 
 void video::light_screen()

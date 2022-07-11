@@ -30,7 +30,7 @@ private:
   Model m_sphere;
 
   float m_sphere_radius
-  { 1.0f };
+  { 0.1f };
 
 public:
   viewctor();
@@ -41,7 +41,7 @@ public:
 
   void set_on_sphere(const spheroid &sphoid);
 
-  void restick();
+  void remeasure();
 
   void set_stick();
 
