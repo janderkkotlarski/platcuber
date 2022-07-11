@@ -110,7 +110,7 @@ void video::light_screen()
 
 void video::light_camera()
 {
-  m_camera.position = Vector3{ 0.0f, 2.0f, 20.0f };      // Camera position
+  m_camera.position = Vector3{ 0.0f, 14.0f, 14.0f };      // Camera position
   m_camera.target = Vector3{ 0.0f, 2.0f, 0.0f };      // Camera looking at point
   m_camera.up = Vector3{ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
 
