@@ -2,7 +2,9 @@
 
 viewctor::viewctor()
 {
-  remeasure();
+  // remeasure();
+
+
 }
 
 void viewctor::set_posit(const Vector3 &posit)
@@ -14,16 +16,24 @@ void viewctor::set_direct(const Vector3 &direct)
 {
   m_direct = direct;
 
-  // remeasure();
+  remeasure();
 }
 
 void viewctor::remeasure()
 {
   m_stick_length = Vector3Length(m_direct);
 
+  m_stick_mult = Vector3Scale(Vector3One(), m_stick_length);
+
   m_stick_radius = m_ratio*m_stick_length;
 
   m_sphere_radius = m_mult*m_stick_radius;
+
+  // set_stick();
+
+
+
+  // set_sphere();
 
   m_theta = 180.0f*acos(m_direct.y/m_stick_length)/PI;
 }
@@ -87,9 +97,10 @@ void viewctor::display()
   direct.y = 0.0f;
   direct.z = -m_direct.x;
 
-  DrawModel(m_sphere, m_posit, 1.0f, RED);
-  // DrawModel(m_stick, m_posit, 1.0f, GREEN);
-  // DrawModelEx(m_stick, m_posit, direct, m_theta, Vector3One(), BLUE);
+  DrawModel(m_sphere, m_posit, m_stick_length, RED);
 
-  /// DrawModel(m_sphere, Vector3Add(m_posit, m_direct), 1.0f, RED);
+  DrawModel(m_stick, m_posit, 1.0f, GREEN);
+  DrawModelEx(m_stick, m_posit, direct, m_theta, m_stick_mult, BLUE);
+
+  DrawModel(m_sphere, Vector3Add(m_posit, m_direct), m_stick_length, RED);
 }

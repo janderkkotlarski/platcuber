@@ -31,7 +31,7 @@ class video
   { 60 };
 
   Vector3 m_cam_pos
-  { 0.0f, 2.0f, 20.0f };
+  { 0.0f, 2.0f, 40.0f };
 
   Vector3 m_cam_target
   { 0.0f, 2.0f, 0.0f };

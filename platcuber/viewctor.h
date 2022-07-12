@@ -10,7 +10,7 @@ class viewctor
 {
 private:
   Vector3 m_posit
-  { 0.0f, 2.0f, 0.0f };
+  { 0.0f, 02.0f, 0.0f };
 
   Vector3 m_direct
   { 2.0f, -11.0f, 6.0f };
@@ -21,13 +21,16 @@ private:
   Model m_stick;
 
   const float m_ratio
-  { 0.02f };
+  { 0.05f };
 
   float m_stick_length
-  { Vector3Length(m_direct) };
+  { 1.0f };
 
   float m_stick_radius
   { m_ratio*m_stick_length };
+
+  Vector3 m_stick_mult
+  { Vector3One() };
 
   Model m_sphere;
 
@@ -36,6 +39,9 @@ private:
 
   float m_sphere_radius
   { m_mult*m_stick_radius };
+
+  float m_sphere_mult
+  { 1.0f };
 
   float m_angle
   { 90.0f };
