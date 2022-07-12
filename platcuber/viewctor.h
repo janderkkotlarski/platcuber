@@ -21,7 +21,7 @@ private:
   Model m_stick;
 
   const float m_ratio
-  { 0.05f };
+  { 0.2f };
 
   float m_stick_length
   { 1.0f };

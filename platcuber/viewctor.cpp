@@ -23,9 +23,7 @@ void viewctor::remeasure()
 {
   m_stick_length = Vector3Length(m_direct);
 
-  m_stick_mult = Vector3Scale(Vector3One(), m_stick_length);
-
-  m_stick_radius = m_ratio*m_stick_length;
+  m_stick_mult.y = m_stick_length;
 
   m_sphere_radius = m_mult*m_stick_radius;
 
@@ -97,10 +95,10 @@ void viewctor::display()
   direct.y = 0.0f;
   direct.z = -m_direct.x;
 
-  DrawModel(m_sphere, m_posit, m_stick_length, RED);
+  DrawModel(m_sphere, m_posit, 1.0f, RED);
 
-  DrawModel(m_stick, m_posit, 1.0f, GREEN);
+  // DrawModel(m_stick, m_posit, 1.0f, GREEN);
   DrawModelEx(m_stick, m_posit, direct, m_theta, m_stick_mult, BLUE);
 
-  DrawModel(m_sphere, Vector3Add(m_posit, m_direct), m_stick_length, RED);
+  DrawModel(m_sphere, Vector3Add(m_posit, m_direct), 1.0f, RED);
 }
