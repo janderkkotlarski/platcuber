@@ -15,6 +15,9 @@ Vector3 spheroid::get_posit() const noexcept
 Vector3 spheroid::get_veloc() const noexcept
 { return m_veloc; }
 
+Vector3 spheroid::get_accel() const noexcept
+{ return m_accel; }
+
 float spheroid::get_radius() const noexcept
 { return m_radius; }
 
@@ -23,9 +26,6 @@ void spheroid::set_pos(const Vector3 &pos)
 
 void spheroid::set_color(const Color &color)
 { m_color = color; }
-
-void spheroid::opacitize()
-{ m_color.a = m_opacity; }
 
 void spheroid::display()
 { DrawModel(m_model, m_posit, 1.0f, m_color); }
@@ -41,7 +41,7 @@ void spheroid::set_sphere()
 
   m_model = LoadModelFromMesh(GenMeshSphere(m_radius, 25, 50));
 
-  // m_model.materials[0].maps[MAP_DIFFUSE].texture = m_tex2d;
+  m_model.materials[0].maps[MAP_DIFFUSE].texture = m_tex2d;
 
 }
 
@@ -62,5 +62,4 @@ void spheroid::move(const Vector3 &posit, const float time)
   m_posit = Vector3Add(m_posit, Vector3Scale(m_veloc, 0.5f*time));
 
   reflect(posit, 0.0f, 1, m_posit, m_radius, m_veloc);
-
 }

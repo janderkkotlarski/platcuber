@@ -94,11 +94,13 @@ void video::init_platform()
 
 void video::init_viewctor()
 {
-  m_viewctor.set_stick();
+  m_veloctor.set_stick();
+  m_veloctor.set_sphere();
+  m_veloctor.veloc_on_sphere(m_player);
 
-  m_viewctor.set_sphere();
-
-  m_viewctor.set_on_sphere(m_player);
+  m_acceltor.set_stick();
+  m_acceltor.set_sphere();
+  m_acceltor.accel_on_sphere(m_player);
 }
 
 void video::light_screen()
@@ -112,12 +114,6 @@ void video::light_screen()
 
 void video::light_camera()
 {
-  /*
-  m_camera.position = Vector3{ 40.0f, 2.0f, 0.0f };      // Camera position
-  m_camera.target = Vector3{ 0.0f, 2.0f, 0.0f };      // Camera looking at point
-  m_camera.up = Vector3{ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
-  */
-
   m_camera.position = m_cam_pos;      // Camera position
   m_camera.target = m_cam_target;      // Camera looking at point
   m_camera.up = m_cam_up;
@@ -215,7 +211,6 @@ void video::light_it()
     lights[0].color = m_chroma.get_color();
 
     m_player.set_color(m_chroma.get_color());
-    // m_player.opacitize();
 
     // if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
     // UpdateLightValues(shader, bulb);
@@ -274,9 +269,10 @@ void video::light_it()
 
           // m_player.display();
 
-          m_player.wiresplay();
+          m_player.display();
 
-          m_viewctor.display();
+          m_veloctor.display();
+          m_acceltor.display();
 
           // DrawModel(m_sphere, lights[0].position, 1.0f, m_chroma.get_color());
 
@@ -318,7 +314,8 @@ void video::light_it()
 
       // m_viewctor.set_in_space();
 
-      m_viewctor.set_on_sphere(m_player);
+      m_veloctor.veloc_on_sphere(m_player);
+      m_acceltor.accel_on_sphere(m_player);
 
     EndDrawing();
     //----------------------------------------------------------------------------------

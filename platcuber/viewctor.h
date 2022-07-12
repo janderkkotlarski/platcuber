@@ -52,6 +52,12 @@ private:
   float m_theta
   { 0.0f };
 
+  bool m_veloc
+  { false };
+
+  bool m_accel
+  { false };
+
 public:
   viewctor();
 
@@ -59,7 +65,11 @@ public:
 
   void set_direct(const Vector3 &direct);
 
-  void set_on_sphere(const spheroid &sphoid);
+  void posit_on_sphere(const spheroid &sphoid);
+
+  void veloc_on_sphere(const spheroid &sphoid);
+
+  void accel_on_sphere(const spheroid &sphoid);
 
   void set_in_space();
 

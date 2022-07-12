@@ -46,7 +46,9 @@ class video
 
   platform m_platform;
 
-  viewctor m_viewctor;
+  viewctor m_veloctor;
+
+  viewctor m_acceltor;
 
   chromatic m_chroma;
 

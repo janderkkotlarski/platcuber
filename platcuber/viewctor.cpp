@@ -2,9 +2,6 @@
 
 viewctor::viewctor()
 {
-  // remeasure();
-
-
 }
 
 void viewctor::set_posit(const Vector3 &posit)
@@ -27,12 +24,6 @@ void viewctor::remeasure()
 
   m_sphere_radius = m_mult*m_stick_radius;
 
-  // set_stick();
-
-
-
-  // set_sphere();
-
   m_theta = 180.0f*acos(m_direct.y/m_stick_length)/PI;
 }
 
@@ -46,17 +37,13 @@ void viewctor::set_sphere()
   m_sphere = LoadModelFromMesh(GenMeshSphere(m_sphere_radius,  25, 50));
 }
 
-void viewctor::set_on_sphere(const spheroid &sphoid)
+void viewctor::posit_on_sphere(const spheroid &sphoid)
 {
   const Vector3 base_posit
   { sphoid.get_posit() };
 
-  set_direct(sphoid.get_veloc());
-
   Vector3 unit_direct
   { Vector3Normalize(m_direct) };
-
-  // unit_direct = Vector3Normalize(unit_direct);
 
   const Vector3 radius_direct
   { Vector3Scale(unit_direct, sphoid.get_radius()) };
@@ -65,20 +52,26 @@ void viewctor::set_on_sphere(const spheroid &sphoid)
   { Vector3Add(radius_direct, base_posit) };
 
   set_posit(onsphere);
+}
 
-  /*
+void viewctor::veloc_on_sphere(const spheroid &sphoid)
+{
+  set_direct(sphoid.get_veloc());
 
-  Vector3 unit_direct
-  { m_direct };
+  m_veloc = true;
+  m_accel = false;
 
-  Vector3Normalize(unit_direct);
+  posit_on_sphere(sphoid);
+}
 
-  const Vector3 radius_direct
-  { Vector3Scale(unit_direct, sphoid.get_radius()) };
+void viewctor::accel_on_sphere(const spheroid &sphoid)
+{
+  set_direct(sphoid.get_accel());
 
-  set_posit(Vector3Add(base_posit, radius_direct));
+  m_accel = true;
+  m_veloc = false;
 
-  */
+  posit_on_sphere(sphoid);
 }
 
 void viewctor::set_in_space()
@@ -97,8 +90,13 @@ void viewctor::display()
 
   DrawModel(m_sphere, m_posit, 1.0f, RED);
 
-  // DrawModel(m_stick, m_posit, 1.0f, GREEN);
-  DrawModelEx(m_stick, m_posit, direct, m_theta, m_stick_mult, BLUE);
+  if (m_veloc)
+  { m_color = BLUE; }
+
+  if (m_accel)
+  { m_color = GREEN; }
+
+  DrawModelEx(m_stick, m_posit, direct, m_theta, m_stick_mult, m_color);
 
   DrawModel(m_sphere, Vector3Add(m_posit, m_direct), 1.0f, RED);
 }

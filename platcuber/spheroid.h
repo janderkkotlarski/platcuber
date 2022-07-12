@@ -16,7 +16,7 @@ private:
   { 2.0f, 0.0f, 0.0f };
 
   Vector3 m_accel
-  { 0.0f, -10.0f, 0.0f };
+  { 0.0f, -2.0f, 0.0f };
 
   const float m_spring
   { 0.1f };
@@ -45,13 +45,13 @@ public:
 
   Vector3 get_veloc() const noexcept;
 
+  Vector3 get_accel() const noexcept;
+
   float get_radius() const noexcept;
 
   void set_pos(const Vector3 &pos);
 
   void set_color(const Color &color);
-
-  void opacitize();
 
   void display();
 
