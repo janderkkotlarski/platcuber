@@ -2,6 +2,7 @@
 #define VIEWCTOR_H
 
 #include "raylib.h"
+#include "raymath.h"
 
 #include "spheroid.h"
 
@@ -12,7 +13,7 @@ private:
   { 0.0f, 2.0f, 0.0f };
 
   Vector3 m_direct
-  { 2.0f, 0.0f, 2.0f };
+  { 2.0f, -11.0f, 6.0f };
 
   Color m_color
   { WHITE };
@@ -23,7 +24,7 @@ private:
   { 0.02f };
 
   float m_stick_length
-  { 1.0f };
+  { Vector3Length(m_direct) };
 
   float m_stick_radius
   { m_ratio*m_stick_length };
@@ -40,7 +41,10 @@ private:
   { 90.0f };
 
   const float m_delta
-  { 0.5f };
+  { 0.0f };
+
+  float m_theta
+  { 0.0f };
 
 public:
   viewctor();

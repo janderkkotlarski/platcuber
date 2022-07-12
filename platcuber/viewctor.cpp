@@ -1,7 +1,5 @@
 #include "viewctor.h"
 
-#include "raymath.h"
-
 viewctor::viewctor()
 {
   remeasure();
@@ -26,6 +24,8 @@ void viewctor::remeasure()
   m_stick_radius = m_ratio*m_stick_length;
 
   m_sphere_radius = m_mult*m_stick_radius;
+
+  m_theta = 180.0f*acos(m_direct.y/m_stick_length)/PI;
 }
 
 void viewctor::set_stick()
@@ -61,12 +61,16 @@ void viewctor::set_in_space()
 
 void viewctor::display()
 {
-  const Vector3 mid_pos
-  { Vector3Add(m_posit, Vector3Scale(m_direct, 0.5f)) };
+  Vector3 direct
+  { m_direct };
 
-  // DrawModel(m_stick, m_posit, 1.0f, GREEN);
-  // DrawModelEx(m_stick, m_posit, m_direct, 40.0f, Vector3One(), BLUE);
-  DrawModelEx(m_stick, m_posit, m_direct, m_angle, Vector3One(), BLUE);
+  direct.x = m_direct.z;
+  direct.y = 0.0f;
+  direct.z = -m_direct.x;
 
   DrawModel(m_sphere, m_posit, 1.0f, RED);
+  // DrawModel(m_stick, m_posit, 1.0f, GREEN);
+  DrawModelEx(m_stick, m_posit, direct, m_theta, Vector3One(), BLUE);
+
+  DrawModel(m_sphere, Vector3Add(m_posit, m_direct), 1.0f, RED);
 }
