@@ -7,7 +7,7 @@ class spheroid
 {
 private:
   const float m_radius
-  { 1.0f };
+  { 2.0f };
 
   Vector3 m_posit
   { 0.0f, 0.0f, 0.0f };
@@ -26,6 +26,9 @@ private:
 
   Color m_color
   { WHITE };
+
+  const int m_opacity
+  { 63 };
 
   Image m_image;
 
@@ -48,7 +51,11 @@ public:
 
   void set_color(const Color &color);
 
+  void opacitize();
+
   void display();
+
+  void wiresplay();
 
   void set_sphere();
 

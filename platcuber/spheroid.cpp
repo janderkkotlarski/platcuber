@@ -24,12 +24,14 @@ void spheroid::set_pos(const Vector3 &pos)
 void spheroid::set_color(const Color &color)
 { m_color = color; }
 
-void spheroid::display()
-{
-  // DrawSphere(m_posit, 0.5f*m_side, m_color);
+void spheroid::opacitize()
+{ m_color.a = m_opacity; }
 
-  DrawModel(m_model, m_posit, 1.0f, m_color);
-}
+void spheroid::display()
+{ DrawModel(m_model, m_posit, 1.0f, m_color); }
+
+void spheroid::wiresplay()
+{ DrawModelWires(m_model, m_posit, 1.0f, m_color); }
 
 void spheroid::set_sphere()
 {
@@ -39,7 +41,7 @@ void spheroid::set_sphere()
 
   m_model = LoadModelFromMesh(GenMeshSphere(m_radius, 25, 50));
 
-  m_model.materials[0].maps[MAP_DIFFUSE].texture = m_tex2d;
+  // m_model.materials[0].maps[MAP_DIFFUSE].texture = m_tex2d;
 
 }
 

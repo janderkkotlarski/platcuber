@@ -97,6 +97,8 @@ void video::init_viewctor()
   m_viewctor.set_stick();
 
   m_viewctor.set_sphere();
+
+  m_viewctor.set_on_sphere(m_player);
 }
 
 void video::light_screen()
@@ -110,10 +112,15 @@ void video::light_screen()
 
 void video::light_camera()
 {
+  /*
   m_camera.position = Vector3{ 40.0f, 2.0f, 0.0f };      // Camera position
   m_camera.target = Vector3{ 0.0f, 2.0f, 0.0f };      // Camera looking at point
   m_camera.up = Vector3{ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
+  */
 
+  m_camera.position = m_cam_pos;      // Camera position
+  m_camera.target = m_cam_target;      // Camera looking at point
+  m_camera.up = m_cam_up;
 
   m_camera.fovy = 45.0f;                                // Camera field-of-view Y
   m_camera.type = CAMERA_PERSPECTIVE;                  // Camera mode type
@@ -187,9 +194,6 @@ void video::light_it()
 
   */
 
-  const Vector3 sphere_pos
-  { 0.0f, 1.0f, 0.0f };
-
   // SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
 
   SetTargetFPS(60);                       // Set our game to run at 60 frames-per-second
@@ -211,6 +215,7 @@ void video::light_it()
     lights[0].color = m_chroma.get_color();
 
     m_player.set_color(m_chroma.get_color());
+    // m_player.opacitize();
 
     // if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
     // UpdateLightValues(shader, bulb);
@@ -269,6 +274,8 @@ void video::light_it()
 
           // m_player.display();
 
+          m_player.wiresplay();
+
           m_viewctor.display();
 
           // DrawModel(m_sphere, lights[0].position, 1.0f, m_chroma.get_color());
@@ -309,9 +316,9 @@ void video::light_it()
 
       m_player.move(m_platform.get_pos(), delta);
 
-      m_viewctor.set_in_space();
+      // m_viewctor.set_in_space();
 
-      // m_viewctor.set_on_sphere(m_player);
+      m_viewctor.set_on_sphere(m_player);
 
     EndDrawing();
     //----------------------------------------------------------------------------------

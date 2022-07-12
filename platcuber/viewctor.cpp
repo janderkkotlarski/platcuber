@@ -14,7 +14,7 @@ void viewctor::set_direct(const Vector3 &direct)
 {
   m_direct = direct;
 
-  remeasure();
+  // remeasure();
 }
 
 void viewctor::remeasure()
@@ -45,13 +45,32 @@ void viewctor::set_on_sphere(const spheroid &sphoid)
 
   set_direct(sphoid.get_veloc());
 
-  const Vector3 unit_direct
+  Vector3 unit_direct
   { Vector3Normalize(m_direct) };
+
+  // unit_direct = Vector3Normalize(unit_direct);
+
+  const Vector3 radius_direct
+  { Vector3Scale(unit_direct, sphoid.get_radius()) };
+
+  const Vector3 onsphere
+  { Vector3Add(radius_direct, base_posit) };
+
+  set_posit(onsphere);
+
+  /*
+
+  Vector3 unit_direct
+  { m_direct };
+
+  Vector3Normalize(unit_direct);
 
   const Vector3 radius_direct
   { Vector3Scale(unit_direct, sphoid.get_radius()) };
 
   set_posit(Vector3Add(base_posit, radius_direct));
+
+  */
 }
 
 void viewctor::set_in_space()
@@ -70,7 +89,7 @@ void viewctor::display()
 
   DrawModel(m_sphere, m_posit, 1.0f, RED);
   // DrawModel(m_stick, m_posit, 1.0f, GREEN);
-  DrawModelEx(m_stick, m_posit, direct, m_theta, Vector3One(), BLUE);
+  // DrawModelEx(m_stick, m_posit, direct, m_theta, Vector3One(), BLUE);
 
-  DrawModel(m_sphere, Vector3Add(m_posit, m_direct), 1.0f, RED);
+  /// DrawModel(m_sphere, Vector3Add(m_posit, m_direct), 1.0f, RED);
 }
