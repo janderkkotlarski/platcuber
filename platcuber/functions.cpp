@@ -24,6 +24,27 @@ Vector3 dim_vector(const float scalar, const int dim)
   { return Vector3{ 0.0f, scalar, 0.0f }; }
 }
 
+void vector_reflect(Vector3 &invector, const Vector3 &revlector)
+{
+  const Vector3 uno_invector
+  { Vector3Normalize(invector) };
+
+  const Vector3 uno_revlector
+  { Vector3Normalize(revlector) };
+
+  const float dot
+  { Vector3DotProduct(uno_invector, uno_revlector) };
+
+  if (dot < 0.0f)
+  {
+    const Vector3 reflected
+    { Vector3Scale(revlector, -2.0f*dot) };
+
+    invector = Vector3Add(invector, reflected);
+  }
+
+}
+
 void reflect(const Vector3 &reflect_posit, const float reflect_dist, const int reflect_dim,
              Vector3 &player_posit, const float player_dist, Vector3 &player_veloc)
 {
