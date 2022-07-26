@@ -12,6 +12,9 @@ private:
   Vector3 m_posit
   { 0.0f, 0.0f, 0.0f };
 
+  Vector3 m_normal
+  { 0.0f, 1.0f, 0.0f };
+
   Color m_color
   { 63, 63, 63, 255 };
 

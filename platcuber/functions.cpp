@@ -42,7 +42,28 @@ void vector_reflect(Vector3 &invector, const Vector3 &revlector)
 
     invector = Vector3Add(invector, reflected);
   }
+}
 
+bool posit_reflection(const Vector3 &inposit, const Vector3 &revposit)
+{
+  return false;
+}
+
+float normal_distance(const Vector3 &normal_posit, const Vector3 &normal_direct, const Vector3 &posit)
+{
+  const Vector3 way
+  { Vector3Subtract(posit, normal_posit) };
+
+  const Vector3 uno_direct
+  { Vector3Normalize(normal_direct) };
+
+  const float dot_scale
+  { Vector3DotProduct(uno_direct, way) };
+
+  const Vector3 normal_way
+  { Vector3Scale(uno_direct, dot_scale) };
+
+  return dot_scale;
 }
 
 void reflect(const Vector3 &reflect_posit, const float reflect_dist, const int reflect_dim,
