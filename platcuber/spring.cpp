@@ -7,10 +7,16 @@ spring::spring()
 
 }
 
-void spring::accelerate(const Vector3 &posit, Vector3 &accel)
+spring::spring(const Vector3 &posit)
+  : m_posit(posit)
 {
-  const Vector3 sub_accel
+
+}
+
+Vector3 spring::accelerate(const Vector3 &posit)
+{
+  const Vector3 accel
   { Vector3Add(m_posit, Vector3Scale(posit, m_mult)) };
 
-  accel = Vector3Add(accel, sub_accel);
+  return accel;
 }

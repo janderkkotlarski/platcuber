@@ -267,6 +267,9 @@ void video::light_it()
 
       UpdateLightValues(m_lighting_shader, lights[0]);
 
+      m_player.set_accel(m_spring.accelerate(m_player.get_posit()));
+      m_player.add_accel(m_gravaccel);
+
       m_player.move(m_platform.get_pos(), delta);
 
       // m_viewctor.set_in_space();

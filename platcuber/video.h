@@ -55,7 +55,11 @@ class video
 
   cuboid m_block;
 
-  spring m_spring;
+  spring m_spring
+  { Vector3{ 0.0f, 8.0f, 0.0f } };
+
+  const Vector3 m_gravaccel
+  { 0.0f, -10.0f, 0.0f };
 
   Model m_model;
   Model m_cube;

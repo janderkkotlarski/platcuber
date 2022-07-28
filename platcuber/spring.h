@@ -18,7 +18,9 @@ private:
 public:
   spring();
 
-  void accelerate(const Vector3 &posit, Vector3 &accel);
+  spring(const Vector3 &posit);
+
+  Vector3 accelerate(const Vector3 &posit);
 };
 
 #endif // SPRING_H
