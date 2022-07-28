@@ -9,7 +9,7 @@ Vector3 dim_vector(const float scalar, const int dim);
 
 void vector_reflect(Vector3 &invector, const Vector3 &revlector);
 
-float normal_distance(const Vector3 &normal_posit, const Vector3 &normal_direct, const Vector3 &posit);
+Vector3 normal_distance(const Vector3 &normal_posit, const Vector3 &normal_direct, const Vector3 &posit);
 
 bool posit_reflection(const Vector3 &inposit, const Vector3 &revposit);
 
