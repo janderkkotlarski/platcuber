@@ -61,6 +61,7 @@ SOURCES += \
         main.cpp \
         platform.cpp \
         spheroid.cpp \
+        spring.cpp \
         video.cpp \
         viewctor.cpp
 
@@ -70,5 +71,6 @@ HEADERS += \
   functions.h \
   platform.h \
   spheroid.h \
+  spring.h \
   video.h \
   viewctor.h

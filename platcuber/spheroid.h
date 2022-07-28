@@ -16,7 +16,7 @@ private:
   { 2.0f, 0.0f, 0.0f };
 
   Vector3 m_accel
-  { 0.0f, -2.0f, 0.0f };
+  { 0.0f, 0.0f, 0.0f };
 
   const float m_spring
   { 0.1f };

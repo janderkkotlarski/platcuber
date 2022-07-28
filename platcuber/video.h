@@ -11,6 +11,7 @@
 #include "cuboid.h"
 #include "chromatic.h"
 #include "viewctor.h"
+#include "spring.h"
 
 class video
 {
@@ -52,7 +53,9 @@ class video
 
   chromatic m_chroma;
 
-  cuboid  m_block;
+  cuboid m_block;
+
+  spring m_spring;
 
   Model m_model;
   Model m_cube;
