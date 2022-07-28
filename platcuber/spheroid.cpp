@@ -21,8 +21,14 @@ Vector3 spheroid::get_accel() const noexcept
 float spheroid::get_radius() const noexcept
 { return m_radius; }
 
-void spheroid::set_pos(const Vector3 &pos)
-{ m_posit = pos; }
+void spheroid::set_pos(const Vector3 &posit)
+{ m_posit = posit; }
+
+void spheroid::set_veloc(const Vector3 &veloc)
+{ m_veloc = veloc; }
+
+void spheroid::set_accel(const Vector3 &accel)
+{ m_accel = accel; }
 
 void spheroid::set_color(const Color &color)
 { m_color = color; }

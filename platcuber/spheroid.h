@@ -49,7 +49,11 @@ public:
 
   float get_radius() const noexcept;
 
-  void set_pos(const Vector3 &pos);
+  void set_pos(const Vector3 &posit);
+
+  void set_veloc(const Vector3 &veloc);
+
+  void set_accel(const Vector3 &accel);
 
   void set_color(const Color &color);
 

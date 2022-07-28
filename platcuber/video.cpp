@@ -183,12 +183,7 @@ void video::light_it()
 
   Light lights[1] = { 0 };
   lights[0] = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), m_chroma.get_color(), m_lighting_shader);
-  /*
-  lights[1] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, 2 }, Vector3Zero(), BLACK, m_lighting_shader);
-  lights[2] = CreateLight(LIGHT_POINT, Vector3{ -2, 1, 2 }, Vector3Zero(), BLACK, m_lighting_shader);
-  lights[3] = CreateLight(LIGHT_POINT, Vector3{ 2, 1, -2 }, Vector3Zero(), BLACK, m_lighting_shader);
 
-  */
 
   // SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
 
@@ -218,19 +213,10 @@ void video::light_it()
 
     // Check key inputs to enable/disable lights
     if (IsKeyPressed(KEY_W)) { lights[0].enabled = !lights[0].enabled; }
-    /*
-    if (IsKeyPressed(KEY_R)) { lights[1].enabled = !lights[1].enabled; }
-    if (IsKeyPressed(KEY_G)) { lights[2].enabled = !lights[2].enabled; }
-    if (IsKeyPressed(KEY_B)) { lights[3].enabled = !lights[3].enabled; }
-    */
+
 
     // Update light values (actually, only enable/disable them)
     UpdateLightValues(m_lighting_shader, lights[0]);
-    /*
-    UpdateLightValues(m_lighting_shader, lights[1]);
-    UpdateLightValues(m_lighting_shader, lights[2]);
-    UpdateLightValues(m_lighting_shader, lights[3]);
-    */
 
 
     // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
@@ -246,47 +232,18 @@ void video::light_it()
 
       BeginMode3D(m_camera);
 
-          // DrawModel(m_cube, Vector3Zero(), 1.0f, WHITE);
-
-
-
-
-          // if (bulb.enabled) DrawSphereEx(bulb.position, 0.2f, 8, 8, GRAY);
-          // else DrawSphereWires(bulb.position, 0.2f, 8, 8, ColorAlpha(YELLOW, 0.3f));
-
-
-
-          // Draw markers to show where the lights are
-          // if (lights[0].enabled) DrawSphereEx(lights[0].position, 0.2f, 8, 8, m_chroma.get_color());
-          // else DrawSphereWires(lights[0].position, 0.2f, 8, 8, ColorAlpha(m_chroma.get_color(), 0.3f));
-
-
 
           // m_platform.display();
 
           DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{2.0f, 0.0f, 0.0f}, PURPLE);
           DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{0.0f, 0.0f, 2.0f}, ORANGE);
 
-          // m_player.display();
-
           m_player.display();
 
           m_veloctor.display();
           m_acceltor.display();
 
-          // DrawModel(m_sphere, lights[0].position, 1.0f, m_chroma.get_color());
-
-          // DrawModel(m_model, Vector3Zero(), 1.0f, WHITE);
-          /*
-          if (lights[1].enabled) DrawSphereEx(lights[1].position, 0.2f, 8, 8, RED);
-          else DrawSphereWires(lights[1].position, 0.2f, 8, 8, ColorAlpha(RED, 0.3f));
-          if (lights[2].enabled) DrawSphereEx(lights[2].position, 0.2f, 8, 8, GREEN);
-          else DrawSphereWires(lights[2].position, 0.2f, 8, 8, ColorAlpha(GREEN, 0.3f));
-          if (lights[3].enabled) DrawSphereEx(lights[3].position, 0.2f, 8, 8, BLUE);
-          else DrawSphereWires(lights[3].position, 0.2f, 8, 8, ColorAlpha(BLUE, 0.3f));
-          */
-
-          // DrawGrid(10, 1.0f);
+          DrawGrid(10, 2.0f);
 
 
       EndMode3D();
