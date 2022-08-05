@@ -57,6 +57,7 @@ LIBS += -LC:\raylib\
 SOURCES += \
         chromatic.cpp \
         cuboid.cpp \
+        force.cpp \
         functions.cpp \
         main.cpp \
         platform.cpp \
@@ -68,6 +69,7 @@ SOURCES += \
 HEADERS += \
   chromatic.h \
   cuboid.h \
+  force.h \
   functions.h \
   platform.h \
   spheroid.h \
