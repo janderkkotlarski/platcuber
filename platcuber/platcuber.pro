@@ -60,6 +60,7 @@ SOURCES += \
         force.cpp \
         functions.cpp \
         main.cpp \
+        particle.cpp \
         platform.cpp \
         spheroid.cpp \
         spring.cpp \
@@ -71,6 +72,7 @@ HEADERS += \
   cuboid.h \
   force.h \
   functions.h \
+  particle.h \
   platform.h \
   spheroid.h \
   spring.h \
