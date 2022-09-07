@@ -15,5 +15,8 @@ void sphere::set_color(const Color &chroma)
 void sphere::set_sphere()
 { m_model = LoadModelFromMesh(GenMeshSphere(1.0f, 25, 50)); }
 
+void sphere::set_shading(Shader &shade)
+{ m_model.materials[0].shader = shade; }
+
 void sphere::display()
 { DrawModel(m_model, m_position, m_radius, m_color); }

@@ -27,7 +27,7 @@ void video::initialize()
   light_screen();
   light_camera();
 
-  init_actors();
+  init_shaders();
 
   init_player();
   init_platform();
@@ -37,6 +37,8 @@ void video::initialize()
   light_textures();
   light_shader();
   light_shadels();
+
+  init_actors();
 }
 
 void video::init_screen()
@@ -81,6 +83,8 @@ void video::init_shaders()
 void video::init_actors()
 {
   m_ball.set_sphere();
+
+  m_ball.set_shading(m_lighting_shader);
 }
 
 void video::init_player()
@@ -91,7 +95,7 @@ void video::init_player()
   m_player.set_pos(player_pos);
 
   m_player.set_sphere();
-  // m_player.set_shading(m_lighting_shader);  
+  // m_player.set_shading(m_lighting_shader);
 }
 
 void video::init_platform()

@@ -28,6 +28,8 @@ public:
 
   void set_sphere();
 
+  void set_shading(Shader &shade);
+
   void display();
 };
 
