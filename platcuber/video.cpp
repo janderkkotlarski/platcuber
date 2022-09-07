@@ -27,6 +27,8 @@ void video::initialize()
   light_screen();
   light_camera();
 
+  init_actors();
+
   init_player();
   init_platform();
   init_viewctor();
@@ -76,6 +78,11 @@ void video::init_shaders()
 
 }
 
+void video::init_actors()
+{
+  m_ball.set_sphere();
+}
+
 void video::init_player()
 {
   const Vector3 player_pos
@@ -84,7 +91,7 @@ void video::init_player()
   m_player.set_pos(player_pos);
 
   m_player.set_sphere();
-  // m_player.set_shading(m_lighting_shader);
+  // m_player.set_shading(m_lighting_shader);  
 }
 
 void video::init_platform()
@@ -245,6 +252,8 @@ void video::light_it()
 
           DrawGrid(10, 2.0f);
 
+          m_ball.display();
+
 
       EndMode3D();
 
@@ -372,6 +381,8 @@ void video::run()
         // m_player.display();
 
         DrawModel(erehps, light_target, 0.2f, WHITE);
+
+        m_ball.display();
       }
       EndMode3D();
     }

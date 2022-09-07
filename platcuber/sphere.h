@@ -7,20 +7,28 @@
 class sphere
 {
 private:
-  Vector3 m_position
-  { Vector3Zero() };
-
   float m_radius
   { 1.0f };
+
+  Vector3 m_position
+  { Vector3Zero() };
 
   Color m_color
   { WHITE };
 
-  Mesh m_mesh;
-
   Model m_model;
 public:
   sphere();
+
+  void set_radius(const float radius);
+
+  void set_posit(const Vector3 &position);
+
+  void set_color(const Color &chroma);
+
+  void set_sphere();
+
+  void display();
 };
 
 #endif // SPHERE_H

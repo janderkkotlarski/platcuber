@@ -13,6 +13,8 @@
 #include "viewctor.h"
 #include "spring.h"
 
+#include "sphere.h"
+
 class video
 {
   int m_screen_side
@@ -80,6 +82,8 @@ class video
   const float m_lighting_color[4]
   { 0.1f, 0.1f, 0.1f, 1.0f };
 
+  sphere m_ball;
+
 public:
   video();
 
@@ -90,6 +94,8 @@ public:
   void init_camera();
 
   void init_shaders();
+
+  void init_actors();
 
   void init_platform();
 
