@@ -62,6 +62,7 @@ SOURCES += \
         main.cpp \
         particle.cpp \
         platform.cpp \
+        sphere.cpp \
         spheroid.cpp \
         spring.cpp \
         video.cpp \
@@ -74,6 +75,7 @@ HEADERS += \
   functions.h \
   particle.h \
   platform.h \
+  sphere.h \
   spheroid.h \
   spring.h \
   video.h \

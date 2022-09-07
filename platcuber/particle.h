@@ -1,19 +1,20 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
+#include <vector>
+
 #include "raylib.h"
 #include "raymath.h"
 
 enum class particle_type
 {
-  none, mass, charge, spring, player
+  none, mass, charge, spring, player, fixed
 };
 
 class particle
 {
 private:
-  particle_type m_type
-  { particle_type::none };
+  std::vector <particle_type> m_type;
 
   Vector3 m_position
   { Vector3Zero() };
@@ -25,10 +26,10 @@ private:
   { Vector3Zero() };
 
   float m_range
-  { 0.0f };
+  { -1.0f };
 
   float m_mass
-  { 0.0f };
+  { 1.0f };
 
   float m_charge
   { 0.0f };
