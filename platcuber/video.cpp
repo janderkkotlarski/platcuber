@@ -61,23 +61,18 @@ void video::init_shaders()
 {
   // m_shader = LoadShader("base_lighting.vs", "lighting.fs");
 
-  m_shader = LoadShader("base_lighting.vs", "fog.fs");
+  m_shader = LoadShader("base_lighting.vs", "dark_fog.fs");
 
   m_shader.locs[LOC_MATRIX_MODEL] =
       GetShaderLocation(m_shader, "matModel");
   m_shader.locs[LOC_VECTOR_VIEW] =
       GetShaderLocation(m_shader, "viewPos");
 
-  const float lighting_color[4]
-  { 10.0f, 10.0f, 10.0f, 100.0f };
-
-  const int ambientLoc = GetShaderLocation(m_shader, "ambient");
-  SetShaderValue(m_shader, ambientLoc, lighting_color, 0);
+  m_ambientLoc = GetShaderLocation(m_shader, "ambient");
+  SetShaderValue(m_shader, m_ambientLoc, m_lighting_color, 0);
 
   m_fog_strength_pos = GetShaderLocation(m_shader, "fogDensity");
   SetShaderValue(m_shader, m_fog_strength_pos, &m_fog_strength, UNIFORM_FLOAT);
-
-
 }
 
 void video::init_actors()
@@ -151,24 +146,7 @@ void video::light_textures()
   m_model.materials[0].maps[MAP_DIFFUSE].texture = m_tex2d;
 }
 
-void video::light_shader()
-{
-  m_shader = LoadShader("base_lighting.vs", "lighting.fs");
-  /// This is the local place for the shaders.
-  // Shader shader = LoadShader("d:/Cpp/build-platcuber-libray_MinGW-Debug/base_lighting.vs",
-  //                     "d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
-  // shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION), TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
 
-  // Get some required shader locations
-  m_shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(m_shader, "viewPos");
-  // NOTE: "matModel" location name is automatically assigned on shader loading,
-  // no need to get the location again if using that uniform name
-  m_shader.locs[LOC_MATRIX_MODEL] = GetShaderLocation(m_shader, "matModel");
-
-  // Ambient light level (some basic lighting)
-  m_ambientLoc = GetShaderLocation(m_shader, "ambient");
-  SetShaderValue(m_shader, m_ambientLoc, m_lighting_color, UNIFORM_VEC4);
-}
 
 void video::light_shadels()
 {

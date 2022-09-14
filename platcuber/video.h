@@ -33,7 +33,7 @@ class video
   Shader m_shader;
 
   const float m_fog_median
-  { 0.02f };
+  { 0.015f };
 
   float m_fog_strength
   { m_fog_median };
@@ -125,8 +125,6 @@ public:
   void light_models();
 
   void light_textures();
-
-  void light_shader();
 
   void light_shadels();
 
