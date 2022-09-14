@@ -19,11 +19,6 @@ video::video()
 
 void video::initialize()
 {
-  // for (int count{ 0 }; count < 100; ++count)
-  // init_screen();
-
-  // init_camera();
-
   light_screen();
   light_camera();
 
@@ -35,7 +30,7 @@ void video::initialize()
 
   light_models();
   light_textures();
-  light_shader();
+  // light_shader();
   light_shadels();
 
   init_actors();
@@ -64,19 +59,24 @@ void video::init_camera()
 
 void video::init_shaders()
 {
-  m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
-  // LoadShader("base_lighting.vs", "lighting.fs");
+  // m_shader = LoadShader("base_lighting.vs", "lighting.fs");
 
-  m_lighting_shader.locs[LOC_MATRIX_MODEL] =
-      GetShaderLocation(m_lighting_shader, "matModel");
-  m_lighting_shader.locs[LOC_VECTOR_VIEW] =
-      GetShaderLocation(m_lighting_shader, "viewPos");
+  m_shader = LoadShader("base_lighting.vs", "fog.fs");
+
+  m_shader.locs[LOC_MATRIX_MODEL] =
+      GetShaderLocation(m_shader, "matModel");
+  m_shader.locs[LOC_VECTOR_VIEW] =
+      GetShaderLocation(m_shader, "viewPos");
 
   const float lighting_color[4]
   { 10.0f, 10.0f, 10.0f, 100.0f };
 
-  const int ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
-  SetShaderValue(m_lighting_shader, ambientLoc, lighting_color, 0);
+  const int ambientLoc = GetShaderLocation(m_shader, "ambient");
+  SetShaderValue(m_shader, ambientLoc, lighting_color, 0);
+
+  m_fog_strength_pos = GetShaderLocation(m_shader, "fogDensity");
+  SetShaderValue(m_shader, m_fog_strength_pos, &m_fog_strength, UNIFORM_FLOAT);
+
 
 }
 
@@ -84,7 +84,7 @@ void video::init_actors()
 {
   m_ball.set_sphere();
 
-  m_ball.set_shading(m_lighting_shader);
+  m_ball.set_shading(m_shader);
 }
 
 void video::init_player()
@@ -153,27 +153,27 @@ void video::light_textures()
 
 void video::light_shader()
 {
-  m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
+  m_shader = LoadShader("base_lighting.vs", "lighting.fs");
   /// This is the local place for the shaders.
   // Shader shader = LoadShader("d:/Cpp/build-platcuber-libray_MinGW-Debug/base_lighting.vs",
   //                     "d:/Cpp/build-platcuber-libray_MinGW-Debug/lighting.fs");
   // shader = LoadShader(TextFormat("resources/shaders/glsl%i/base_lighting.vs", GLSL_VERSION), TextFormat("resources/shaders/glsl%i/lighting.fs", GLSL_VERSION));
 
   // Get some required shader locations
-  m_lighting_shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(m_lighting_shader, "viewPos");
+  m_shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(m_shader, "viewPos");
   // NOTE: "matModel" location name is automatically assigned on shader loading,
   // no need to get the location again if using that uniform name
-  m_lighting_shader.locs[LOC_MATRIX_MODEL] = GetShaderLocation(m_lighting_shader, "matModel");
+  m_shader.locs[LOC_MATRIX_MODEL] = GetShaderLocation(m_shader, "matModel");
 
   // Ambient light level (some basic lighting)
-  m_ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
-  SetShaderValue(m_lighting_shader, m_ambientLoc, m_lighting_color, UNIFORM_VEC4);
+  m_ambientLoc = GetShaderLocation(m_shader, "ambient");
+  SetShaderValue(m_shader, m_ambientLoc, m_lighting_color, UNIFORM_VEC4);
 }
 
 void video::light_shadels()
 {
   // m_model.materials[0].shader = m_lighting_shader;
-  m_cube.materials[0].shader = m_lighting_shader;
+  m_cube.materials[0].shader = m_shader;
   // m_sphere.materials[0].shader = m_lighting_shader;
 
   // m_player.set_shading(m_lighting_shader);
@@ -193,7 +193,7 @@ void video::light_it()
   { 1.0f };
 
   Light lights[1] = { 0 };
-  lights[0] = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), m_chroma.get_color(), m_lighting_shader);
+  lights[0] = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), m_chroma.get_color(), m_shader);
 
 
   // SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
@@ -227,12 +227,14 @@ void video::light_it()
 
 
     // Update light values (actually, only enable/disable them)
-    UpdateLightValues(m_lighting_shader, lights[0]);
+    UpdateLightValues(m_shader, lights[0]);
 
 
     // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
     float cameraPos[3] = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
-    SetShaderValue(m_lighting_shader, m_lighting_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
+    SetShaderValue(m_shader, m_fog_strength_pos, &m_fog_strength, UNIFORM_FLOAT);
+
+    SetShaderValue(m_shader, m_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
     //----------------------------------------------------------------------------------
 
     // Draw
@@ -278,7 +280,9 @@ void video::light_it()
       lights[0].position.y = anchor.y + wiggle*cos(0.5f*PI*m_time);
       lights[0].position.z = anchor.z + wiggle*sin(0.5f*PI*m_time);
 
-      UpdateLightValues(m_lighting_shader, lights[0]);
+      m_fog_strength = m_fog_median + m_fog_median*sin(0.5f*PI*m_time);
+
+      UpdateLightValues(m_shader, lights[0]);
 
       m_player.set_accel(m_spring.accelerate(m_player.get_posit()));
       m_player.add_accel(m_gravaccel);
@@ -298,99 +302,9 @@ void video::light_it()
   //--------------------------------------------------------------------------------------
   UnloadModel(m_model);     // Unload the model
   UnloadModel(m_cube);      // Unload the model
-  UnloadShader(m_lighting_shader);   // Unload shader
+  UnloadShader(m_shader);   // Unload shader
 
   CloseWindow();          // Close window and OpenGL context
   //--------------------------------------------------------------------------------------
-}
-
-void video::run()
-{
-  Model erehps = LoadModelFromMesh(GenMeshSphere(2.0f, 20, 20));
-
-  Shader shader = LoadShader("base_lighting.vs", "lighting.fs");
-
-  shader.locs[LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
-
-  const int ambientLoc = GetShaderLocation(shader, "ambient");
-
-  const float lighting_color[4]
-  { 10.0f, 1.0f, 1.0f, 1.0f };
-  SetShaderValue(shader, ambientLoc, lighting_color, UNIFORM_VEC4);
-
-  erehps.materials[0].shader = shader;
-
-
-  // init_shaders();
-
-  const Vector3 light_target
-  { 0.0f, 0.0f, 0.0f };
-
-  const Vector3 light_source
-  { 0.0f, 2.0f, 0.0f };
-
-  erehps.materials[0].shader = shader;
-
-
-  Light bulb
-  { CreateLight(LIGHT_POINT, light_source, light_target, RED, shader) };
-
-
-  // { CreateLight(LIGHT_POINT, m_cam_target, m_cam_target, RED, shader) };
-
-  // init_player();
-
-  // SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
-  // InitWindow(m_screen_side, m_screen_side, "beatalizer");
-
-  // SetTargetFPS(60);
-
-  while (!m_windeath)                // Detect window close button or ESC key
-  {
-    if (IsKeyPressed(KEY_DELETE))
-    { m_windeath = true; }
-
-    UpdateLightValues(shader, bulb);
-
-    BeginDrawing();
-    {
-
-
-      ClearBackground(BLACK);
-
-      BeginMode3D(m_camera);
-      {
-        // DrawSphereEx(Vector3{0.0f, 0.0f, 0.0f}, 0.2f, 8, 8, WHITE);
-
-        DrawSphereEx(Vector3{1.0f, 0.0f, 0.0f}, 0.1f, 8, 8, RED);
-
-        DrawSphereEx(Vector3{-1.0f, 0.0f, 0.0f}, 0.1f, 8, 8, GREEN);
-
-        DrawSphereEx(Vector3{0.0f, 1.0f, 0.0f}, 0.1f, 8, 8, YELLOW);
-
-        DrawSphereEx(Vector3{0.0f, -1.0f, 0.0f}, 0.1f, 8, 8, BLUE);
-
-        DrawSphereEx(Vector3{0.0f, 0.0f, 1.0f}, 0.1f, 8, 8, ORANGE);
-
-        DrawSphereEx(Vector3{0.0f, 0.0f, -1.0f}, 0.1f, 8, 8, PURPLE);
-
-        // DrawSphereEx(bulb.position, 0.2f, 8, 8, YELLOW);
-
-        // DrawSphereEx(m_cam_target, 1.0f, 10, 10, GREEN);
-
-        // m_player.display();
-
-        // DrawCubeV(Vector3{ 0.0f, 2.0f, 0.0f }, Vector3{ 0.5f, 0.5f, 0.5f }, RED);
-
-        // m_player.display();
-
-        DrawModel(erehps, light_target, 0.2f, WHITE);
-
-        m_ball.display();
-      }
-      EndMode3D();
-    }
-    EndDrawing();
-  }
 }
 

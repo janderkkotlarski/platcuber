@@ -30,6 +30,17 @@ class video
 
   Shader m_lighting_shader;
 
+  Shader m_shader;
+
+  const float m_fog_median
+  { 0.02f };
+
+  float m_fog_strength
+  { m_fog_median };
+
+  int m_fog_strength_pos
+  { 0 };
+
   const int m_fps
   { 60 };
 
@@ -121,7 +132,6 @@ public:
 
   void light_it();
 
-  void run();
 };
 
 #endif // VIDEO_H
