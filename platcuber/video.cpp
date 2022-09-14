@@ -150,11 +150,11 @@ void video::light_textures()
 
 void video::light_shadels()
 {
-  // m_model.materials[0].shader = m_lighting_shader;
+  // m_model.materials[0].shader = m_shader;
   m_cube.materials[0].shader = m_shader;
   // m_sphere.materials[0].shader = m_lighting_shader;
 
-  // m_player.set_shading(m_lighting_shader);
+  m_player.set_shading(m_shader);
 }
 
 void video::light_it()
@@ -258,7 +258,7 @@ void video::light_it()
       lights[0].position.y = anchor.y + wiggle*cos(0.5f*PI*m_time);
       lights[0].position.z = anchor.z + wiggle*sin(0.5f*PI*m_time);
 
-      m_fog_strength = m_fog_median + m_fog_median*sin(0.5f*PI*m_time);
+      m_fog_strength = m_fog_median + m_fog_median*sin(1.5f*PI*m_time);
 
       UpdateLightValues(m_shader, lights[0]);
 
