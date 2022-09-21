@@ -30,7 +30,7 @@ public:
 
   void set_shading(Shader &shade);
 
-  void display();
+  void display() const;
 };
 
 #endif // SPHERE_H

@@ -18,5 +18,5 @@ void sphere::set_sphere()
 void sphere::set_shading(Shader &shade)
 { m_model.materials[0].shader = shade; }
 
-void sphere::display()
+void sphere::display() const
 { DrawModel(m_model, m_position, m_radius, m_color); }

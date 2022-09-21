@@ -159,7 +159,18 @@ void video::light_shadels()
 
 void video::roster_deez()
 {
+  sphere ball;
 
+  for (int x{0}; x < m_side_amount; ++x)
+  {
+    m_deez.push_back(ball);
+  }
+}
+
+void video::show_deez()
+{
+  for (const sphere &ball: m_deez)
+  { ball.display(); }
 }
 
 void video::light_it()
@@ -176,7 +187,7 @@ void video::light_it()
   lights[0] = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), m_chroma.get_color(), m_shader);
 
 
-
+  roster_deez();
 
   // SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
 
@@ -238,6 +249,8 @@ void video::light_it()
           // m_acceltor.display();
 
           DrawGrid(10, 2.0f);
+
+          show_deez();
 
           // m_ball.display();
 

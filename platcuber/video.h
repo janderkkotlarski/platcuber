@@ -143,6 +143,8 @@ public:
 
   void roster_deez();
 
+  void show_deez();
+
   void light_it();
 
 };
