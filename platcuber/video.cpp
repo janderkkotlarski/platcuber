@@ -163,7 +163,7 @@ void video::light_it()
     //--------------------------------------------------------------------------------------
 
   const Vector3 anchor
-  { 0.0f, 2.5f, 0.0f };
+  { 0.0f, 1.01f, 0.0f };
 
   m_light_pos = anchor;
 
@@ -229,10 +229,9 @@ void video::light_it()
           DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{2.0f, 0.0f, 0.0f}, PURPLE);
           DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{0.0f, 0.0f, 2.0f}, ORANGE);
 
-          m_player.display();
-
-          m_veloctor.display();
-          m_acceltor.display();
+          // m_player.display();
+          // m_veloctor.display();
+          // m_acceltor.display();
 
           DrawGrid(10, 2.0f);
 
@@ -254,23 +253,20 @@ void video::light_it()
       { m_time -= m_period; }
 
 
-      lights[0].position.x = anchor.x + wiggle*cos(0.5f*PI*m_time);
-      lights[0].position.y = anchor.y + wiggle*cos(0.5f*PI*m_time);
-      lights[0].position.z = anchor.z + wiggle*sin(0.5f*PI*m_time);
+      // lights[0].position.x = anchor.x + wiggle*cos(0.5f*PI*m_time);
+      // lights[0].position.y = anchor.y + wiggle*cos(0.5f*PI*m_time);
+      // lights[0].position.z = anchor.z + wiggle*sin(0.5f*PI*m_time);
 
       m_fog_strength = m_fog_median + m_fog_median*sin(1.5f*PI*m_time);
 
       UpdateLightValues(m_shader, lights[0]);
 
-      m_player.set_accel(m_spring.accelerate(m_player.get_posit()));
-      m_player.add_accel(m_gravaccel);
-
-      m_player.move(m_platform.get_pos(), delta);
-
+      // m_player.set_accel(m_spring.accelerate(m_player.get_posit()));
+      // m_player.add_accel(m_gravaccel);
+      // m_player.move(m_platform.get_pos(), delta);
       // m_viewctor.set_in_space();
-
-      m_veloctor.veloc_on_sphere(m_player);
-      m_acceltor.accel_on_sphere(m_player);
+      // m_veloctor.veloc_on_sphere(m_player);
+      // m_acceltor.accel_on_sphere(m_player);
 
     EndDrawing();
     //----------------------------------------------------------------------------------
