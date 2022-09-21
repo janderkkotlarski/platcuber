@@ -1,6 +1,8 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 
+#include <vector>
+
 #include "raylib.h"
 
 #include "raymath.h"
@@ -33,7 +35,7 @@ class video
   Shader m_shader;
 
   const float m_fog_median
-  { 0.015f };
+  { 0.05f };
 
   float m_fog_strength
   { m_fog_median };
@@ -45,13 +47,16 @@ class video
   { 60 };
 
   Vector3 m_cam_pos
-  { 0.0f, 2.0f, 40.0f };
+  { 0.0f, 40.0f, 0.0f };
 
   Vector3 m_cam_target
   { 0.0f, 2.0f, 0.0f };
 
   Vector3 m_cam_up
-  { 0.0f, 1.0f, 0.0f };
+  { 0.0f, 0.0f, 1.0f };
+
+  const Vector3 m_light_start_pos
+  { 0.0f, 100.0f, 0.0f };
 
   Vector3 m_light_pos
   { 0.0f, 0.0f, 0.0f };
@@ -88,12 +93,20 @@ class video
   { 0.0f };
 
   const float m_period
-  { 8.0f };
+  { 4.0f };
 
   const float m_lighting_color[4]
   { 0.1f, 0.1f, 0.1f, 1.0f };
 
   sphere m_ball;
+
+  std::vector <sphere> m_deez;
+
+  const float m_seperation
+  { 2.0f };
+
+  const int m_side_amount
+  { 2 };
 
 public:
   video();
@@ -127,6 +140,8 @@ public:
   void light_textures();
 
   void light_shadels();
+
+  void roster_deez();
 
   void light_it();
 

@@ -157,21 +157,25 @@ void video::light_shadels()
   m_player.set_shading(m_shader);
 }
 
+void video::roster_deez()
+{
+
+}
+
 void video::light_it()
 {
     // Initialization
     //--------------------------------------------------------------------------------------
 
-  const Vector3 anchor
-  { 0.0f, 1.01f, 0.0f };
+  m_light_pos = m_light_start_pos;
 
-  m_light_pos = anchor;
-
-  const float wiggle
-  { 1.0f };
+  // const float wiggle
+  // { 1.0f };
 
   Light lights[1] = { 0 };
   lights[0] = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), m_chroma.get_color(), m_shader);
+
+
 
 
   // SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
@@ -235,7 +239,7 @@ void video::light_it()
 
           DrawGrid(10, 2.0f);
 
-          m_ball.display();
+          // m_ball.display();
 
 
       EndMode3D();
@@ -257,7 +261,7 @@ void video::light_it()
       // lights[0].position.y = anchor.y + wiggle*cos(0.5f*PI*m_time);
       // lights[0].position.z = anchor.z + wiggle*sin(0.5f*PI*m_time);
 
-      m_fog_strength = m_fog_median + m_fog_median*sin(1.5f*PI*m_time);
+      m_fog_strength = m_fog_median + m_fog_median*sin(1.5f*PI*m_time/m_period);
 
       UpdateLightValues(m_shader, lights[0]);
 
