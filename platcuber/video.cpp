@@ -178,8 +178,11 @@ void video::light_it()
     // Initialization
     //--------------------------------------------------------------------------------------
 
-  const Vector3 n0072_anchor
+  const Vector3 n0072_behind
   { 0.0f, -2.0f, 0.0f };
+
+  const Vector3 n0072_before
+  { 0.0f, 2.0f, 0.0f };
 
   const Vector3 n0072_right
   { 1.0f, 0.0f, 0.0f };
@@ -204,22 +207,31 @@ void video::light_it()
   for (float x{ -n0072_min }; x < 0.0f*n0072_min + bit; x += 1.0f)
   {
 
-    const Vector3 n007_start
-    { Vector3Add(n0072_anchor, n0072_up) };
+    const Vector3 n007_start_x
+    { Vector3Add(n0072_behind, n0072_up) };
 
+    const Vector3 n007_pos_x
+    { Vector3Scale(Vector3Add(n007_start_x, Vector3Scale(n0072_right, x)), n0072_dist) };
 
-    const Vector3 n007_pos
-    { Vector3Scale(Vector3Add(n007_start, Vector3Scale(n0072_right, x)), n0072_dist) };
+    const Vector3 n007_start_y
+    { Vector3Add(n0072_before, n0072_right) };
+
+    const Vector3 n007_pos_y
+    { Vector3Scale(Vector3Add(n007_start_y, Vector3Scale(n0072_up, x)), n0072_dist) };
 
     sphere n007;
 
-    n007.set_posit(n007_pos);
-
     n007.set_sphere();
 
+    n007.set_posit(n007_pos_x);
     n007.set_color(GREEN);
 
     n007.set_shading(m_shader);
+
+    n0072.push_back(n007);
+
+    n007.set_posit(n007_pos_y);
+    n007.set_color(RED);
 
     n0072.push_back(n007);
   }
