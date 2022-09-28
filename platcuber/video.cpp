@@ -204,7 +204,33 @@ void video::light_it()
     m_chroma.pogo();
     m_chroma.choose();
 
+    const Vector3 n0072_anchor
+    { 0.0f, -2.0f, 0.0f };
 
+    const Vector3 n0072_right
+    { 1.0f, 0.0f, 0.0f };
+
+    const Vector3 n0072_up
+    { 0.0f, 0.0f, 1.0f };
+
+    std::vector <spheroid> n0072;
+
+    const float n0072_side
+    { 3.0f };
+
+    const float n0072_min
+    { n0072_side/2.0f - 0.5f };
+
+    const float bit
+    { 0.001f };
+
+    for (float x{ -n0072_min }; x < n0072_min + bit; x += 1.0f)
+    {
+      const Vector3 n007_pos
+      { Vector3Add(n0072_anchor, Vector3Scale(n0072_right, x)) };
+
+
+    }
 
 
     lights[0].color = m_chroma.get_color();
@@ -250,9 +276,9 @@ void video::light_it()
 
           DrawGrid(10, 2.0f);
 
-          show_deez();
+          // show_deez();
 
-          // m_ball.display();
+          m_ball.display();
 
 
       EndMode3D();
@@ -274,7 +300,7 @@ void video::light_it()
       // lights[0].position.y = anchor.y + wiggle*cos(0.5f*PI*m_time);
       // lights[0].position.z = anchor.z + wiggle*sin(0.5f*PI*m_time);
 
-      m_fog_strength = m_fog_median + m_fog_median*sin(1.5f*PI*m_time/m_period);
+      m_fog_strength = m_fog_median + m_fog_median*sin(2.0f*PI*m_time/m_period);
 
       UpdateLightValues(m_shader, lights[0]);
 

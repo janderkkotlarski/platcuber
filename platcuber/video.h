@@ -47,7 +47,7 @@ class video
   { 60 };
 
   Vector3 m_cam_pos
-  { 0.0f, 40.0f, 0.0f };
+  { 0.0f, 20.0f, 0.0f };
 
   Vector3 m_cam_target
   { 0.0f, 2.0f, 0.0f };
@@ -103,7 +103,7 @@ class video
   std::vector <sphere> m_deez;
 
   const float m_seperation
-  { 2.0f };
+  { 10.0f };
 
   const int m_side_amount
   { 2 };
