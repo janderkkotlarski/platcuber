@@ -178,6 +178,52 @@ void video::light_it()
     // Initialization
     //--------------------------------------------------------------------------------------
 
+  const Vector3 n0072_anchor
+  { 0.0f, -2.0f, 0.0f };
+
+  const Vector3 n0072_right
+  { 1.0f, 0.0f, 0.0f };
+
+  const Vector3 n0072_up
+  { 0.0f, 0.0f, 1.0f };
+
+  std::vector <sphere> n0072;
+
+  const float n0072_dist
+  { 2.0f };
+
+  const float n0072_side
+  { 3.0f };
+
+  const float n0072_min
+  { n0072_side/2.0f - 0.5f };
+
+  const float bit
+  { 0.001f };
+
+  for (float x{ -n0072_min }; x < 0.0f*n0072_min + bit; x += 1.0f)
+  {
+
+    const Vector3 n007_start
+    { Vector3Add(n0072_anchor, n0072_up) };
+
+
+    const Vector3 n007_pos
+    { Vector3Scale(Vector3Add(n007_start, Vector3Scale(n0072_right, x)), n0072_dist) };
+
+    sphere n007;
+
+    n007.set_posit(n007_pos);
+
+    n007.set_sphere();
+
+    n007.set_color(GREEN);
+
+    n007.set_shading(m_shader);
+
+    n0072.push_back(n007);
+  }
+
   m_light_pos = m_light_start_pos;
 
   // const float wiggle
@@ -204,33 +250,7 @@ void video::light_it()
     m_chroma.pogo();
     m_chroma.choose();
 
-    const Vector3 n0072_anchor
-    { 0.0f, -2.0f, 0.0f };
 
-    const Vector3 n0072_right
-    { 1.0f, 0.0f, 0.0f };
-
-    const Vector3 n0072_up
-    { 0.0f, 0.0f, 1.0f };
-
-    std::vector <spheroid> n0072;
-
-    const float n0072_side
-    { 3.0f };
-
-    const float n0072_min
-    { n0072_side/2.0f - 0.5f };
-
-    const float bit
-    { 0.001f };
-
-    for (float x{ -n0072_min }; x < n0072_min + bit; x += 1.0f)
-    {
-      const Vector3 n007_pos
-      { Vector3Add(n0072_anchor, Vector3Scale(n0072_right, x)) };
-
-
-    }
 
 
     lights[0].color = m_chroma.get_color();
@@ -273,6 +293,9 @@ void video::light_it()
           // m_player.display();
           // m_veloctor.display();
           // m_acceltor.display();
+
+          for (sphere &n007: n0072)
+          { n007.display(); }
 
           DrawGrid(10, 2.0f);
 
