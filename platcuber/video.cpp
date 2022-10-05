@@ -59,20 +59,20 @@ void video::init_camera()
 
 void video::init_shaders()
 {
-  // m_shader = LoadShader("base_lighting.vs", "lighting.fs");
+  // m_dark_shader = LoadShader("base_lighting.vs", "lighting.fs");
 
-  m_shader = LoadShader("base_lighting.vs", "dark_fog.fs");
+  m_dark_shader = LoadShader("base_lighting.vs", "dark_fog.fs");
 
-  m_shader.locs[LOC_MATRIX_MODEL] =
-      GetShaderLocation(m_shader, "matModel");
-  m_shader.locs[LOC_VECTOR_VIEW] =
-      GetShaderLocation(m_shader, "viewPos");
+  m_dark_shader.locs[LOC_MATRIX_MODEL] =
+      GetShaderLocation(m_dark_shader, "matModel");
+  m_dark_shader.locs[LOC_VECTOR_VIEW] =
+      GetShaderLocation(m_dark_shader, "viewPos");
 
-  m_ambientLoc = GetShaderLocation(m_shader, "ambient");
-  SetShaderValue(m_shader, m_ambientLoc, m_lighting_color, 0);
+  m_ambientLoc = GetShaderLocation(m_dark_shader, "ambient");
+  SetShaderValue(m_dark_shader, m_ambientLoc, m_lighting_color, 0);
 
-  m_fog_strength_pos = GetShaderLocation(m_shader, "fogDensity");
-  SetShaderValue(m_shader, m_fog_strength_pos, &m_fog_strength, UNIFORM_FLOAT);
+  m_fog_strength_pos = GetShaderLocation(m_dark_shader, "fogDensity");
+  SetShaderValue(m_dark_shader, m_fog_strength_pos, &m_fog_strength, UNIFORM_FLOAT);
 
   m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
 
@@ -160,11 +160,11 @@ void video::light_textures()
 
 void video::light_shadels()
 {
-  // m_model.materials[0].shader = m_shader;
-  m_cube.materials[0].shader = m_shader;
+  // m_model.materials[0].shader = m_dark_shader;
+  m_cube.materials[0].shader = m_dark_shader;
   // m_sphere.materials[0].shader = m_lighting_shader;
 
-  m_player.set_shading(m_shader);
+  m_player.set_shading(m_dark_shader);
 }
 
 void video::roster_deez()
@@ -236,7 +236,7 @@ void video::light_it()
     n007.set_posit(n007_pos_x);
     n007.set_color(GREEN);
 
-    n007.set_shading(m_shader);
+    n007.set_shading(m_dark_shader);
 
     n0072.push_back(n007);
 
@@ -251,9 +251,9 @@ void video::light_it()
   // const float wiggle
   // { 1.0f };
 
-  Light lights[1]
-  { { 0 } };
-  lights[0] = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), m_chroma.get_color(), m_shader);
+  Light dark_light
+  { 0 };
+  dark_light = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), m_chroma.get_color(), m_dark_shader);
 
   Light a_light
   { 0 };
@@ -280,7 +280,7 @@ void video::light_it()
 
 
 
-    lights[0].color = m_chroma.get_color();
+    dark_light.color = m_chroma.get_color();
 
     m_player.set_color(WHITE);
 
@@ -289,18 +289,18 @@ void video::light_it()
 
 
     // Check key inputs to enable/disable lights
-    if (IsKeyPressed(KEY_W)) { lights[0].enabled = !lights[0].enabled; }
+    if (IsKeyPressed(KEY_W)) { dark_light.enabled = !dark_light.enabled; }
 
 
     // Update light values (actually, only enable/disable them)
-    UpdateLightValues(m_shader, lights[0]);
+    UpdateLightValues(m_dark_shader, dark_light);
     UpdateLightValues(m_lighting_shader, a_light);
 
     // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
     float cameraPos[3] = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
-    SetShaderValue(m_shader, m_fog_strength_pos, &m_fog_strength, UNIFORM_FLOAT);
+    SetShaderValue(m_dark_shader, m_fog_strength_pos, &m_fog_strength, UNIFORM_FLOAT);
 
-    SetShaderValue(m_shader, m_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
+    SetShaderValue(m_dark_shader, m_dark_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
     SetShaderValue(m_lighting_shader, m_lighting_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
     //----------------------------------------------------------------------------------
 
@@ -353,7 +353,7 @@ void video::light_it()
 
       m_fog_strength = m_fog_median + m_fog_median*sin(2.0f*PI*m_time/m_period);
 
-      UpdateLightValues(m_shader, lights[0]);
+      UpdateLightValues(m_dark_shader, dark_light);
       UpdateLightValues(m_lighting_shader, a_light);
 
 
@@ -372,7 +372,7 @@ void video::light_it()
   //--------------------------------------------------------------------------------------
   UnloadModel(m_model);     // Unload the model
   UnloadModel(m_cube);      // Unload the model
-  UnloadShader(m_shader);   // Unload shader
+  UnloadShader(m_dark_shader);   // Unload shader
 
   CloseWindow();          // Close window and OpenGL context
   //--------------------------------------------------------------------------------------

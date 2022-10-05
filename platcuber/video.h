@@ -32,7 +32,7 @@ class video
 
   Shader m_lighting_shader;
 
-  Shader m_shader;
+  Shader m_dark_shader;
 
   const float m_fog_median
   { 0.05f };

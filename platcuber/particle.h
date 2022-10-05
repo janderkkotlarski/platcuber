@@ -8,7 +8,7 @@
 
 enum class particle_type
 {
-  none, mass, charge, spring, player, fixed
+  empty, mass, charge, spring, player, fixed
 };
 
 class particle
@@ -37,5 +37,7 @@ private:
 public:
   particle();
 };
+
+float assign_mass(const particle_type &mass_type);
 
 #endif // PARTICLE_H
