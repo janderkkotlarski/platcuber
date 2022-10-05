@@ -73,13 +73,23 @@ void video::init_shaders()
 
   m_fog_strength_pos = GetShaderLocation(m_shader, "fogDensity");
   SetShaderValue(m_shader, m_fog_strength_pos, &m_fog_strength, UNIFORM_FLOAT);
+
+  m_lighting_shader = LoadShader("base_lighting.vs", "lighting.fs");
+
+  m_lighting_shader.locs[LOC_MATRIX_MODEL] =
+      GetShaderLocation(m_lighting_shader, "matModel");
+  m_lighting_shader.locs[LOC_VECTOR_VIEW] =
+      GetShaderLocation(m_lighting_shader, "viewPos");
+
+  m_ambientLoc = GetShaderLocation(m_lighting_shader, "ambient");
+  SetShaderValue(m_lighting_shader, m_ambientLoc, m_lighting_color, 0);
 }
 
 void video::init_actors()
 {
   m_ball.set_sphere();
 
-  m_ball.set_shading(m_shader);
+  m_ball.set_shading(m_lighting_shader);
 }
 
 void video::init_player()
@@ -241,8 +251,13 @@ void video::light_it()
   // const float wiggle
   // { 1.0f };
 
-  Light lights[1] = { 0 };
+  Light lights[1]
+  { { 0 } };
   lights[0] = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), m_chroma.get_color(), m_shader);
+
+  Light a_light
+  { 0 };
+  a_light = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), BLUE, m_lighting_shader);
 
 
   roster_deez();
@@ -267,7 +282,7 @@ void video::light_it()
 
     lights[0].color = m_chroma.get_color();
 
-    m_player.set_color(m_chroma.get_color());
+    m_player.set_color(WHITE);
 
     // if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
     // UpdateLightValues(shader, bulb);
@@ -279,13 +294,14 @@ void video::light_it()
 
     // Update light values (actually, only enable/disable them)
     UpdateLightValues(m_shader, lights[0]);
-
+    UpdateLightValues(m_lighting_shader, a_light);
 
     // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
     float cameraPos[3] = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
     SetShaderValue(m_shader, m_fog_strength_pos, &m_fog_strength, UNIFORM_FLOAT);
 
     SetShaderValue(m_shader, m_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
+    SetShaderValue(m_lighting_shader, m_lighting_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
     //----------------------------------------------------------------------------------
 
     // Draw
@@ -338,6 +354,8 @@ void video::light_it()
       m_fog_strength = m_fog_median + m_fog_median*sin(2.0f*PI*m_time/m_period);
 
       UpdateLightValues(m_shader, lights[0]);
+      UpdateLightValues(m_lighting_shader, a_light);
+
 
       // m_player.set_accel(m_spring.accelerate(m_player.get_posit()));
       // m_player.add_accel(m_gravaccel);
