@@ -12,6 +12,8 @@
     #define GLSL_VERSION            100
 #endif
 
+#include "functions.h"
+
 video::video()
 {
   initialize();
@@ -346,6 +348,8 @@ void video::light_it()
       while (m_time >= m_period)
       { m_time -= m_period; }
 
+
+      m_ball.set_posit(orbit(m_mid_posit, m_cos_posit, m_sin_posit, m_time, m_mult, m_period));
 
       // lights[0].position.x = anchor.x + wiggle*cos(0.5f*PI*m_time);
       // lights[0].position.y = anchor.y + wiggle*cos(0.5f*PI*m_time);

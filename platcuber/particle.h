@@ -40,4 +40,7 @@ public:
 
 float assign_mass(const particle_type &mass_type);
 
+
+
 #endif // PARTICLE_H
+

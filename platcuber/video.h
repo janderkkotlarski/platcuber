@@ -95,6 +95,18 @@ class video
   const float m_period
   { 4.0f };
 
+  const float m_mult
+  { 1.0f };
+
+  const Vector3 m_mid_posit
+  { 0.0f, 2.0f, 0.0f };
+
+  const Vector3 m_cos_posit
+  { -6.0f, 0.0f, 0.0f };
+
+  const Vector3 m_sin_posit
+  { 3.0f, 0.0f, 3.0f };
+
   const float m_lighting_color[4]
   { 0.1f, 0.1f, 0.1f, 1.0f };
 

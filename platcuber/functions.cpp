@@ -1,4 +1,4 @@
-  #include "functions.h"
+#include "functions.h"
 
 #include <stdlib.h>
 
@@ -105,3 +105,20 @@ void reflect(const Vector3 &reflect_posit, const float reflect_dist, const int r
   }
 }
 
+Vector3 orbit(const Vector3 &mid_posit, const Vector3 &cos_posit, const Vector3 &sin_posit,
+              const float time, const float mult, const float period)
+{
+  const float phi
+  { 2.0f*PI*time*mult/period };
+
+  const Vector3 cosit
+  { Vector3Scale(cos_posit, cos(phi)) };
+
+  const Vector3 sinit
+  { Vector3Scale(sin_posit, sin(phi)) };
+
+  Vector3 oribt_posit
+  { Vector3Add(cosit, sinit) };
+
+  return Vector3Add(oribt_posit, mid_posit);
+}

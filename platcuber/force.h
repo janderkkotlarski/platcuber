@@ -20,6 +20,9 @@ private:
 
   const float m_stiffness
   { 1.0f };
+
+  const float m_gravity
+  { 1.0f };
 public:
 
   force();

@@ -16,4 +16,7 @@ bool posit_reflection(const Vector3 &inposit, const Vector3 &revposit);
 void reflect(const Vector3 &reflect_posit, const float reflect_dist, const int reflect_dim,
              Vector3 &player_posit, const float player_dist, Vector3 &player_veloc);
 
+Vector3 orbit(const Vector3 &mid_posit, const Vector3 &cos_posit, const Vector3 &sin_posit,
+              const float time, const float mult, const float period);
+
 #endif // FUNCTIONS_H
