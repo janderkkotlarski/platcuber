@@ -18,6 +18,9 @@ float assign_mass(const particle_type &mass_type)
     case particle_type::mass:
       return 1.0f;
       break;
+    case particle_type::planet:
+      return 1.0e6f;
+      break;
   }
 
   return 1.0f;

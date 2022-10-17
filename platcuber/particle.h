@@ -8,7 +8,7 @@
 
 enum class particle_type
 {
-  empty, mass, charge, spring, player, fixed
+  empty, mass, charge, spring, player, fixed, planet
 };
 
 class particle
