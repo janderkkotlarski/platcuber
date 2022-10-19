@@ -21,7 +21,7 @@ private:
 
   particle m_away;
 
-  const Vector3 m_separation
+  const Vector3 m_distance
   { 0.0f, 0.0f, 0.0f };
 
   const float m_stiffness

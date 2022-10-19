@@ -324,14 +324,14 @@ void video::light_it()
           // m_veloctor.display();
           // m_acceltor.display();
 
-          for (sphere &n007: n0072)
-          { n007.display(); }
+          // for (sphere &n007: n0072)
+          // { n007.display(); }
 
           DrawGrid(10, 2.0f);
 
           // show_deez();
 
-          m_ball.display();
+          // m_ball.display();
 
 
       EndMode3D();

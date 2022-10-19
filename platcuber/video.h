@@ -15,7 +15,10 @@
 #include "viewctor.h"
 #include "spring.h"
 
+#include "particle.h"
 #include "sphere.h"
+
+
 
 class video
 {
@@ -119,6 +122,10 @@ class video
 
   const int m_side_amount
   { 2 };
+
+  particle m_alpha;
+
+  particle m_beta;
 
 public:
   video();
