@@ -3,6 +3,8 @@
 
 #include "raylib.h"
 
+#include "particle.h"
+
 enum class force_type
 {
   none, gravity, repulse,
@@ -14,6 +16,10 @@ class force
 private:
   force_type m_type
   { force_type::none };
+
+  particle m_home;
+
+  particle m_away;
 
   const Vector3 m_separation
   { 0.0f, 0.0f, 0.0f };
@@ -28,6 +34,8 @@ public:
   force();
 
   Vector3 force_spring();
+
+  Vector3 force_gravity();
 };
 
 
