@@ -18,13 +18,13 @@ class particle
 private:
   std::vector <particle_type> m_type;
 
-  Vector3 m_position
+  Vector3 m_posit
   { Vector3Zero() };
 
-  Vector3 m_velocity
+  Vector3 m_veloc
   { Vector3Zero() };
 
-  Vector3 m_acceleration
+  Vector3 m_accel
   { Vector3Zero() };
 
   float m_range
@@ -36,8 +36,16 @@ private:
   float m_charge
   { 0.0f };
 
+  Color m_color
+  { WHITE };
+
+  float m_radius
+  { 1.0f };
+
 public:
   particle();
+
+  void set_color(const Color &chroma);
 
   void display(sphere &ball);
 };

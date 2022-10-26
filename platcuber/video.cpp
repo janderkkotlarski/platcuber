@@ -92,6 +92,8 @@ void video::init_actors()
   m_ball.set_sphere();
 
   m_ball.set_shading(m_lighting_shader);
+
+  m_alpha.set_color(RED);
 }
 
 void video::init_player()
@@ -259,7 +261,7 @@ void video::light_it()
 
   Light a_light
   { 0 };
-  a_light = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), BLUE, m_lighting_shader);
+  a_light = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), WHITE, m_lighting_shader);
 
 
   roster_deez();
@@ -329,6 +331,8 @@ void video::light_it()
 
           DrawGrid(10, 2.0f);
 
+          m_alpha.display(m_ball);
+
           // show_deez();
 
           // m_ball.display();
@@ -349,7 +353,7 @@ void video::light_it()
       { m_time -= m_period; }
 
 
-      m_ball.set_posit(orbit(m_mid_posit, m_cos_posit, m_sin_posit, m_time, m_mult, m_period));
+      // m_ball.set_posit(orbit(m_mid_posit, m_cos_posit, m_sin_posit, m_time, m_mult, m_period));
 
       // lights[0].position.x = anchor.x + wiggle*cos(0.5f*PI*m_time);
       // lights[0].position.y = anchor.y + wiggle*cos(0.5f*PI*m_time);

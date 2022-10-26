@@ -5,8 +5,18 @@ particle::particle()
 
 }
 
+void particle::set_color(const Color &chroma)
+{ m_color = chroma; }
+
+
 void particle::display(sphere &ball)
 {
+  ball.set_posit(m_posit);
+
+  ball.set_color(m_color);
+
+  ball.set_radius(m_radius);
+
   ball.display();
 }
 
