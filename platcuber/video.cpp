@@ -338,7 +338,7 @@ void video::light_it()
 
       DrawFPS(10, 10);
 
-      DrawText("Use keys [Y] to toggle light", 10, 40, 20, DARKGRAY);
+      // DrawText("Use keys [Y] to toggle light", 10, 40, 20, DARKGRAY);
 
       const float delta
       { 1.0f/float(m_fps) };

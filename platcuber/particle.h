@@ -6,6 +6,8 @@
 #include "raylib.h"
 #include "raymath.h"
 
+#include "sphere.h"
+
 enum class particle_type
 {
   empty, mass, charge, spring, player, fixed, planet
@@ -36,6 +38,8 @@ private:
 
 public:
   particle();
+
+  void display(sphere &ball);
 };
 
 float assign_mass(const particle_type &mass_type);

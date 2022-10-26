@@ -5,6 +5,11 @@ particle::particle()
 
 }
 
+void particle::display(sphere &ball)
+{
+  ball.display();
+}
+
 float assign_mass(const particle_type &mass_type)
 {
   switch (mass_type)
@@ -25,3 +30,4 @@ float assign_mass(const particle_type &mass_type)
 
   return 1.0f;
 }
+
