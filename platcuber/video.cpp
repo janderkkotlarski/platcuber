@@ -94,6 +94,11 @@ void video::init_actors()
   m_ball.set_shading(m_lighting_shader);
 
   m_alpha.set_color(RED);
+
+
+  m_beta.set_posit(Vector3{0.0f, 0.0f, 4.0f});
+  m_beta.set_veloc(Vector3{0.01f, 0.0f, 0.0f});
+  m_beta.set_color(BLUE);
 }
 
 void video::init_player()
@@ -319,8 +324,11 @@ void video::light_it()
 
           // m_platform.display();
 
-          DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{2.0f, 0.0f, 0.0f}, PURPLE);
-          DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{0.0f, 0.0f, 2.0f}, ORANGE);
+          DrawGrid(10, 2.0f);
+
+
+          DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{3.0f, 0.0f, 0.0f}, PURPLE);
+          DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{0.0f, 0.0f, 3.0f}, ORANGE);
 
           // m_player.display();
           // m_veloctor.display();
@@ -329,9 +337,11 @@ void video::light_it()
           // for (sphere &n007: n0072)
           // { n007.display(); }
 
-          DrawGrid(10, 2.0f);
+
 
           m_alpha.display(m_ball);
+
+          m_beta.display(m_ball);
 
           // show_deez();
 
@@ -351,6 +361,8 @@ void video::light_it()
 
       while (m_time >= m_period)
       { m_time -= m_period; }
+
+      m_beta.move(delta);
 
 
       // m_ball.set_posit(orbit(m_mid_posit, m_cos_posit, m_sin_posit, m_time, m_mult, m_period));

@@ -5,6 +5,15 @@ particle::particle()
 
 }
 
+void particle::set_posit(const Vector3 &posit)
+{ m_posit = posit; }
+
+void particle::set_veloc(const Vector3 &veloc)
+{ m_veloc = veloc; }
+
+void particle::set_accel(const Vector3 &accel)
+{ m_accel = accel; }
+
 void particle::set_color(const Color &chroma)
 { m_color = chroma; }
 
@@ -18,6 +27,11 @@ void particle::display(sphere &ball)
   ball.set_radius(m_radius);
 
   ball.display();
+}
+
+void particle::move(const float delta)
+{
+  m_posit = Vector3Add(m_posit, Vector3Scale(m_veloc, delta));
 }
 
 float assign_mass(const particle_type &mass_type)

@@ -45,9 +45,15 @@ private:
 public:
   particle();
 
+  void set_posit(const Vector3 &posit);
+  void set_veloc(const Vector3 &veloc);
+  void set_accel(const Vector3 &accel);
+
   void set_color(const Color &chroma);
 
   void display(sphere &ball);
+
+  void move(const float delta);
 };
 
 float assign_mass(const particle_type &mass_type);
