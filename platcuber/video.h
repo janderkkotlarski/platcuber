@@ -127,7 +127,7 @@ class video
 
   particle m_beta;
   const Vector3 m_beta_veloc
-  { 2.6f, 1.0f, 0.0f };
+  { 3.5f, 0.5f, 0.0f };
 
   const float m_strong_mult
   { 0.4f };
