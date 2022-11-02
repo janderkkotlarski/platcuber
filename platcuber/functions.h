@@ -19,4 +19,6 @@ void reflect(const Vector3 &reflect_posit, const float reflect_dist, const int r
 Vector3 orbit(const Vector3 &mid_posit, const Vector3 &cos_posit, const Vector3 &sin_posit,
               const float time, const float mult, const float period);
 
+Vector3 strong(const Vector3 &here, const Vector3 &there, const float mult);
+
 #endif // FUNCTIONS_H

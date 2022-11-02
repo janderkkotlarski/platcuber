@@ -97,7 +97,7 @@ void video::init_actors()
 
 
   m_beta.set_posit(Vector3{0.0f, 0.0f, 4.0f});
-  m_beta.set_veloc(Vector3{0.01f, 0.0f, 0.0f});
+  m_beta.set_veloc(m_beta_veloc);
   m_beta.set_color(BLUE);
 }
 
@@ -361,6 +361,8 @@ void video::light_it()
 
       while (m_time >= m_period)
       { m_time -= m_period; }
+
+      m_beta.set_accel(strong(m_beta.get_posit(), m_alpha.get_posit(), m_strong_mult));
 
       m_beta.move(delta);
 

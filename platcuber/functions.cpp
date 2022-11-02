@@ -122,3 +122,8 @@ Vector3 orbit(const Vector3 &mid_posit, const Vector3 &cos_posit, const Vector3 
 
   return Vector3Add(oribt_posit, mid_posit);
 }
+
+Vector3 strong(const Vector3 &here, const Vector3 &there, const float mult)
+{
+  return Vector3Scale(Vector3Subtract(there, here), mult);
+}

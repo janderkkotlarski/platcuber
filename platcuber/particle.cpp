@@ -5,6 +5,9 @@ particle::particle()
 
 }
 
+Vector3 particle::get_posit()
+{ return m_posit; }
+
 void particle::set_posit(const Vector3 &posit)
 { m_posit = posit; }
 
@@ -31,7 +34,9 @@ void particle::display(sphere &ball)
 
 void particle::move(const float delta)
 {
-  m_posit = Vector3Add(m_posit, Vector3Scale(m_veloc, delta));
+  m_posit = Vector3Add(m_posit, Vector3Scale(m_veloc, 0.5f*delta));
+  m_veloc = Vector3Add(m_veloc, Vector3Scale(m_accel, delta));
+  m_posit = Vector3Add(m_posit, Vector3Scale(m_veloc, 0.5f*delta));
 }
 
 float assign_mass(const particle_type &mass_type)
