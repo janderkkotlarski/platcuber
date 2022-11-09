@@ -15,6 +15,7 @@
 #include "viewctor.h"
 #include "spring.h"
 
+#include "force.h"
 #include "particle.h"
 #include "sphere.h"
 
@@ -122,6 +123,8 @@ class video
 
   const int m_side_amount
   { 2 };
+
+  force m_force;
 
   particle m_alpha;
 

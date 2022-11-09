@@ -32,6 +32,12 @@ void particle::display(sphere &ball)
   ball.display();
 }
 
+void particle::accelerate(force &fork, particle &part)
+{
+
+
+}
+
 void particle::move(const float delta)
 {
   m_posit = Vector3Add(m_posit, Vector3Scale(m_veloc, 0.5f*delta));

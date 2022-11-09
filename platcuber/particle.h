@@ -6,6 +6,7 @@
 #include "raylib.h"
 #include "raymath.h"
 
+#include "force.h"
 #include "sphere.h"
 
 enum class particle_type
@@ -33,6 +34,9 @@ private:
   float m_mass
   { 1.0f };
 
+  float m_force
+  { 0.0f };
+
   float m_charge
   { 0.0f };
 
@@ -54,6 +58,8 @@ public:
   void set_color(const Color &chroma);
 
   void display(sphere &ball);
+
+  void accelerate(force &fork, particle &part);
 
   void move(const float delta);
 };
