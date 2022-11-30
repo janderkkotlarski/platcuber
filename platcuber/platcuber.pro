@@ -57,6 +57,7 @@ LIBS += -LC:\raylib\
 SOURCES += \
         chromatic.cpp \
         cuboid.cpp \
+        enum_decs.cpp \
         force.cpp \
         functions.cpp \
         main.cpp \
@@ -71,6 +72,7 @@ SOURCES += \
 HEADERS += \
   chromatic.h \
   cuboid.h \
+  enum_decs.h \
   force.h \
   functions.h \
   particle.h \

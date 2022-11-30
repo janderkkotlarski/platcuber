@@ -6,13 +6,9 @@
 #include "raylib.h"
 #include "raymath.h"
 
-#include "force.h"
+#include "enum_decs.h"
 #include "sphere.h"
 
-enum class particle_type
-{
-  empty, mass, charge, spring, player, fixed, planet
-};
 
 class particle
 {
@@ -60,8 +56,6 @@ public:
   void display(sphere &ball);
 
   void null_force();
-
-  void add_force(force &fork, particle &part);
 
   void move(const float delta);
 };

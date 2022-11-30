@@ -3,11 +3,9 @@
 
 #include "raylib.h"
 
-enum class force_type
-{
-  none, gravity, repulse,
-  spring
-};
+#include "enum_decs.h"
+#include "particle.h"
+
 
 class force
 {
@@ -28,6 +26,8 @@ public:
   force();
 
   void type_reset();
+
+  void type_select(particle &here, particle &there);
 
   Vector3 force_spring();
 

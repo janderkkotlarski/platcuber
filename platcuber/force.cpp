@@ -10,6 +10,11 @@ force::force()
 void force::type_reset()
 { m_type = force_type::none; }
 
+void force::type_select(particle &here, particle &there)
+{
+
+}
+
 Vector3 force::force_spring()
 { return Vector3Scale(m_distance, m_stiffness); }
 

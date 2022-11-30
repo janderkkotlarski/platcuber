@@ -35,12 +35,6 @@ void particle::display(sphere &ball)
 void particle::null_force()
 { m_force = Vector3Zero(); }
 
-void particle::add_force(force &fork, particle &part)
-{
-
-
-
-}
 
 void particle::move(const float delta)
 {
