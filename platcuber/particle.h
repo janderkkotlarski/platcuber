@@ -28,14 +28,14 @@ private:
   Vector3 m_accel
   { Vector3Zero() };
 
+  Vector3 m_force
+  { Vector3Zero() };
+
   float m_range
   { -1.0f };
 
   float m_mass
   { 1.0f };
-
-  float m_force
-  { 0.0f };
 
   float m_charge
   { 0.0f };
@@ -58,6 +58,8 @@ public:
   void set_color(const Color &chroma);
 
   void display(sphere &ball);
+
+  void null_force();
 
   void add_force(force &fork, particle &part);
 
