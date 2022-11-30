@@ -27,6 +27,8 @@ public:
 
   force();
 
+  void type_reset();
+
   Vector3 force_spring();
 
   Vector3 force_gravity();

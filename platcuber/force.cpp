@@ -7,6 +7,9 @@ force::force()
 
 }
 
+void force::type_reset()
+{ m_type = force_type::none; }
+
 Vector3 force::force_spring()
 { return Vector3Scale(m_distance, m_stiffness); }
 
