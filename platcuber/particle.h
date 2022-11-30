@@ -59,7 +59,7 @@ public:
 
   void display(sphere &ball);
 
-  void accelerate(force &fork, particle &part);
+  void add_force(force &fork, particle &part);
 
   void move(const float delta);
 };

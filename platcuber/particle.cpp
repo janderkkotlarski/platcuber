@@ -32,7 +32,7 @@ void particle::display(sphere &ball)
   ball.display();
 }
 
-void particle::accelerate(force &fork, particle &part)
+void particle::add_force(force &fork, particle &part)
 {
 
 
