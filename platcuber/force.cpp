@@ -12,7 +12,7 @@ void force::type_reset()
 
 void force::type_select(particle &here, particle &there)
 {
-
+  if (here.)
 }
 
 Vector3 force::force_spring()
