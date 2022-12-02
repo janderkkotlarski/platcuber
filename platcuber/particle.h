@@ -15,6 +15,9 @@ class particle
 private:
   std::vector <particle_type> m_type;
 
+  force_type m_force_type
+  { force_type::none };
+
   Vector3 m_posit
   { Vector3Zero() };
 
