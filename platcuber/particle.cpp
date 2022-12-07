@@ -5,6 +5,9 @@ particle::particle()
 
 }
 
+force_type particle::get_force_type()
+{ return m_force_type; }
+
 Vector3 particle::get_posit()
 { return m_posit; }
 

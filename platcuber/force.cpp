@@ -13,8 +13,8 @@ void force::type_reset()
 void force::type_select(particle &here, particle &there)
 {
   // if (here.)
-
-
+  if (here.get_force_type() == there.get_force_type())
+  { true; }
 }
 
 Vector3 force::force_spring()

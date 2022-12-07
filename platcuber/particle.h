@@ -48,6 +48,8 @@ private:
 public:
   particle();
 
+  force_type get_force_type();
+
   Vector3 get_posit();
 
   void set_posit(const Vector3 &posit);
