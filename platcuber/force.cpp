@@ -14,6 +14,8 @@ void force::type_select(particle &here, particle &there)
 {
   m_type = force_type::none;
 
+  m_distance = Vector3Subtract(there.get_posit(), here.get_posit());
+
   if (here.get_force_type() != force_type::none &&
       here.get_force_type() == there.get_force_type())
   { m_type = here.get_force_type(); }

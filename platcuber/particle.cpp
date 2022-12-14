@@ -5,6 +5,12 @@ particle::particle()
 
 }
 
+particle::particle(const force_type ftp)
+  : m_force_type(ftp)
+{
+
+}
+
 force_type particle::get_force_type()
 { return m_force_type; }
 
@@ -38,6 +44,14 @@ void particle::display(sphere &ball)
 void particle::null_force()
 { m_force = Vector3Zero(); }
 
+void particle::add_force(const Vector3 &force)
+{ m_force = Vector3Add(m_force, force); }
+
+void particle::sub_force(const Vector3 &force)
+{ m_force = Vector3Subtract(m_force, force); }
+
+void particle::accelerate()
+{ m_accel = Vector3Scale(m_force, 1.0f/m_mass); }
 
 void particle::move(const float delta)
 {

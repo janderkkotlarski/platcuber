@@ -13,7 +13,7 @@ private:
   force_type m_type
   { force_type::none };
 
-  const Vector3 m_distance
+  Vector3 m_distance
   { 0.0f, 0.0f, 0.0f };
 
   const float m_stiffness

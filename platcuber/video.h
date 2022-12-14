@@ -8,12 +8,14 @@
 #include "raymath.h"
 
 
+#include "enum_decs.h"
+
 #include "platform.h"
 #include "spheroid.h"
 #include "cuboid.h"
 #include "chromatic.h"
 #include "viewctor.h"
-#include "spring.h"
+// #include "spring.h"
 
 #include "force.h"
 #include "particle.h"
@@ -77,10 +79,7 @@ class video
 
   cuboid m_block;
 
-  spring m_spring
-  { Vector3{ 0.0f, 8.0f, 0.0f } };
-
-  const Vector3 m_gravaccel
+   const Vector3 m_gravaccel
   { 0.0f, -10.0f, 0.0f };
 
   Model m_model;
@@ -129,6 +128,7 @@ class video
   particle m_alpha;
 
   particle m_beta;
+
   const Vector3 m_beta_veloc
   { 3.5f, 0.5f, 0.0f };
 

@@ -48,6 +48,8 @@ private:
 public:
   particle();
 
+  particle(const force_type ftp);
+
   force_type get_force_type();
 
   Vector3 get_posit();
@@ -56,11 +58,17 @@ public:
   void set_veloc(const Vector3 &veloc);
   void set_accel(const Vector3 &accel);
 
+
   void set_color(const Color &chroma);
 
   void display(sphere &ball);
 
-  void null_force();
+  void null_force();  
+
+  void add_force(const Vector3 &force);
+  void sub_force(const Vector3 &force);
+
+  void accelerate();
 
   void move(const float delta);
 };
