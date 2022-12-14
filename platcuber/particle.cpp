@@ -22,6 +22,9 @@ force_type particle::get_force_type()
 Vector3 particle::get_posit()
 { return m_posit; }
 
+float particle::get_mass()
+{ return m_mass; }
+
 void particle::set_posit(const Vector3 &posit)
 { m_posit = posit; }
 

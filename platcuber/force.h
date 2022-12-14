@@ -16,11 +16,17 @@ private:
   Vector3 m_distance
   { 0.0f, 0.0f, 0.0f };
 
+  float m_mass_here
+  { 0.0f };
+
+  float m_mass_there
+  { 0.0f };
+
   const float m_stiffness
   { 1.0f };
 
   const float m_gravity
-  { 1.0f };
+  { 10.0f };
 public:
 
   force();
@@ -32,8 +38,6 @@ public:
   Vector3 force_spring();
 
   Vector3 force_gravity();
-
-  Vector3 acceleration(const float mass);
 };
 
 

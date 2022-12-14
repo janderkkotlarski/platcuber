@@ -93,6 +93,8 @@ void video::init_actors()
 
   m_ball.set_shading(m_lighting_shader);
 
+  m_alpha.set_posit(Vector3{0.0f, 0.0f, -4.0f});
+  m_alpha.set_veloc(m_alpha_veloc);
   m_alpha.set_color(RED);
 
 
@@ -366,7 +368,7 @@ void video::light_it()
 
       m_alpha.null_force();
 
-      m_alpha.sub_force(m_force.force_spring());
+      m_alpha.sub_force(m_force.force_gravity());
 
       m_alpha.accelerate();
 
@@ -379,7 +381,7 @@ void video::light_it()
 
       m_beta.null_force();
 
-      m_beta.add_force(m_force.force_spring());
+      m_beta.add_force(m_force.force_gravity());
 
       m_beta.accelerate();
 

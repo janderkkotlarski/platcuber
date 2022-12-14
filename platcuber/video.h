@@ -126,13 +126,16 @@ class video
   force m_force;
 
   particle m_alpha
-  { force_type::spring };
+  { force_type::gravity };
+
+  const Vector3 m_alpha_veloc
+  { -0.5f, 0.0f, 0.0f };
 
   particle m_beta
-  { force_type::spring };
+  { force_type::gravity };
 
   const Vector3 m_beta_veloc
-  { 0.5f, 0.5f, 0.0f };
+  { 0.5f, 0.0f, 0.0f };
 
   const float m_strong_mult
   { 0.4f };
