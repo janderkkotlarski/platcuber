@@ -364,6 +364,19 @@ void video::light_it()
 
       m_force.type_select(m_beta, m_alpha);
 
+      m_alpha.null_force();
+
+      m_alpha.sub_force(m_force.force_spring());
+
+      m_alpha.accelerate();
+
+      // m_beta.set_accel(strong(m_beta.get_posit(), m_alpha.get_posit(), m_strong_mult));
+
+      // m_beta.accelerate(m_force, m_alpha);
+
+      m_alpha.move(delta);
+
+
       m_beta.null_force();
 
       m_beta.add_force(m_force.force_spring());
