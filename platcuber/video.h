@@ -125,9 +125,11 @@ class video
 
   force m_force;
 
-  particle m_alpha;
+  particle m_alpha
+  { force_type::spring };
 
-  particle m_beta;
+  particle m_beta
+  { force_type::spring };
 
   const Vector3 m_beta_veloc
   { 3.5f, 0.5f, 0.0f };

@@ -50,6 +50,8 @@ public:
 
   particle(const force_type ftp);
 
+  particle(const float range);
+
   force_type get_force_type();
 
   Vector3 get_posit();

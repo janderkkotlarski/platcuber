@@ -11,6 +11,11 @@ particle::particle(const force_type ftp)
 
 }
 
+particle::particle(const float range)
+{
+
+}
+
 force_type particle::get_force_type()
 { return m_force_type; }
 
