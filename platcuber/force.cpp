@@ -12,13 +12,20 @@ void force::type_reset()
 
 void force::type_select(particle &here, particle &there)
 {
-  // if (here.)
-  if (here.get_force_type() == there.get_force_type())
-  { true; }
+  m_type = force_type::none;
+
+  if (here.get_force_type() != force_type::none &&
+      here.get_force_type() == there.get_force_type())
+  { m_type = here.get_force_type(); }
 }
 
 Vector3 force::force_spring()
-{ return Vector3Scale(m_distance, m_stiffness); }
+{
+  if (m_type == force_type::spring)
+  { return Vector3Scale(m_distance, m_stiffness); }
+
+  return Vector3Zero();
+}
 
 Vector3 force::force_gravity()
 {
