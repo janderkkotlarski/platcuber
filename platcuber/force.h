@@ -26,7 +26,7 @@ private:
   { 1.0f };
 
   const float m_gravity
-  { 10.0f };
+  { 100.0f };
 public:
 
   force();
@@ -34,6 +34,8 @@ public:
   void type_reset();
 
   void type_select(particle &here, particle &there);
+
+  void force_return(particle &here, particle &there);
 
   Vector3 force_spring();
 

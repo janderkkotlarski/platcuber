@@ -364,13 +364,20 @@ void video::light_it()
       while (m_time >= m_period)
       { m_time -= m_period; }
 
-      m_force.type_select(m_beta, m_alpha);
-
       m_alpha.null_force();
 
-      m_alpha.sub_force(m_force.force_gravity());
+      m_beta.null_force();
+
+      m_force.type_select(m_alpha, m_beta);
+
+      m_force.force_return(m_alpha, m_beta);
+
+
+
+      ///m_alpha.sub_force(m_force.force_gravity());
 
       m_alpha.accelerate();
+
 
       // m_beta.set_accel(strong(m_beta.get_posit(), m_alpha.get_posit(), m_strong_mult));
 
@@ -379,9 +386,9 @@ void video::light_it()
       m_alpha.move(delta);
 
 
-      m_beta.null_force();
 
-      m_beta.add_force(m_force.force_gravity());
+
+      // m_beta.add_force(m_force.force_gravity());
 
       m_beta.accelerate();
 

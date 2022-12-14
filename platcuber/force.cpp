@@ -31,6 +31,15 @@ void force::type_select(particle &here, particle &there)
   }
 }
 
+void force::force_return(particle &here, particle &there)
+{
+  here.add_force(force_spring());
+  here.add_force(force_gravity());
+
+  there.sub_force(force_spring());
+  there.sub_force(force_gravity());
+}
+
 Vector3 force::force_spring()
 {
   if (m_type == force_type::spring)
