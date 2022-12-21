@@ -11,11 +11,6 @@
 #include "enum_decs.h"
 
 #include "platform.h"
-#include "spheroid.h"
-#include "cuboid.h"
-#include "chromatic.h"
-#include "viewctor.h"
-// #include "spring.h"
 
 #include "force.h"
 #include "particle.h"
@@ -67,19 +62,9 @@ class video
   Vector3 m_light_pos
   { 0.0f, 0.0f, 0.0f };
 
-  spheroid m_player;
-
   platform m_platform;
 
-  viewctor m_veloctor;
-
-  viewctor m_acceltor;
-
-  chromatic m_chroma;
-
-  cuboid m_block;
-
-   const Vector3 m_gravaccel
+  const Vector3 m_gravaccel
   { 0.0f, -10.0f, 0.0f };
 
   Model m_model;

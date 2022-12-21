@@ -55,8 +55,6 @@ LIBS += -LC:\raylib\raylib
 LIBS += -LC:\raylib\
 
 SOURCES += \
-        chromatic.cpp \
-        cuboid.cpp \
         enum_decs.cpp \
         force.cpp \
         functions.cpp \
@@ -64,21 +62,15 @@ SOURCES += \
         particle.cpp \
         platform.cpp \
         sphere.cpp \
-        spheroid.cpp \
-        spring.cpp \
         video.cpp \
         viewctor.cpp
 
 HEADERS += \
-  chromatic.h \
-  cuboid.h \
   enum_decs.h \
   force.h \
   functions.h \
   particle.h \
   platform.h \
   sphere.h \
-  spheroid.h \
-  spring.h \
   video.h \
   viewctor.h
