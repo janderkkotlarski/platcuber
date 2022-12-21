@@ -53,12 +53,15 @@ Vector3 force::force_gravity()
   if (m_type == force_type::gravity)
   {
     const float distance
-    { 0.1f + Vector3Length(m_distance) };
+    { 0.0f + Vector3Length(m_distance) };
 
     const float grav
     { m_gravity*m_mass_here*m_mass_there/(distance*distance*distance) };
 
-    return Vector3Scale(m_distance, grav);
+    const float dist_mult
+    { distance/Vector3Length(m_distance) };
+
+    return Vector3Scale(m_distance, dist_mult*grav);
   }
 
   return Vector3Zero();

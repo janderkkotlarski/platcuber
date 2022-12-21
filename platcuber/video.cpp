@@ -93,12 +93,12 @@ void video::init_actors()
 
   m_ball.set_shading(m_lighting_shader);
 
-  m_alpha.set_posit(Vector3{0.0f, 0.0f, -4.0f});
+  m_alpha.set_posit(m_alpha_posit);
   m_alpha.set_veloc(m_alpha_veloc);
   m_alpha.set_color(RED);
 
 
-  m_beta.set_posit(Vector3{0.0f, 0.0f, 4.0f});
+  m_beta.set_posit(m_beta_posit);
   m_beta.set_veloc(m_beta_veloc);
   m_beta.set_color(BLUE);
 }

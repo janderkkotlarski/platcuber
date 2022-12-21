@@ -128,14 +128,20 @@ class video
   particle m_alpha
   { force_type::gravity };
 
+  const Vector3 m_alpha_posit
+  { 0.0f, 0.0f, -2.0f };
+
   const Vector3 m_alpha_veloc
-  { -2.0f, 0.0f, 0.0f };
+  { -4.8f, 0.0f, 0.0f };
 
   particle m_beta
   { force_type::gravity };
 
+  const Vector3 m_beta_posit
+  { Vector3Negate(m_alpha_posit) };
+
   const Vector3 m_beta_veloc
-  { 2.0f, 0.0f, 0.0f };
+  { Vector3Negate(m_alpha_veloc) };
 
   const float m_strong_mult
   { 0.4f };
