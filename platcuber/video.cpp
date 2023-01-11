@@ -237,6 +237,9 @@ void video::light_it()
 
       // DrawText("Use keys [Y] to toggle light", 10, 40, 20, DARKGRAY);
 
+      std::chrono::high_resolution_clock::time_point start
+      { std::chrono::high_resolution_clock::now() };
+
       const float delta
       { 1.0f/float(m_fps) };
 
@@ -258,10 +261,19 @@ void video::light_it()
       m_beta.accelerate();
       m_beta.move(delta);
 
+      std::chrono::high_resolution_clock::time_point end
+      { std::chrono::high_resolution_clock::now() };
+
+      std::chrono::duration<float> span
+      { std::chrono::duration_cast<std::chrono::duration<float>>(end - start) };
+
+
       m_fog_strength = m_fog_median + m_fog_median*sin(2.0f*PI*m_time/m_period);
 
       // UpdateLightValues(m_dark_shader, dark_light);
       UpdateLightValues(m_lighting_shader, a_light);
+
+      DrawText("HURR!", 20, 20, 20, GREEN);
 
 
     EndDrawing();
