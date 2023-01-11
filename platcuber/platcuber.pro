@@ -62,8 +62,7 @@ SOURCES += \
         particle.cpp \
         platform.cpp \
         sphere.cpp \
-        video.cpp \
-        viewctor.cpp
+        video.cpp
 
 HEADERS += \
   enum_decs.h \
@@ -72,5 +71,4 @@ HEADERS += \
   particle.h \
   platform.h \
   sphere.h \
-  video.h \
-  viewctor.h
+  video.h

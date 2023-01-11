@@ -6,7 +6,6 @@
 #include "enum_decs.h"
 #include "particle.h"
 
-
 class force
 {
 private:

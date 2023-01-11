@@ -2,21 +2,16 @@
 #define VIDEO_H
 
 #include <vector>
+#include <chrono>
 
 #include "raylib.h"
-
 #include "raymath.h"
 
-
 #include "enum_decs.h"
-
 #include "platform.h"
-
 #include "force.h"
 #include "particle.h"
 #include "sphere.h"
-
-
 
 class video
 {
@@ -147,8 +142,6 @@ public:
   void init_platform();
 
   void init_player();
-
-  void init_viewctor();
 
   void spectral_pogo();
 

@@ -1,7 +1,6 @@
 #ifndef ENUM_DECS_H
 #define ENUM_DECS_H
 
-
 enum class particle_type
 {
   empty, mass, player, fixed, planet
