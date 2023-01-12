@@ -42,6 +42,15 @@ class video
   const int m_fps
   { 60 };
 
+  const int m_fps_mult
+  { 20 };
+
+  int m_cps_count
+  { 0 };
+
+  const int m_cps
+  { m_fps*m_fps_mult };
+
   Vector3 m_cam_pos
   { 0.0f, 20.0f, 0.0f };
 
@@ -58,9 +67,6 @@ class video
   { 0.0f, 0.0f, 0.0f };
 
   platform m_platform;
-
-  const Vector3 m_gravaccel
-  { 0.0f, -10.0f, 0.0f };
 
   Model m_model;
   Model m_cube;
@@ -106,13 +112,13 @@ class video
   force m_force;
 
   particle m_alpha
-  { force_type::gravity };
+  { force_type::none };
 
   const Vector3 m_alpha_posit
   { 0.0f, 0.0f, -2.0f };
 
   const Vector3 m_alpha_veloc
-  { -4.8f, 0.0f, 0.0f };
+  { -0.5f, 0.0f, 0.0f };
 
   particle m_beta
   { force_type::gravity };

@@ -181,161 +181,111 @@ void video::light_it()
 
   // SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
 
-  SetTargetFPS(60);                       // Set our game to run at 60 frames-per-second
+  SetTargetFPS(m_cps);                       // Set our game to run at 60 frames-per-second
   //--------------------------------------------------------------------------------------
 
   // Main game loop
   while (!WindowShouldClose())            // Detect window close button or ESC key
   {
-    // Update
-    //----------------------------------------------------------------------------------
-    UpdateCamera(&m_camera);              // Update camera
+    const float delta
+    { 1.0f/float(m_cps*m_fps_mult) };
 
-    // if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
-    // UpdateLightValues(shader, bulb);
+    if (m_cps_count == 0)
+    {
 
+        // Update
+      //----------------------------------------------------------------------------------
+      UpdateCamera(&m_camera);              // Update camera
 
-    // Check key inputs to enable/disable lights
-    // if (IsKeyPressed(KEY_W)) { dark_light.enabled = !dark_light.enabled; }
-
-
-    // Update light values (actually, only enable/disable them)
-    // UpdateLightValues(m_dark_shader, dark_light);
-    // UpdateLightValues(m_lighting_shader, a_light);
-
-    // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
-    float cameraPos[3] = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
-    // SetShaderValue(m_dark_shader, m_fog_strength_pos, &m_fog_strength, UNIFORM_FLOAT);
-
-    // SetShaderValue(m_dark_shader, m_dark_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
-    SetShaderValue(m_lighting_shader, m_lighting_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
-    //----------------------------------------------------------------------------------
-
-    // Draw
-    //----------------------------------------------------------------------------------
-    BeginDrawing();
-
-      ClearBackground(BLACK);
-
-      BeginMode3D(m_camera);
-      {
-          // m_platform.display();
-
-          DrawGrid(10, 2.0f);
+      // if (IsKeyPressed(KEY_Y)) { bulb.enabled = !bulb.enabled; }
+      // UpdateLightValues(shader, bulb);
 
 
-          DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{3.0f, 0.0f, 0.0f}, PURPLE);
-          DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{0.0f, 0.0f, 3.0f}, ORANGE);
-
-          m_alpha.display(m_ball);
-
-          m_beta.display(m_ball);
-
-      }
-      EndMode3D();
-
-      DrawFPS(10, 10);
-
-      // DrawText("Use keys [Y] to toggle light", 10, 40, 20, DARKGRAY);
-
-      const float delta
-      { 1.0f/float(m_fps) };
-
-      m_time += delta;
-
-      while (m_time >= m_period)
-      { m_time -= m_period; }
-
-      m_alpha.null_force();
-
-      m_beta.null_force();
-
-      m_force.type_select(m_alpha, m_beta);
-      m_force.force_return(m_alpha, m_beta);
-
-      m_alpha.accelerate();
-      m_alpha.move(delta);
-
-      m_beta.accelerate();
-      m_beta.move(delta);
-
-      auto start
-      { std::chrono::high_resolution_clock::now() };
-
-      bool recurse
-      { true };
-
-      float nanoz
-      { 0 };
-
-      int loops
-      { 0 };
-
-      while (recurse)
-      {
-        auto stop
-        { std::chrono::high_resolution_clock::now() };
-
-        auto diff
-        { stop - start };
-
-        const auto nanos
-        { std::chrono::duration <int, std::nano> (diff).count() };
-
-        ++loops;
-
-        if (nanos > 9900000)
-        {
-          recurse = false;
-
-          nanoz = nanos;
-        }
-      }
-
-      if (loops < m_min_loops)
-      { m_min_loops = loops; }
-
-      const int time_taken
-      { 1337 };
-
-      const float clox
-      { 0.21f };
-
-      const std::string t_span
-      { std::to_string(nanoz) };
-
-      const char * c_span
-      { t_span.c_str() };
-
-      DrawText(c_span, 40, 40, 20, RED);
-
-      const std::string t_loops
-      { std::to_string(loops) };
-
-      const char * c_loops
-      { t_loops.c_str() };
-
-      DrawText(c_loops, 40, 70, 20, RED);
-
-      const std::string t_min
-      { std::to_string(m_min_loops) };
-
-      const char * c_min
-      { t_min.c_str() };
-
-      DrawText(c_min, 40, 100, 20, RED);
+      // Check key inputs to enable/disable lights
+      // if (IsKeyPressed(KEY_W)) { dark_light.enabled = !dark_light.enabled; }
 
 
-      m_fog_strength = m_fog_median + m_fog_median*sin(2.0f*PI*m_time/m_period);
-
+      // Update light values (actually, only enable/disable them)
       // UpdateLightValues(m_dark_shader, dark_light);
-      UpdateLightValues(m_lighting_shader, a_light);
+      // UpdateLightValues(m_lighting_shader, a_light);
+
+      // Update the shader with the camera view vector (points towards { 0.0f, 0.0f, 0.0f })
+      float cameraPos[3] = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
+      // SetShaderValue(m_dark_shader, m_fog_strength_pos, &m_fog_strength, UNIFORM_FLOAT);
+
+      // SetShaderValue(m_dark_shader, m_dark_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
+      SetShaderValue(m_lighting_shader, m_lighting_shader.locs[LOC_VECTOR_VIEW], cameraPos, UNIFORM_VEC3);
+      //----------------------------------------------------------------------------------
+
+      // Draw
+      //----------------------------------------------------------------------------------
+      BeginDrawing();
+
+        ClearBackground(BLACK);
+
+        BeginMode3D(m_camera);
+        {
+            // m_platform.display();
+
+            DrawGrid(10, 2.0f);
+
+
+            DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{3.0f, 0.0f, 0.0f}, PURPLE);
+            DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{0.0f, 0.0f, 3.0f}, ORANGE);
+
+            m_alpha.display(m_ball);
+
+            m_beta.display(m_ball);
+
+        }
+        EndMode3D();
+
+        DrawFPS(10, 10);
+
+        // DrawText("Use keys [Y] to toggle light", 10, 40, 20, DARKGRAY);
+
+        const std::string t_min
+        { std::to_string(delta) };
+
+        const char * c_min
+        { t_min.c_str() };
+
+        DrawText(c_min, 40, 100, 20, RED);
+
+        // UpdateLightValues(m_dark_shader, dark_light);
+        UpdateLightValues(m_lighting_shader, a_light);
 
 
 
 
-    EndDrawing();
-    //----------------------------------------------------------------------------------
+      EndDrawing();
+      //----------------------------------------------------------------------------------
+    }
+
+
+
+    m_time += delta;
+
+    while (m_time >= m_period)
+    { m_time -= m_period; }
+
+    m_alpha.null_force();
+
+    m_beta.null_force();
+
+    m_force.type_select(m_alpha, m_beta);
+    m_force.force_return(m_alpha, m_beta);
+
+    m_alpha.accelerate();
+    // m_alpha.move(delta);
+
+    m_beta.accelerate();
+    m_beta.move(delta);
+
+    ++m_cps_count;
+
+    m_cps_count %= m_fps_mult;
+
   }
 
   // De-Initialization
