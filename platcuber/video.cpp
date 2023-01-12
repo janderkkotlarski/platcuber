@@ -260,19 +260,40 @@ void video::light_it()
       m_beta.move(delta);
 
       auto start
-      { std::chrono::steady_clock::now() };
+      { std::chrono::high_resolution_clock::now() };
 
-      for (int count {0}; count < 1000000; ++count)
-      { ; }
+      bool recurse
+      { true };
 
-      auto stop
-      { std::chrono::steady_clock::now() };
+      float nanoz
+      { 0 };
 
-      auto diff
-      { stop - start };
+      int loops
+      { 0 };
 
-      auto nanos
-      { std::chrono::duration <double, std::nano> (diff).count() };
+      while (recurse)
+      {
+        auto stop
+        { std::chrono::high_resolution_clock::now() };
+
+        auto diff
+        { stop - start };
+
+        const auto nanos
+        { std::chrono::duration <int, std::nano> (diff).count() };
+
+        ++loops;
+
+        if (nanos > 9900000)
+        {
+          recurse = false;
+
+          nanoz = nanos;
+        }
+      }
+
+      if (loops < m_min_loops)
+      { m_min_loops = loops; }
 
       const int time_taken
       { 1337 };
@@ -281,11 +302,29 @@ void video::light_it()
       { 0.21f };
 
       const std::string t_span
-      { std::to_string(nanos) };
+      { std::to_string(nanoz) };
 
       const char * c_span
       { t_span.c_str() };
+
       DrawText(c_span, 40, 40, 20, RED);
+
+      const std::string t_loops
+      { std::to_string(loops) };
+
+      const char * c_loops
+      { t_loops.c_str() };
+
+      DrawText(c_loops, 40, 70, 20, RED);
+
+      const std::string t_min
+      { std::to_string(m_min_loops) };
+
+      const char * c_min
+      { t_min.c_str() };
+
+      DrawText(c_min, 40, 100, 20, RED);
+
 
       m_fog_strength = m_fog_median + m_fog_median*sin(2.0f*PI*m_time/m_period);
 

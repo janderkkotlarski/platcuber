@@ -126,6 +126,9 @@ class video
   const float m_strong_mult
   { 0.4f };
 
+  int m_min_loops
+  { 1000000000 };
+
 public:
   video();
 
