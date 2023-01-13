@@ -127,3 +127,4 @@ Vector3 strong(const Vector3 &here, const Vector3 &there, const float mult)
 {
   return Vector3Scale(Vector3Subtract(there, here), mult);
 }
+

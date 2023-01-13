@@ -187,6 +187,10 @@ void video::light_it()
   // Main game loop
   while (!WindowShouldClose())            // Detect window close button or ESC key
   {
+
+    const float cps
+    { float(m_cps) };
+
     const float delta
     { 1.0f/float(m_cps*m_fps_mult) };
 

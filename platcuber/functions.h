@@ -1,6 +1,8 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+#include <string>
+
 #include "raylib.h"
 
 float dim_scalar(const Vector3 &vect, const int dim);
@@ -20,5 +22,11 @@ Vector3 orbit(const Vector3 &mid_posit, const Vector3 &cos_posit, const Vector3 
               const float time, const float mult, const float period);
 
 Vector3 strong(const Vector3 &here, const Vector3 &there, const float mult);
+
+void write_as_text(const int &input);
+
+void write_as_text(const float &input);
+
+void writing_text(const std::string &text);
 
 #endif // FUNCTIONS_H
