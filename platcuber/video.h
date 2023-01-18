@@ -43,7 +43,7 @@ class video
   { 60 };
 
   const int m_fps_mult
-  { 20 };
+  { 200 };
 
   int m_cps_count
   { 0 };
@@ -112,13 +112,13 @@ class video
   force m_force;
 
   particle m_alpha
-  { force_type::none };
+  { force_type::gravity };
 
   const Vector3 m_alpha_posit
   { 0.0f, 0.0f, -2.0f };
 
   const Vector3 m_alpha_veloc
-  { -0.5f, 0.0f, 0.0f };
+  { -0.7f, 0.0f, 0.0f };
 
   particle m_beta
   { force_type::gravity };
