@@ -1,7 +1,4 @@
-// #include "cuboid.h"
 #include "video.h"
-// #include "basic_lighting.h"
-
 int main()
 {
   // cuboid cube;

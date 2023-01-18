@@ -1,14 +1,13 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
-#include <vector>
+#include "enum_decs.h"
+#include "sphere.h"
 
 #include "raylib.h"
 #include "raymath.h"
 
-#include "enum_decs.h"
-#include "sphere.h"
-
+#include <vector>
 
 class particle
 {

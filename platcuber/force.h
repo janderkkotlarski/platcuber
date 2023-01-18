@@ -1,10 +1,10 @@
 #ifndef FORCE_H
 #define FORCE_H
 
-#include "raylib.h"
-
 #include "enum_decs.h"
 #include "particle.h"
+
+#include "raylib.h"
 
 class force
 {

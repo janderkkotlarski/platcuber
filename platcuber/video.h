@@ -1,17 +1,17 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 
-#include <vector>
-#include <chrono>
-
-#include "raylib.h"
-#include "raymath.h"
-
 #include "enum_decs.h"
 #include "platform.h"
 #include "force.h"
 #include "particle.h"
 #include "sphere.h"
+
+#include "raylib.h"
+#include "raymath.h"
+
+#include <vector>
+#include <chrono>
 
 class video
 {
@@ -43,10 +43,7 @@ class video
   { 60 };
 
   const int m_fps_mult
-  { 200 };
-
-  int m_cps_count
-  { 0 };
+  { 20000 };
 
   const int m_cps
   { m_fps*m_fps_mult };

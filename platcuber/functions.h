@@ -1,9 +1,9 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
-#include <string>
-
 #include "raylib.h"
+
+#include <string>
 
 float dim_scalar(const Vector3 &vect, const int dim);
 

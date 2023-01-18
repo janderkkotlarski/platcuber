@@ -1,8 +1,8 @@
 #include "functions.h"
 
-#include <stdlib.h>
-
 #include "raymath.h"
+
+#include <vector>
 
 float dim_scalar(const Vector3& vect, const int dim)
 {
