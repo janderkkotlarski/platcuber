@@ -42,6 +42,8 @@ public:
   Vector3 force_gravity();
 };
 
-void juggler(std::vector <particle> &elements);
+void juggle(force grip, std::vector <particle> &elements, const float delta);
+
+void showing(std::vector <particle> &elements, sphere &ball);
 
 #endif // FORCE_H

@@ -115,7 +115,7 @@ class video
   { 0.0f, 0.0f, -2.0f };
 
   const Vector3 m_alpha_veloc
-  { -0.7f, 0.0f, 0.0f };
+  { -1.1f, 0.0f, 0.0f };
 
   particle m_beta
   { force_type::gravity };
@@ -124,7 +124,33 @@ class video
   { Vector3Negate(m_alpha_posit) };
 
   const Vector3 m_beta_veloc
-  { Vector3Negate(m_alpha_veloc) };
+  { Vector3Negate(Vector3Scale(m_alpha_veloc, 0.5f)) };
+
+  particle m_gamma
+  { force_type::gravity };
+
+  const Vector3 m_gamma_posit
+  { Vector3Scale(m_alpha_posit, 3.0f) };
+
+  const Vector3 m_gamma_veloc
+  { Vector3Negate(Vector3Scale(m_alpha_veloc, 1.0f)) };
+
+  particle m_daleth
+  { force_type::none };
+
+  const Vector3 m_daleth_posit
+  { Vector3Scale(m_alpha_posit, -3.0f) };
+
+  const Vector3 m_daleth_veloc
+  { Vector3Negate(Vector3Scale(m_alpha_veloc, 0.0f)) };
+
+  const int m_element_amount
+  { 2 };
+
+  const float m_element_theta
+  { 2.0f*PI/float(m_element_amount) };
+
+  std::vector <particle> m_elements;
 
   const float m_strong_mult
   { 0.4f };

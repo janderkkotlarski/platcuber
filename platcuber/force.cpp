@@ -67,8 +67,41 @@ Vector3 force::force_gravity()
   return Vector3Zero();
 }
 
-void juggler(std::vector <particle> &elements)
+void juggle(force grip, std::vector <particle> &elements, const float delta)
+{
+  for (particle &elem: elements)
+  { elem.null_force(); }
+
+  const int size
+  { int(elements.size()) };
+
+  for (int x{0}; x < size - 1; ++x)
+  {
+    for (int y{x + 1}; y < size; ++y)
+    {
+      grip.type_select(elements[x], elements[y]);
+      grip.force_return(elements[x], elements[y]);
+    }
+  }
+
+  for (particle &elem: elements)
+  {
+    elem.accelerate();
+    elem.move(delta);
+  }
+}
+
+void showing(std::vector <particle> &elements, sphere &ball)
 {
   const int size
   { int(elements.size()) };
+
+  for (int x{0}; x < size - 1; ++x)
+  {
+    for (int y{x + 1}; y < size; ++y)
+    {
+      elements[x].display(ball);
+      elements[y].display(ball);
+    }
+  }
 }
