@@ -109,7 +109,7 @@ class video
   force m_force;
 
   particle m_alpha
-  { force_type::gravity };
+  { force_type::spring };
 
   const Vector3 m_alpha_posit
   { 0.0f, 0.0f, -2.0f };
@@ -118,31 +118,31 @@ class video
   { -1.1f, 0.0f, 0.0f };
 
   particle m_beta
-  { force_type::gravity };
+  { force_type::spring };
 
   const Vector3 m_beta_posit
   { Vector3Negate(m_alpha_posit) };
 
   const Vector3 m_beta_veloc
-  { Vector3Negate(Vector3Scale(m_alpha_veloc, 0.5f)) };
+  { Vector3Negate(Vector3Scale(m_alpha_veloc, 1.0f)) };
 
   particle m_gamma
-  { force_type::gravity };
+  { force_type::spring };
 
   const Vector3 m_gamma_posit
   { Vector3Scale(m_alpha_posit, 3.0f) };
 
   const Vector3 m_gamma_veloc
-  { Vector3Negate(Vector3Scale(m_alpha_veloc, 1.0f)) };
+  { Vector3Negate(Vector3Scale(m_alpha_veloc, 1.2f)) };
 
   particle m_daleth
-  { force_type::none };
+  { force_type::spring };
 
   const Vector3 m_daleth_posit
   { Vector3Scale(m_alpha_posit, -3.0f) };
 
   const Vector3 m_daleth_veloc
-  { Vector3Negate(Vector3Scale(m_alpha_veloc, 0.0f)) };
+  { Vector3Negate(Vector3Scale(m_alpha_veloc, -1.2f)) };
 
   const int m_element_amount
   { 2 };
