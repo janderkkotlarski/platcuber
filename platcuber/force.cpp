@@ -66,3 +66,9 @@ Vector3 force::force_gravity()
 
   return Vector3Zero();
 }
+
+void juggler(std::vector <particle> &elements)
+{
+  const int size
+  { int(elements.size()) };
+}

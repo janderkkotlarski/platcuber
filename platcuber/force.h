@@ -42,6 +42,6 @@ public:
   Vector3 force_gravity();
 };
 
-
+void juggler(std::vector <particle> &elements);
 
 #endif // FORCE_H
