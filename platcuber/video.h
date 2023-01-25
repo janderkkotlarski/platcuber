@@ -136,7 +136,7 @@ class video
   { Vector3Negate(Vector3Scale(m_alpha_veloc, 1.2f)) };
 
   particle m_daleth
-  { force_type::spring };
+  { force_type::none };
 
   const Vector3 m_daleth_posit
   { Vector3Scale(m_alpha_posit, -3.0f) };
