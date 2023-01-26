@@ -49,7 +49,7 @@ class video
   { m_fps*m_fps_mult };
 
   Vector3 m_cam_pos
-  { 0.0f, 20.0f, 0.0f };
+  { 0.0f, 20.0f, -20.0f };
 
   Vector3 m_cam_target
   { 0.0f, 2.0f, 0.0f };
@@ -142,7 +142,7 @@ class video
   { Vector3Scale(m_alpha_posit, -3.0f) };
 
   const Vector3 m_daleth_veloc
-  { Vector3Negate(Vector3Scale(m_alpha_veloc, -1.2f)) };
+  { Vector3Negate(Vector3Scale(m_alpha_veloc, -0.0f)) };
 
   const int m_element_amount
   { 2 };
