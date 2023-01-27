@@ -150,7 +150,11 @@ class video
   const float m_element_theta
   { 2.0f*PI/float(m_element_amount) };
 
+  const Vector2 m_element_
+
   std::vector <particle> m_elements;
+
+
 
   const float m_strong_mult
   { 0.4f };
