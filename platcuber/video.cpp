@@ -133,11 +133,8 @@ void video::init_platform()
 
 void video::light_screen()
 {
-  const int screenWidth = 1400;
-  const int screenHeight = 800;
-
   SetConfigFlags(FLAG_MSAA_4X_HINT);  // Enable Multi Sampling Anti Aliasing 4x (if available)
-  InitWindow(screenWidth, screenHeight, "raylib [shaders] example - basic lighting");
+  InitWindow(m_screen_width, m_screen_height, "spheres");
 }
 
 void video::light_camera()
@@ -168,22 +165,6 @@ void video::light_textures()
   m_model.materials[0].maps[MAP_DIFFUSE].texture = m_tex2d;
 }
 
-void video::roster_deez()
-{
-  sphere ball;
-
-  for (int x{0}; x < m_side_amount; ++x)
-  {
-    m_deez.push_back(ball);
-  }
-}
-
-void video::show_deez()
-{
-  for (const sphere &ball: m_deez)
-  { ball.display(); }
-}
-
 void video::light_it()
 {
     // Initialization
@@ -200,10 +181,6 @@ void video::light_it()
   Light a_light
   { 0 };
   a_light = CreateLight(LIGHT_POINT, m_light_pos, Vector3Zero(), WHITE, m_lighting_shader);
-
-
-
-  roster_deez();
 
   // SetCameraMode(m_camera, CAMERA_ORBITAL);  // Set an orbital camera mode
 

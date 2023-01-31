@@ -18,6 +18,9 @@ class video
   int m_screen_side
   { 800 };
 
+  const int m_screen_width = 1400;
+  const int m_screen_height = 800;
+
   bool m_windeath
   { false };
 
@@ -208,10 +211,6 @@ public:
   void light_textures();
 
   void light_shadels();
-
-  void roster_deez();
-
-  void show_deez();
 
   void light_it();
 
