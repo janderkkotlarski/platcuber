@@ -110,6 +110,10 @@ void video::init_actors()
   m_elements.push_back(m_beta);
   m_elements.push_back(m_gamma);
   m_elements.push_back(m_daleth);
+
+  m_element.set_posit(m_element_posit);
+  m_element.set_veloc(m_element_veloc);
+  m_element.set_color(GRAY);
 }
 
 void video::init_platform()

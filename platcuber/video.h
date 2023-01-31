@@ -144,6 +144,15 @@ class video
   const Vector3 m_daleth_veloc
   { Vector3Negate(Vector3Scale(m_alpha_veloc, 1.0f)) };
 
+  particle m_element
+  { force_type::none };
+
+  const Vector3 m_element_posit
+  { Vector3Scale(m_alpha_posit, 1.0f) };
+
+  const Vector3 m_element_veloc
+  { Vector3Negate(Vector3Scale(m_alpha_veloc, 0.0f)) };
+
   const int m_element_amount
   { 2 };
 
@@ -155,11 +164,9 @@ class video
     { cos(m_element_theta), sin(m_element_theta) },
     { -sin(m_element_theta), cos(m_element_theta) }
   };
+
   // { cos(theta), sin(theta) }
   // { -sin(theta), cos(theta) }
-
-
-
 
   std::vector <particle> m_elements;
 
