@@ -25,7 +25,7 @@ private:
   { 0.1f };
 
   const float m_gravity
-  { 10.0f };
+  { 1.0f };
 
 public:
 

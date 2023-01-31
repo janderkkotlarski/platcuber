@@ -94,24 +94,6 @@ void video::init_actors()
   m_alpha.set_veloc(m_alpha_veloc);
   m_alpha.set_color(RED);
 
-  m_beta.set_posit(m_beta_posit);
-  m_beta.set_veloc(m_beta_veloc);
-  m_beta.set_color(BLUE);
-
-  m_gamma.set_posit(m_gamma_posit);
-  m_gamma.set_veloc(m_gamma_veloc);
-  m_gamma.set_color(GREEN);
-
-  m_daleth.set_posit(m_daleth_posit);
-  m_daleth.set_veloc(m_daleth_veloc);
-  m_daleth.set_color(YELLOW);
-
-  // m_elements.push_back(m_alpha);
-  // m_elements.push_back(m_beta);
-  // m_elements.push_back(m_gamma);
-  // m_elements.push_back(m_daleth);
-
-
   m_element.set_color(GRAY);
 
   for (int count{ 0 }; count < m_element_amount; ++count)
