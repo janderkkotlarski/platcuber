@@ -150,7 +150,16 @@ class video
   const float m_element_theta
   { 2.0f*PI/float(m_element_amount) };
 
-  const Vector2 m_element_
+  const std::vector <std::vector <float>> m_element_rotation
+  {
+    { cos(m_element_theta), sin(m_element_theta) },
+    { -sin(m_element_theta), cos(m_element_theta) }
+  };
+  // { cos(theta), sin(theta) }
+  // { -sin(theta), cos(theta) }
+
+
+
 
   std::vector <particle> m_elements;
 

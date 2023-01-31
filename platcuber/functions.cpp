@@ -128,3 +128,13 @@ Vector3 strong(const Vector3 &here, const Vector3 &there, const float mult)
   return Vector3Scale(Vector3Subtract(there, here), mult);
 }
 
+void simple_rotate(Vector3 &element_posit, const std::vector <std::vector<float>> &matrix)
+{
+  const Vector3 sub
+  { matrix[0][0]*element_posit.x + matrix[1][0]*element_posit.z,
+    0.0f,
+    matrix[0][1]*element_posit.x + matrix[1][1]*element_posit.z
+  };
+
+  element_posit = Vector3Add(element_posit, sub);
+}

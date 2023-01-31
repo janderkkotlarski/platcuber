@@ -4,6 +4,7 @@
 #include "raylib.h"
 
 #include <string>
+#include <vector>
 
 float dim_scalar(const Vector3 &vect, const int dim);
 
@@ -28,5 +29,7 @@ void write_as_text(const int &input);
 void write_as_text(const float &input);
 
 void writing_text(const std::string &text);
+
+void simple_rotate(Vector3 &element_posit, const std::vector <std::vector<float>> &matrix);
 
 #endif // FUNCTIONS_H
