@@ -136,5 +136,5 @@ void simple_rotate(Vector3 &element_posit, const std::vector <std::vector<float>
     matrix[0][1]*element_posit.x + matrix[1][1]*element_posit.z
   };
 
-  element_posit = Vector3Add(element_posit, sub);
+  element_posit = sub;
 }

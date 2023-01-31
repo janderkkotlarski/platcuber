@@ -43,7 +43,7 @@ class video
   { 60 };
 
   const int m_fps_mult
-  { 2000 };
+  { 200 };
 
   const int m_cps
   { m_fps*m_fps_mult };
@@ -112,7 +112,7 @@ class video
   { force_type::gravity };
 
   const Vector3 m_alpha_posit
-  { 0.0f, 0.0f, -2.0f };
+  { 0.0f, 0.0f, -4.0f };
 
   const Vector3 m_alpha_veloc
   { -1.1f, 0.0f, 0.0f };
@@ -139,30 +139,30 @@ class video
   { force_type::gravity };
 
   const Vector3 m_daleth_posit
-  { Vector3Scale(m_alpha_posit, -3.0f) };
+  { Vector3Scale(m_alpha_posit, -2.0f) };
 
   const Vector3 m_daleth_veloc
   { Vector3Negate(Vector3Scale(m_alpha_veloc, 1.0f)) };
 
   particle m_element
-  { force_type::none };
+  { force_type::gravity };
 
-  const Vector3 m_element_posit
+  Vector3 m_element_posit
   { Vector3Scale(m_alpha_posit, 1.0f) };
 
-  const Vector3 m_element_veloc
-  { Vector3Negate(Vector3Scale(m_alpha_veloc, 0.0f)) };
+  Vector3 m_element_veloc
+  { Vector3Negate(Vector3Scale(m_alpha_veloc, 1.5f)) };
 
   const int m_element_amount
-  { 2 };
+  { 4 };
 
   const float m_element_theta
   { 2.0f*PI/float(m_element_amount) };
 
   const std::vector <std::vector <float>> m_element_rotation
   {
-    { cos(m_element_theta), sin(m_element_theta) },
-    { -sin(m_element_theta), cos(m_element_theta) }
+    { 1.0f*cos(m_element_theta), 1.0f*sin(m_element_theta) },
+    { 1.0f*-sin(m_element_theta), 1.0f*cos(m_element_theta) }
   };
 
   // { cos(theta), sin(theta) }

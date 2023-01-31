@@ -106,14 +106,24 @@ void video::init_actors()
   m_daleth.set_veloc(m_daleth_veloc);
   m_daleth.set_color(YELLOW);
 
-  m_elements.push_back(m_alpha);
-  m_elements.push_back(m_beta);
-  m_elements.push_back(m_gamma);
-  m_elements.push_back(m_daleth);
+  // m_elements.push_back(m_alpha);
+  // m_elements.push_back(m_beta);
+  // m_elements.push_back(m_gamma);
+  // m_elements.push_back(m_daleth);
 
-  m_element.set_posit(m_element_posit);
-  m_element.set_veloc(m_element_veloc);
+
   m_element.set_color(GRAY);
+
+  for (int count{ 0 }; count < m_element_amount; ++count)
+  {
+    m_element.set_posit(m_element_posit);
+    m_element.set_veloc(m_element_veloc);
+
+    m_elements.push_back(m_element);
+
+    simple_rotate(m_element_posit, m_element_rotation);
+    simple_rotate(m_element_veloc, m_element_rotation);
+  }
 }
 
 void video::init_platform()
