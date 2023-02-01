@@ -35,9 +35,11 @@ void force::force_return(particle &here, particle &there)
 {
   here.add_force(force_spring());
   here.add_force(force_gravity());
+  here.add_force(force_expo());
 
   there.sub_force(force_spring());
   there.sub_force(force_gravity());
+  there.sub_force(force_expo());
 }
 
 Vector3 force::force_spring()
@@ -62,6 +64,25 @@ Vector3 force::force_gravity()
     { distance/Vector3Length(m_distance) };
 
     return Vector3Scale(m_distance, dist_mult*grav);
+  }
+
+  return Vector3Zero();
+}
+
+Vector3 force::force_expo()
+{
+  if (m_type == force_type::expo)
+  {
+    const float distance
+    { Vector3Length(m_distance) };
+
+    if (distance > 0.0f)
+    {
+      const Vector3 force_fractions
+      { Vector3Scale(m_distance, 1.0f/distance) };
+
+      return Vector3Scale(force_fractions, m_expo_strength*exp(-m_expo_decay*distance));
+    }
   }
 
   return Vector3Zero();

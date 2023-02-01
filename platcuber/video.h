@@ -112,7 +112,7 @@ class video
   force m_force;
 
   particle m_alpha
-  { force_type::gravity };
+  { force_type::expo };
 
   const Vector3 m_alpha_posit
   { 0.0f, 0.0f, 4.0f };
@@ -121,7 +121,7 @@ class video
   { 0.0f, 0.0f, 0.0f };
 
   particle m_element
-  { force_type::gravity };
+  { force_type::expo };
 
   Vector3 m_element_posit
   { Vector3Scale(m_alpha_posit, 1.0f) };

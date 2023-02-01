@@ -8,7 +8,7 @@ enum class particle_type
 
 enum class force_type
 {
-  none, gravity, repulse, spring
+  none, gravity, repulse, spring, expo
 };
 
 #endif // ENUM_DECS_H

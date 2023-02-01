@@ -27,6 +27,12 @@ private:
   const float m_gravity
   { 1.0f };
 
+  const float m_expo_strength
+  { 5.0f };
+
+  const float m_expo_decay
+  { 0.5f };
+
 public:
 
   force();
@@ -40,6 +46,8 @@ public:
   Vector3 force_spring();
 
   Vector3 force_gravity();
+
+  Vector3 force_expo();
 };
 
 void juggle(force grip, std::vector <particle> &elements, const float delta);
