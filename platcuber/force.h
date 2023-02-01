@@ -22,16 +22,16 @@ private:
   { 0.0f };
 
   const float m_stiffness
-  { 0.1f };
+  { 2.5f };
 
   const float m_gravity
   { 1.0f };
 
   const float m_expo_strength
-  { 5.0f };
+  { 50.0f };
 
   const float m_expo_decay
-  { 0.5f };
+  { 0.01f };
 
 public:
 

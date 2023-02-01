@@ -46,13 +46,13 @@ class video
   { 60 };
 
   const int m_fps_mult
-  { 200 };
+  { 20 };
 
   const int m_cps
   { m_fps*m_fps_mult };
 
   Vector3 m_cam_pos
-  { 0.0f, 20.0f, -20.0f };
+  { 0.0f, 100.0f, 0.0f };
 
   Vector3 m_cam_target
   { 0.0f, 2.0f, 0.0f };
@@ -130,7 +130,7 @@ class video
   { Vector3Negate(Vector3Scale(m_alpha_veloc, 1.5f)) };
 
   const int m_element_amount
-  { 12 };
+  { 50 };
 
   const float m_element_theta
   { 2.0f*PI/float(m_element_amount) };
