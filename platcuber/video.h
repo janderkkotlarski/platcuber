@@ -52,7 +52,7 @@ class video
   { m_fps*m_fps_mult };
 
   Vector3 m_cam_pos
-  { 0.0f, 100.0f, 0.0f };
+  { 0.0f, 30.0f, 0.0f };
 
   Vector3 m_cam_target
   { 0.0f, 2.0f, 0.0f };
@@ -65,8 +65,6 @@ class video
 
   Vector3 m_light_pos
   { 0.0f, 0.0f, 0.0f };
-
-  platform m_platform;
 
   Model m_model;
   Model m_cube;
@@ -166,8 +164,6 @@ public:
   void init_shaders();
 
   void init_actors();
-
-  void init_platform();
 
   void init_player();
 

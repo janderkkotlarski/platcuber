@@ -26,8 +26,6 @@ void video::initialize()
   light_camera();
 
   init_shaders();
-  init_platform();
-
   light_models();
   light_textures();
   // light_shader();
@@ -106,11 +104,6 @@ void video::init_actors()
     simple_rotate(m_element_posit, m_element_rotation);
     simple_rotate(m_element_veloc, m_element_rotation);
   }
-}
-
-void video::init_platform()
-{
-  m_platform.set_plane();
 }
 
 void video::light_screen()
@@ -210,26 +203,16 @@ void video::light_it()
 
       BeginMode3D(m_camera);
       {
-          // m_platform.display();
-
           DrawGrid(10, 2.0f);
-
 
           DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{3.0f, 0.0f, 0.0f}, PURPLE);
           DrawLine3D(Vector3{0.0f, 0.0f, 0.0f}, Vector3{0.0f, 0.0f, 3.0f}, ORANGE);
 
-          // m_alpha.display(m_ball);
-
-          // m_beta.display(m_ball);
-
           showing(m_elements, m_ball);
-
       }
       EndMode3D();
 
       DrawFPS(10, 10);
-
-      // DrawText("Use keys [Y] to toggle light", 10, 40, 20, DARKGRAY);
 
       const std::string t_min
       { std::to_string(delta) };
@@ -242,9 +225,6 @@ void video::light_it()
       // UpdateLightValues(m_dark_shader, dark_light);
       UpdateLightValues(m_lighting_shader, a_light);
 
-
-
-
     EndDrawing();
     //----------------------------------------------------------------------------------
 
@@ -254,23 +234,6 @@ void video::light_it()
 
       while (m_time >= m_period)
       { m_time -= m_period; }
-
-      /*
-
-      m_alpha.null_force();
-
-      m_beta.null_force();
-
-      m_force.type_select(m_alpha, m_beta);
-      m_force.force_return(m_alpha, m_beta);
-
-      m_alpha.accelerate();
-      m_alpha.move(delta);
-
-      m_beta.accelerate();
-      m_beta.move(delta);
-
-      */
 
       juggle(m_force, m_elements, delta);
     }

@@ -28,7 +28,7 @@ private:
   { 1.0f };
 
   const float m_expo_strength
-  { 50.0f };
+  { 1.0f };
 
   const float m_expo_decay
   { 0.01f };
