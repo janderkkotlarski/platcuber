@@ -116,10 +116,10 @@ class video
   { 0.0f, 0.0f, 4.0f };
 
   const Vector3 m_alpha_veloc
-  { 0.0f, 0.0f, 0.0f };
+  { 1.4f, 0.0f, 0.0f };
 
   particle m_element
-  { force_type::expo };
+  { force_type::spring };
 
   Vector3 m_element_posit
   { Vector3Scale(m_alpha_posit, 1.0f) };
@@ -128,7 +128,7 @@ class video
   { Vector3Negate(Vector3Scale(m_alpha_veloc, 1.5f)) };
 
   const int m_element_amount
-  { 50 };
+  { 5 };
 
   const float m_element_theta
   { 2.0f*PI/float(m_element_amount) };

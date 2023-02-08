@@ -22,7 +22,7 @@ private:
   { 0.0f };
 
   const float m_stiffness
-  { 2.5f };
+  { 0.1f };
 
   const float m_gravity
   { 1.0f };
