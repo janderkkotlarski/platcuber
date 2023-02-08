@@ -32,4 +32,6 @@ void writing_text(const std::string &text);
 
 void simple_rotate(Vector3 &element_posit, const std::vector <std::vector<float>> &matrix);
 
+void rotate(const Vector3 &rotation_axis, Vector3 &rotator, const float theta);
+
 #endif // FUNCTIONS_H

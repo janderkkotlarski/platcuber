@@ -138,3 +138,26 @@ void simple_rotate(Vector3 &element_posit, const std::vector <std::vector<float>
 
   element_posit = sub;
 }
+
+void rotate(const Vector3 &rotation_axis, Vector3 &rotator, const float theta)
+{
+  const Vector3 unit_axis
+  { Vector3Normalize(rotation_axis) };
+
+  const float para_mult
+  { Vector3DotProduct(unit_axis, rotator) };
+
+  const Vector3 para_rotator
+  { Vector3Scale(unit_axis, para_mult) };
+
+  Vector3 perp_rotator
+  { Vector3Subtract(rotator, para_rotator) };
+
+  const Vector3 crossed
+  { Vector3CrossProduct(unit_axis, perp_rotator) };
+
+  const Vector3 nura_rotator
+  { Vector3Add(Vector3Scale(para_rotator, cos(theta)), Vector3Scale(crossed, sin(theta))) };
+
+  rotator = Vector3Add(para_rotator, nura_rotator);
+}

@@ -22,6 +22,9 @@ force_type particle::get_force_type()
 Vector3 particle::get_posit()
 { return m_posit; }
 
+Vector3 particle::get_veloc()
+{ return m_veloc; }
+
 float particle::get_mass()
 { return m_mass; }
 

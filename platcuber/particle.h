@@ -55,6 +55,8 @@ public:
 
   Vector3 get_posit();
 
+  Vector3 get_veloc();
+
   float get_mass();
 
   void set_posit(const Vector3 &posit);

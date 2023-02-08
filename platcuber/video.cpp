@@ -101,6 +101,21 @@ void video::init_actors()
 
     m_elements.push_back(m_element);
 
+    if (m_theta >= 0.5f*m_element_theta)
+    {
+      const Vector3 axis
+      { m_elements[count].get_posit() };
+
+      Vector3 veloc
+      { m_elements[count].get_veloc() };
+
+      rotate(axis, veloc, m_theta);
+
+      m_elements[count].set_veloc(veloc);
+    }
+
+    m_theta += 2.0f*m_element_theta;
+
     simple_rotate(m_element_posit, m_element_rotation);
     simple_rotate(m_element_veloc, m_element_rotation);
   }
